@@ -1,0 +1,2 @@
+This is my vim runtime. Additional plugins (not included here) are added into the repos/ directory and added using runtimepath+= in .vimrc.
+.vimrc is not included in this repo, but is in a separate repo of user config files. This repo is intended for my own use, to more easily install vim on a new machine. There aren't any of my own scripts in here, those are in other repos as well, eg, vim4flash.
