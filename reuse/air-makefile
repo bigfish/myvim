@@ -1,0 +1,10 @@
+#!bin/sh
+
+#build swf and launch with adl
+MAIN.swf : MAIN.mxml MAIN-App.xml	
+	amxmlc MAIN.mxml
+	adl MAIN-App.xml
+
+#package the air app
+app: MAIN.swf MAIN-App.xml 
+	adt -package -storetype pkcs12 -keystore ${HOME}/flash/cert/cert.p12 -storepass belikemike MAIN.air MAIN-App.xml MAIN.swf assets
