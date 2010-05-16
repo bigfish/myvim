@@ -5,5 +5,5 @@
 
 set efm=Lint\ at\ line\ %l\ character\ %c:\ %m
 "use bash script to filter unwanted errors
-set makeprg=jslint.sh\ %
+set makeprg=jslint\ %
 
