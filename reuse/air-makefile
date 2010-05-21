@@ -7,4 +7,8 @@ MAIN.swf : MAIN.mxml MAIN-App.xml
 
 #package the air app
 app: MAIN.swf MAIN-App.xml 
-	adt -package -storetype pkcs12 -keystore ${HOME}/flash/cert/cert.p12 -storepass belikemike MAIN.air MAIN-App.xml MAIN.swf assets
+	adt -package -storetype pkcs12 -keystore ${HOME}/flash/cert/cert.p12 -storepass belikemike MAIN.air MAIN-App.xml MAIN.swf assets icons
+
+#package the android app
+apk: MAIN.swf MAIN-App.xml 
+	adt -package -target apk -storetype pkcs12 -keystore ${HOME}/flash/cert/cert.p12 -storepass belikemike MAIN.apk MAIN-App.xml MAIN.swf assets icons

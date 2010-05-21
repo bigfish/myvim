@@ -329,6 +329,7 @@ function! s:AddAllImports()
 	let imports = []
 	" get list of all classes used in file
 	let classes = s:GetAllClasses()
+
 	for class in classes
 		"get import statement for class
 		let imp = s:GetImportFromClass(class)
@@ -341,10 +342,11 @@ function! s:AddAllImports()
 			continue
 		endif
 		"don't add if in same package as current file
-		let importPackage = s:GetPackageFromImport(imp)
-		if (importPackage == curpkg)
-			continue
-		endif
+		"apparently, in Haxe, we need to import class in same package ...
+		"let importPackage = s:GetPackageFromImport(imp)
+		"if (importPackage == curpkg)
+			"continue
+		"endif
 		"OK, add import to list
 		call add(imports, imp)
 	endfor
