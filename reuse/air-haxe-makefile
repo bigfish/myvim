@@ -1,9 +1,14 @@
-#!bin/sh
+#!bin/bash
 
-#build swf and launch with adl
-MAIN.swf : MAIN.mxml MAIN-App.xml	
-	amxmlc MAIN.mxml
+as3:
+	haxe build-as3.hxml
+
+#build swf from generated AS3 and launch with adl
+MAIN.swf : as3_src/__main__.as MAIN-App.xml	as3
+	amxmlc -o MAIN.swf as3_src/__main__.as
 	adl MAIN-App.xml
+	#use command below if assets required
+	#amxmlc -library-path+=assets/MAIN.swc -o MAIN.swf as3_src/__main__.as
 
 #package the air app
 app: MAIN.swf MAIN-App.xml 

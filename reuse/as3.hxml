@@ -1,0 +1,5 @@
+-as3 as3_src
+-swf-version 10
+-cp PROJECT_DIR/src
+-main NAMESPACE.APP_NAME
+-swf-header 800:600:50:FFFFFF
