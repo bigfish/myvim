@@ -676,10 +676,11 @@ function! s:OpenHXDoc(class)
 		" empty attribute = "0"
 		if len(asdoc) > 1
 			"open in browser
+			let asdoc =  escape (asdoc, "#?&;|%")
 			if(exists("asdoc_browser"))
 				execute "!".g:asdoc_browser." ".asdoc
 			elseif has("macunix")
-				execute "!open " . asdoc
+				execute '!open ' . asdoc
 			elseif has("unix")
 				execute "!gnome-open " . asdoc 
 			else
