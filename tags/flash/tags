@@ -1,9 +1,9 @@
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
-!_TAG_PROGRAM_NAME	Exuberant Ctags	//	class: import:	asdoc:
-!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/	class: import:	asdoc:
-!_TAG_PROGRAM_VERSION	5.8	//	class: import:	asdoc:
+!_TAG_PROGRAM_NAME	Exuberant Ctags	
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	
+!_TAG_PROGRAM_VERSION	5.8	//
 -Infinity	package.html	/^		public var -Infinity:Number;$/;"	v	class:	import:	asdoc:"http://flexdocs/package.html#-Infinity"
 ABSOLUTE	mx/core/ContainerLayout.html	/^		public const ABSOLUTE:String = "absolute";$/;"	v	class:ContainerLayout	import:mx.core.ContainerLayout	asdoc:"http://flexdocs/mx/core/ContainerLayout.html#ABSOLUTE"
 ACKNOWLEDGE	mx/messaging/events/MessageAckEvent.html	/^		public const ACKNOWLEDGE:String = "acknowledge";$/;"	v	class:MessageAckEvent	import:mx.messaging.events.MessageAckEvent	asdoc:"http://flexdocs/mx/messaging/events/MessageAckEvent.html#ACKNOWLEDGE"
