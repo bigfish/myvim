@@ -11,13 +11,27 @@ snippet fun
 	}
 
 # function template + trigger to expand doc comment
-snippet ft
+snippet f
 	function ${1:function_name} (${2:argument}):${3:return} { em${4}
 		<++>
 	}
+# method template (function assigned to property)
+snippet m
+	${1:method_name} : function (${2:argument}):${3:return} { em${4}
+		<++>
+	},
+
 #execute ExtMethod command
 snippet em
 	`JSExtMethod()`
+#Ext Property template
+snippet p
+	${1:prop_name}:${2:prop_type} : ${3:default_value}, ep${4}
+	<++>
+
+#execute ExtProperty command
+snippet ep
+	`JSExtProperty()`
 
 # if
 snippet if
