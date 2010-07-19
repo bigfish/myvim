@@ -9,9 +9,16 @@ snippet fun
 	function ${1:function_name}(${2:argument}) {
 		${3:// body...}
 	}
-# Anonymous Function
-snippet f
-	function (${1}) {${2}};
+
+# function template + trigger to expand doc comment
+snippet ft
+	function ${1:function_name}(${2:argument}):${3:return} { em${4}
+		<++>
+	}
+#execute ExtMethod command
+snippet em
+	`JSExtMethod()`
+
 # if
 snippet if
 	if (${1:true}) {${2}}
