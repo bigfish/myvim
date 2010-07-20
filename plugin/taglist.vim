@@ -2140,10 +2140,18 @@ endfunction
 "     tag_name<TAB>file_name<TAB>ex_cmd;"<TAB>extension_fields
 "
 function! s:Tlist_Parse_Tagline(tag_line)
+
     if a:tag_line == ''
         " Skip empty lines
         return
     endif
+
+	"HACK!!
+	"drop lines of tags which are properties but have functions as values
+	"this is to avoid duplication in JavaScript
+	if stridx(a:tag_line, 'function') > -1 && s:Tlist_Extract_Tagtype(a:tag_line) == 'p'
+		return
+	endif
 
     " Extract the tag type
     let ttype = s:Tlist_Extract_Tagtype(a:tag_line)
