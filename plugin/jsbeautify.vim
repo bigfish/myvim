@@ -623,9 +623,11 @@ endfunction
 "wrap the function to apply any exceptions
 function! JSBeautify()
     call g:Jsbeautify()
-    exec ":%s/function(/function (/g"
+	if search('function(','n')
+		exec ":%s/function(/function (/g"
+	endif
 endfunction
 
-nnoremap <silent> <leader>ff :call JSBeautify()<cr>
+"nnoremap <silent> <leader>ff :call JSBeautify()<cr>
 
 

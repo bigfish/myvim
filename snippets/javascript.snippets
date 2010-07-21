@@ -12,7 +12,7 @@ snippet fun
 
 # function template + trigger to expand doc comment
 snippet f
-	function ${1:function_name} (${2:argument}):${3:return} { em${4}
+	function ${1:function_name}(${2:argument}):${3:return} { em${4}
 		<++>
 	}
 # method template (function assigned to property)
@@ -32,6 +32,15 @@ snippet p
 #execute ExtProperty command
 snippet ep
 	`JSExtProperty()`
+
+#Ext Var template
+snippet v
+	var ${1:prop_name}:${2:prop_type} = ${3:default_value}; ev${4}
+	<++>
+
+#execute ExtVar command
+snippet ev
+	`JSExtVar()`
 
 # if
 snippet if
