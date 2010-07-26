@@ -113,3 +113,68 @@ snippet jslint
 snippet globals
 	/*global window: false */
 
+#YUI Test assertions
+snippet areEqual
+	Y.Assert.areEqual("${1:expected value}", "${2:actual value}", "${3:Asserts that a value is equal to another. This uses the double equals sign so type coercion may occur.}");
+
+snippet areNotEqual
+	Y.Assert.areNotEqual("${1:expected value}", "${2:actual value}", "${3:Asserts that a value is not equal to another. This uses the double equals sign so type coercion may occur.}");
+
+snippet areSame
+	Y.Assert.areSame("${1:expected value}", "${2:actual value}", "${3:Asserts that a value is the same as another. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet areNotSame
+	Y.Assert.areNotSame("${1:expected value}", "${2:actual value}", "${3:Asserts that a value is not the same as another. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet fail
+	Y.Assert.fail("${1:Forces an assertion error to occur.}");
+
+#snippet fail
+#	Y.fail("${1:Forces an assertion error to occur.}");
+snippet isArray
+	Y.Assert.isArray("${1:item to test}", "${2:Asserts that a value is an array.}");
+
+snippet isBoolean
+	Y.Assert.isBoolean("${1:item to test}", "${2:Asserts that a value is a Boolean.}");
+
+snippet isFunction
+	Y.Assert.isFunction("${1:item to test}", "${2:Asserts that a value is a function.}");
+
+snippet isInstanceOf
+	Y.Assert.isInstanceOf("${1:item to test}", "${2:Asserts that a value is an instance of a particular object.}");
+
+snippet isNumber
+	Y.Assert.isNumber("${1:item to test}", "${2:Asserts that a value is a number.}");
+
+snippet isObject
+	Y.Assert.isObject("${1:item to test}", "${2:Asserts that a value is an object.}");
+
+snippet isString
+	Y.Assert.isString("${1:item to test}", "${2:Asserts that a value is a string.}");
+
+snippet isTypeOf
+	Y.Assert.isTypeOf("${1:expected type}", "${2:actual value}", "${3:	Asserts that a value is of a particular type.}");
+
+snippet isUndefined
+	Y.Assert.isUndefined("${1:item to test}", "${2:Asserts that a value is undefined. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet isNaN
+	Y.Assert.isNaN("${1:item to test}", "${2:Asserts that a value is not a number.}");
+
+snippet isNotNaN
+	Y.Assert.isNotNaN("${1:item to test}", "${2:Asserts that a value is not the special NaN value.}");
+
+snippet isNotNull
+	Y.Assert.isNotNull("${1:item to test}", "${2: Asserts that a value is not null. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet isNotUndefined
+	Y.Assert.isNotUndefined("${1:item to test}", "${2:Asserts that a value is not undefined. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet isNull
+	Y.Assert.isNull("${1:item to test}", "${2:Asserts that a value is null. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet isFalse
+	Y.Assert.isFalse("${1:value}", "${2:Asserts that a value is false. This uses the triple equals sign so no type coercion may occur.}");
+
+snippet isTrue
+	Y.Assert.isTrue("${1:value}", "${2:Asserts that a value is true. This uses the triple equals sign so no type coercion may occur.}");
