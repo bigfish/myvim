@@ -39,19 +39,36 @@ if has("cscope")
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
+
         cs add cscope.out  
-    " else add the database pointed to by environment variable 
+
     elseif $CSCOPE_DB != ""
+
         cs add $CSCOPE_DB
-        cs add $CSCOPE_SDK_DB
-        cs add $CSCOPE_BCFLEXLIB_DB
-        cs add $CSCOPE_DAFISHINSEA_DB
-        cs add $CSCOPE_MINIMALCOMPS_DB
-    endif
+
+	endif
+
+	"add project cscope
+	"cs add system("find_cscope_db pwd")
+
+    " else add the database pointed to by environment variables 
+	" now doing contextually in filetype plugins
+    "elseif $CSCOPE_DB != ""
+        "cs add $CSCOPE_DB
+        "cs add $CSCOPE_SDK_DB
+        "cs add $CSCOPE_BCFLEXLIB_DB
+        "cs add $CSCOPE_DAFISHINSEA_DB
+        "cs add $CSCOPE_MINIMALCOMPS_DB
+    "endif
 
     " show msg when any other cscope db added
     set cscopeverbose  
 
+	"use quickfix .. clear previous results
+	:set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+	"show only last three elements of filepath ( 0 = all )
+	:set cspc=3
 
     """"""""""""" My cscope/vim key mappings
     "
