@@ -1,0 +1,23 @@
+<tskel:msg>
+	Insert Ext Method and Documentation Comment
+</tskel:msg>
+<tskel:before>
+	let b:tskelMethodName = input("Name of method: ")
+	if b:tskelMethodName == "" | let b:tskelMethodName = "<+CURSOR+>" | endif
+    let g:num_params = input('Number of Parameterg: ')
+    let g:fun_params = []
+    let i = 1
+    while i <= g:num_params
+        let param = {}
+        let param['name'] = input('param '.i.' name:')
+        let param['type'] = input('param '.i.' type:')
+        call add(g:fun_params, param)
+        let i += 1
+    endwhile
+</tskel:before>
+<tskel:after>
+	unlet b:tskelMethodName
+	unlet g:num_params
+	unlet g:fun_params
+</tskel:after>
+<+for(i in range(g:num_params))+>|<+noop+>|<+endfor(i)+>
