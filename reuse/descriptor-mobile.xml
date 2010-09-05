@@ -7,7 +7,7 @@
 	<name>
 		<text xml:lang="en">Example Co. Example Application 1.0</text>
 	</name>
-	<version>1.0</version>
+	<versionNumber>1.0</versionNumber>
 	<supportedProfiles>mobileDevice</supportedProfiles>
 	<filename>Example Application</filename>
 	<description>
@@ -55,4 +55,11 @@
 			</icon>
 		</fileType>
 	</fileTypes>
+	<android>
+		<manifestAdditions>
+			<manifest>
+				<data><![CDATA[<uses-permission android:name="android.permission.VIBRATE" />]]></data>
+			</manifest>
+		</manifestAdditions>
+	</android>
 </application>

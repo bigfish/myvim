@@ -3,7 +3,7 @@
 <!-- AIR Application Descriptor File. See http://www.adobe.com/go/learn_air_1.0_application_descriptor_en. -->
 	<id>com.dafishinsea.metrics.Metrics</id>
 	<name>metrics</name>
-	<version>1.0</version>
+	<versionNumber>1.0</versionNumber>
 	<supportedProfiles>mobileDevice</supportedProfiles>
 	<filename>Metrics</filename>
 	<description>metrics generator</description>
