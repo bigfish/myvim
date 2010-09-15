@@ -1,8 +1,8 @@
 #!bin/sh
 
 #build swf and launch with adl
-MAIN.swf : MAIN.mxml MAIN-App.xml	
-	amxmlc MAIN.mxml
+MAIN.swf : NS_PATH/MAIN.mxml MAIN-App.xml
+	amxmlc -sp+=src -o MAIN.swf NS_PATH/MAIN.mxml
 	adl MAIN-App.xml
 
 #package the air app

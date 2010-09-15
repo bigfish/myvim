@@ -57,9 +57,11 @@
 	</fileTypes>
 	<android>
 		<manifestAdditions>
-			<manifest>
-				<data><![CDATA[<uses-permission android:name="android.permission.VIBRATE" />]]></data>
-			</manifest>
+		<![CDATA[
+		<manifest>
+		<uses-permission android:name="android.permission.VIBRATE" />
+		</manifest>
+		]]>
 		</manifestAdditions>
 	</android>
 </application>
