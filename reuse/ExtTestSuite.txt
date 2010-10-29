@@ -1,0 +1,24 @@
+/*global YUI */
+YUI.add('TEST_SUITE_NAME', function (Y) {
+
+    var suite = new Y.Test.Suite("TEST_SUITE_TITLE");
+
+    suite.add(new Y.Test.Case({
+
+        name: "TEST_CASE_TITLE",
+
+        setUp: function () {},
+
+        tearDown: function () {},
+
+        testConstructor: function () {
+            Y.Assert.isTrue(1);
+        }
+
+    }));
+
+    Y.Test.Runner.add(suite);
+
+}, '@VERSION@', {
+    requires: ['test']
+});
