@@ -22,31 +22,28 @@
       margin: 1em;
       font-family: Verdana, Arial, Helvetica !important;
     }
-    .yui3-console-bd .yui3-console-entry:first-child {
+    /*.yui3-console-bd .yui3-console-entry:first-child {*/
+    .yui3-console-bd .yui3-console-entry {
       display: block;
-      height: 50px;
       color:white;
       padding:0;
       margin: 1em;
     }
     .yui3-console-bd .yui3-console-entry-TestRunner:first-child .yui3-console-entry-content {
       display: block;
-      height: 50px;
       margin: 0;
       padding:5px;
     }
     .yui3-console-entry-pass {
-      color: green !important;
       display: none;
     }
     .yui3-console-entry-info {
     }
     .yui3-console-entry-status {
-      color: green !important;
       display:none;
     }
     .yui3-console-entry-error {
-      color: red;
+      color: red !important;
     }
     .yui3-console-entry-content {
       padding: 5px;
@@ -114,8 +111,8 @@
 			        }
 			    }).plug(Y.Plugin.ConsoleFilters, {
 			        category: {
-					            pass: true,
-					            status: true
+					            pass: false,
+					            status: false
 			        }
 			    }).render( "#log" );
 			
