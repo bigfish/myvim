@@ -7,7 +7,7 @@ let s:keepcpo      = &cpo
 set cpo&vim
 
 "run JsTestDriver
-function! jstd#RunTests() 
+function! jstestdriver#RunTests() 
 	let s:save_makeprg = &makeprg
 	let s:save_errorformat = &errorformat
 	set makeprg=run_jstests
@@ -26,8 +26,8 @@ function! jstd#RunTests()
 "CanvasUtilsTests.testB failed. AssertError: this should be true expected true but was false|/Users/david/javascript/canvasteroids/test/tests/CanvasUtilsTest.js|10
 
 	set efm=%m:%f:%l 
-
-	:make
+	:make!
+	:cw
 	let &makeprg = s:save_makeprg 
 	let &errorformat = s:save_errorformat
 endfunction
