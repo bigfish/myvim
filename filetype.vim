@@ -332,6 +332,10 @@ au BufNewFile,BufRead *.cdl			setf cdl
 " Conary Recipe
 au BufNewFile,BufRead *.recipe			setf conaryrecipe
 
+" CoffeeScript 
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *Cakefile set filetype=coffee
+
 " Controllable Regex Mutilator
 au BufNewFile,BufRead *.crm			setf crm
 
