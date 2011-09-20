@@ -974,9 +974,7 @@ au BufNewFile,BufRead *.mv,*.mpl,*.mws		setf maple
 au BufNewFile,BufRead *.map			setf map
 
 "markdown
-augroup markdown
-	au! BufRead,BufNewFile *.mkd setfiletype mkd
-augroup END
+au BufRead,BufNewFile *.mkd,*.md		setf markdown
 
 " Mason
 au BufNewFile,BufRead *.mason,*.mhtml		setf mason
@@ -1053,8 +1051,8 @@ au BufNewFile,BufRead *.mod
 	\   setf modsim3 |
 	\ endif
 
-" Modula 2
-au BufNewFile,BufRead *.m2,*.DEF,*.MOD,*.md,*.mi setf modula2
+" Modula 2 - conflicts with Markdown
+"au BufNewFile,BufRead *.m2,*.DEF,*.MOD,*.md,*.mi setf modula2
 
 " Modula 3 (.m3, .i3, .mg, .ig)
 au BufNewFile,BufRead *.[mi][3g]		setf modula3
