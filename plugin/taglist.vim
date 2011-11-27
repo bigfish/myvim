@@ -417,7 +417,7 @@ let s:tlist_def_java_settings = 'java;p:package;c:class;i:interface;' .
                               \ 'f:field;m:method'
 
 " javascript language
-let s:tlist_def_javascript_settings = 'javascript;f:function'
+let s:tlist_def_javascript_settings = 'javascript;f:function;v:variable;p:property'
 
 " lisp language
 let s:tlist_def_lisp_settings = 'lisp;f:function'
@@ -2150,6 +2150,12 @@ function! s:Tlist_Parse_Tagline(tag_line)
 	"drop lines of tags which are properties but have functions as values
 	"this is to avoid duplication in JavaScript
 	if stridx(a:tag_line, 'function') > -1 && s:Tlist_Extract_Tagtype(a:tag_line) == 'p'
+		return
+	endif
+
+	"drop lines of tags which are variables but have functions as values
+	"this is to avoid duplication in JavaScript
+	if stridx(a:tag_line, 'function') > -1 && s:Tlist_Extract_Tagtype(a:tag_line) == 'v'
 		return
 	endif
 
