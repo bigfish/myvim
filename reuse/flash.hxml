@@ -1,5 +1,0 @@
--swf9 PROJECT_DIR/bin/APP_NAME.swf
--swf-version 10
--cp PROJECT_DIR/src
--main NAMESPACE.APP_NAME
--swf-header 800:600:50:FFFFFF
