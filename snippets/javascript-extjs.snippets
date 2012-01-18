@@ -2,9 +2,9 @@
 #Ext.define
 snippet def 
 	Ext.define('${1:class_name}', {
-		extend: ${2:superclass},
+		extend: '${2:superclass}',
 		constructor: function (${3:props}) {
-			this.callParent(${4:arguments});
+			this.callParent(${4:[props]});
 			${5:construct}
 		}	
 	});
