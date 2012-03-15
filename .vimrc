@@ -445,3 +445,6 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 
 :imap jk <Esc>
 :imap kj <Esc>
+
+"lets also allow 
+:imap <C-;> <Esc>
