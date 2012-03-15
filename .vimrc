@@ -105,7 +105,7 @@ autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
 "****************** NAVIGATION MAPPINGS ***********************""{{{
 
 "jump to start/end of line in insert mode"
-:imap <C-A> <Esc>A
+:imap <C-A> <Esc>^
 ":nmap <C-A> A
  
 "map arrow keys to navigate wrapped lines
@@ -443,8 +443,3 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 " move to filetype plugin
 "map <leader>b :JSBeautify<CR>
 
-:imap jk <Esc>
-:imap kj <Esc>
-
-"lets also allow 
-:imap <C-;> <Esc>
