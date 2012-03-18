@@ -85,13 +85,13 @@ set splitbelow
 :set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
 
 "complete quotes
-:inoremap [ []<left>
-:inoremap ( ()<left>
+":inoremap [ []<left>
+":inoremap ( ()<left>
 " this is messing up cindent
-:inoremap { {<CR>}<Esc>O<C-t>
+":inoremap { {<CR>}<Esc>O<C-t>
 ":inoremap { {<CR><C-D>}<Esc>O
-:inoremap " ""<left>
-:inoremap ' ''<left>
+":inoremap " ""<left>
+":inoremap ' ''<left>
 
 "cd to file dir (mnemonic=(l)ocal)
 nmap <leader>l :lcd %:p:h<CR>
@@ -180,7 +180,9 @@ imap <C-s> <ESC>:w<CR>
 "force quit (W)indow Ctrl / Com W
 inoremap <C-w> <Esc>:wq!<CR>
 nnoremap <C-w> <Esc>:wq!<CR>
-
+"save and quit all
+inoremap <C-q> <Esc>:wqa!<CR>
+nnoremap <C-q> <Esc>:wqa!<CR>
 "show line numbers
 map <leader>-n <Esc>:set nu<cr>
 
@@ -194,6 +196,9 @@ map <leader>-n <Esc>:set nu<cr>
 "or snipMate mappings 
 nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
 inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
+
+"emacs like delete
+nnoremap <M-BS> dB
 
 "XML Tidy
 ":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
@@ -237,17 +242,17 @@ endif
 map ,c :sp $HOME/.vimrc<CR>
 map ,g :sp $HOME/.gvimrc<CR>
 "map ,b :sp $HOME/.bashrc<CR>
-map <silent> ,C :source $HOME/.vimrc<CR>
+noremap <silent> ,C :source $HOME/.vimrc<CR>
 map <silent> ,G :source $HOME/.gvimrc<CR>
 
 "(r)eload
-map <silent> ,r <Esc>,C,G,A
+noremap <silent> ,r <Esc>,C,G,A
 
 "get snippets
-map ,s :sp $HOME/.vim/snippets/javascript.snippets<CR>
+noremap ,s :sp $HOME/.vim/snippets/javascript.snippets<CR>
 
 "reload snippets
-map ,r :call ReloadAllSnippets()<CR>
+noremap ,r :call ReloadAllSnippets()<CR>
 
 "}}}
 
@@ -262,8 +267,8 @@ if has("macunix")
 
 	:noremap <D-l> :llist<cr>
 	:noremap <D-L> :lcl<cr>
-	:nmap <D-n> :lne<cr>
-	:nmap <D-p> :lp<cr>
+	:noremap <D-n> :lne<cr>
+	:noremap <D-p> :lp<cr>
 else
 	:noremap <A-q> :clist<cr>
 	:noremap <A-Q> :ccl<cr>
@@ -272,10 +277,10 @@ else
 
 	:noremap <A-l> :llist<cr>
 	:noremap <A-L> :lcl<cr>
-	:nmap <A-n> :lne<cr>
-	:nmap <A-p> :lp<cr>
+	:noremap <A-n> :lne<cr>
+	:noremap <A-p> :lp<cr>
 	"(r)ewind
-	:nmap <A-r> :lr<cr>
+	:noremap <A-r> :lr<cr>
 endif
 "}}}
 
@@ -330,12 +335,6 @@ noremap <leader>h :split<CR>
 noremap L <C-W>L
 "move window to new tab
 noremap T <C-W>T 
-"tab navigation
-nmap <leader>t :tabnew<CR>
-"imap <C-Right> <Esc>:tabn<cr>
-"nmap <C-Right> :tabn<cr>
-"imap <C-Left> <Esc>:tabp<cr>
-"nmap <C-Left> :tabp<cr>
 
 "min height of active window
 set winheight=15
@@ -403,8 +402,8 @@ let g:tskelQueryType = 'query'
 "set foldmethod=marker
 
 "make current file executable
-nmap <leader>x :!chmod +x %<CR>
-imap <leader>x <esc>:!chmod +x %<CR>
+noremap <leader>x :!chmod +x %<CR>
+inoremap <leader>x <esc>:!chmod +x %<CR>
 
 "always cd to files dir
 autocmd BufEnter,BufRead * :lcd %:p:h
@@ -437,9 +436,19 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
 
-" nodelint
+" nodelintasdasdas ;
+
 "let g:NodelintConfig = $HOME . '/nodelint-config.js'
 "let g:NodelintPassive = 1
-" move to filetype plugin
+" move to asdasdassa filetype plugin
 "map <leader>b :JSBeautify<CR>
+hi clear CursorLine
+hi CursorLine ctermbg=DarkBlue
+au InsertEnter * set nocul
+au InsertLeave * set cul
+set cul
 
+"experimental -- Return is Escape
+"use Ctrl-J for newline (or o in normal mode)
+inoremap <CR> <Esc>
+set clipboard=unnamed
