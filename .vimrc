@@ -436,7 +436,7 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
 
-" nodelintasdasdas ;
+" nodelintasdasdas 
 
 "let g:NodelintConfig = $HOME . '/nodelint-config.js'
 "let g:NodelintPassive = 1
@@ -447,8 +447,11 @@ hi CursorLine ctermbg=DarkBlue
 au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
-
-"experimental -- Return is Escape
-"use Ctrl-J for newline (or o in normal mode)
-inoremap <CR> <Esc>
+		
+"experimental -- Tab is Escape
+vnoremap <Tab> <Esc>gV
+onoremap <Tab> <Esc>
+inoremap <Tab> <Esc>`^
+inoremap <Leader><Tab> <Tab>
+"help copypaste to work
 set clipboard=unnamed
