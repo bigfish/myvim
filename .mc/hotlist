@@ -1,3 +1,0 @@
-ENTRY "incoming" URL "/#sh:david@monolith:/var/lib/mldonkey/incoming/files/"
-ENTRY "Music" URL "/Users/david/Music"
-ENTRY "/#sh:david@monolith:Downloads/home/david/Downloads" URL "/#sh:david@monolith:Downloads/home/david/Downloads"

@@ -181,8 +181,8 @@ imap <C-s> <ESC>:w<CR>
 inoremap <C-w> <Esc>:wq!<CR>
 nnoremap <C-w> <Esc>:wq!<CR>
 "save and quit all
-inoremap <C-q> <Esc>:wqa!<CR>
-nnoremap <C-q> <Esc>:wqa!<CR>
+inoremap <C-q> <Esc>:q!<CR>
+nnoremap <C-q> <Esc>:q!<CR>
 "show line numbers
 map <leader>-n <Esc>:set nu<cr>
 
@@ -443,7 +443,7 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 " move to asdasdassa filetype plugin
 "map <leader>b :JSBeautify<CR>
 hi clear CursorLine
-hi CursorLine ctermbg=DarkBlue
+hi CursorLine ctermbg=blue
 au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
