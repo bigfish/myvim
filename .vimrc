@@ -443,7 +443,7 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 " move to asdasdassa filetype plugin
 "map <leader>b :JSBeautify<CR>
 hi clear CursorLine
-hi CursorLine ctermbg=blue
+hi CursorLine ctermbg=Blue
 au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
