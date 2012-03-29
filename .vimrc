@@ -440,8 +440,9 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 
 "let g:NodelintConfig = $HOME . '/nodelint-config.js'
 "let g:NodelintPassive = 1
-" move to asdasdassa filetype plugin
-"map <leader>b :JSBeautify<CR>
+" TODO: move to filetype plugin
+map <leader>b :JSBeautify<CR>
+
 hi clear CursorLine
 hi CursorLine ctermbg=blue
 au InsertEnter * set nocul
@@ -453,5 +454,6 @@ vnoremap <Tab> <Esc>gV
 onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
+
 "help copypaste to work
 set clipboard=unnamed
