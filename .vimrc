@@ -21,9 +21,30 @@ set incsearch    " do incremental searching
 
 let mapleader = ";"
 
-colorscheme vividchalk
 call pathogen#infect()
+
+" change colorscheme for editing
+function! EditMode()
+:set background=dark
+:colorscheme vividchalk
+endfunction
+
+" change colorscheme for diffing
+function! DiffMode()
+:set background=light
+:colorscheme hemisu
+endfunction
+
+command! DiffMode call DiffMode()
+command! EditMode call EditMode()
+
+if &diff
+	:DiffMode
+endif
+
+call EditMode()
 " Enable file type detection.
+"
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
@@ -345,7 +366,8 @@ set winwidth=15
 " Make window splitting behav
 set equalalways
 set splitright
-set splitbelow
+"set splitbelow
+
 set eadirection=both
 "}}}
 
@@ -406,8 +428,8 @@ noremap <leader>x :!chmod +x %<CR>
 inoremap <leader>x <esc>:!chmod +x %<CR>
 
 "always cd to files dir
-autocmd BufEnter,BufRead * :lcd %:p:h
-
+"this breaks fugitive Gdiff command!
+"autocmd BufEnter,BufRead * :lcd %:p:h
 "autocmd FileType idl set makeprg=idlj\ %
 let g:completekey="<C-Space>"
 
