@@ -171,3 +171,27 @@ call s:hifg("Special"        ,"#33AA00","DarkGreen",24) " 7
 call s:hifg("Regexp"         ,"#44B4CC","DarkCyan",21) " 74
 call s:hifg("rubyMethod"     ,"#DDE93D","Yellow",77) " 191
 "highlight railsMethod   guifg=#EE1122 ctermfg=1
+
+" Utilility Function ---------------------------------------{{{
+function! s:h(group, style)
+	execute "highlight" a:group
+		\ "guifg="   (has_key(a:style, "fg")    ? a:style.fg.gui   : "NONE")
+		\ "guibg="   (has_key(a:style, "bg")    ? a:style.bg.gui   : "NONE")
+		\ "guisp="   (has_key(a:style, "sp")    ? a:style.sp.gui   : "NONE")
+		\ "gui="     (has_key(a:style, "gui")   ? a:style.gui      : "NONE")
+		\ "ctermfg=" (has_key(a:style, "fg")    ? a:style.fg.cterm : "NONE")
+		\ "ctermbg=" (has_key(a:style, "bg")    ? a:style.bg.cterm : "NONE")
+		\ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
+endfunction
+
+"}}}
+
+let s:faintGreen=   { "gui": "#005F00", "cterm": "34"  }
+let s:faintRed=        { "gui": "#5F0000", "cterm": "52"  }
+let s:normRed=		{ "gui": "#af0000", "cterm": "124" }
+let s:darkBlue=        { "gui": "#005FD7", "cterm": "26"  }
+
+call s:h("DiffAdd",      { "fg": s:faintGreen })
+call s:h("DiffChange",   { "fg": s:normRed })
+call s:h("DiffDelete",   { "fg": s:faintRed })
+call s:h("DiffText",     { "fg": s:darkBlue })
