@@ -18,8 +18,8 @@ set history=100
 set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
-
-let mapleader = ";"
+" this slows down typing ;
+"let mapleader = ";"
 
 call pathogen#infect()
 
@@ -104,7 +104,7 @@ set splitright
 set splitbelow
 
 :set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
-
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 "complete quotes
 ":inoremap [ []<left>
 ":inoremap ( ()<left>
@@ -172,10 +172,10 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 "plugin shortcuts -- Alt/Meta only works in GUI
 
 "*************** Navigation helpers
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <silent><leader>d <Plug>ToggleProject
+nmap <C-n> :NERDTreeToggle<CR>
+"nmap <C-p> <Plug>ToggleProject
 nnoremap <silent> <leader>t :TlistToggle<CR>
-nnoremap <silent> <leader>e :BufExplorer<CR>
+nnoremap <C-e> :BufExplorer<CR>
 
 let g:proj_flags = "gmst"
 let g:proj_window_width = 40
@@ -205,7 +205,7 @@ nnoremap <C-w> <Esc>:wq!<CR>
 inoremap <C-q> <Esc>:q!<CR>
 nnoremap <C-q> <Esc>:q!<CR>
 "show line numbers
-map <leader>-n <Esc>:set nu<cr>
+map <leader>n <Esc>:set nu<cr>
 
  "}}}
  
@@ -329,17 +329,12 @@ set foldcolumn=0
 "*************************** WINDOW AND TABS *******************"{{{
 "resize windows- nb ^W is mapped to close window, -style
 "make taller / shorter
-noremap + <C-W>+
-noremap _ <C-W>-
-"make wider / thinner
-noremap - <C-W><
-"noremap = <C-W>> "conflicts with indenting command
 "make windows equal height and width
-noremap ,= <C-W>=
-""maximize vertically
-noremap ,_ <C-W>_
-""maximize horizontally
-noremap ,- :vertical resize<CR>
+noremap <leader>= <C-W>=
+"make wider
+noremap - <C-W>>
+"make taller
+noremap + <C-W>+
 "make this the Only window
 noremap ,o <C-W>o
 noremap <leader>v :vsplit<CR>
@@ -419,7 +414,6 @@ let g:tskelQueryType = 'query'
 
 "snippets
  let g:snips_author = 'David Wilhelm'
-
 "enable static folds
 "set foldmethod=marker
 
@@ -445,7 +439,7 @@ set fillchars="fold:,vert:"
 function! SetJSTags()
 	"set javascript tags
 	set tags=tags;
-	set tags+=$EXT_HOME/tags
+	"set tags+=$EXT_HOME/tags
 	"set tags+=$JSCORE_HOME/tags
 	"set tags+=$HTML5_HOME/tags
 	"set tags+=$HTML5_HOME/webgl/tags
@@ -458,15 +452,13 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
 
-" nodelintasdasdas 
-
 "let g:NodelintConfig = $HOME . '/nodelint-config.js'
 "let g:NodelintPassive = 1
 " TODO: move to filetype plugin
 map <leader>b :JSBeautify<CR>
 
 hi clear CursorLine
-hi CursorLine ctermbg=Blue
+hi CursorLine ctermbg=18
 au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
@@ -479,3 +471,6 @@ inoremap <Leader><Tab> <Tab>
 
 "help copypaste to work
 set clipboard=unnamed
+"fugitive tweaks
+autocmd BufReadPost fugitive://* set bufhidden=delete
+

@@ -186,12 +186,17 @@ endfunction
 
 "}}}
 
-let s:faintGreen=   { "gui": "#005F00", "cterm": "34"  }
+let s:faintGreen=   { "gui": "#008700", "cterm": "28"  }
 let s:faintRed=        { "gui": "#5F0000", "cterm": "52"  }
+let s:faintOrange=        { "gui": "#AF5F00", "cterm": "130"  }
+let s:lightOrange=        { "gui": "#AF5F00", "cterm": "136"  }
 let s:normRed=		{ "gui": "#af0000", "cterm": "124" }
-let s:darkBlue=        { "gui": "#005FD7", "cterm": "26"  }
+let s:darkBlue=        { "gui": "#005FD7", "cterm": "18"  }
+let s:faintBlue=        { "gui": "#5F5FAf", "cterm": "99"  }
+let s:darkPurple=        { "gui": "#005FD7", "cterm": "206"  }
+let s:brightYellow=        { "gui": "#FFFF00", "cterm": "226"  }
 
-call s:h("DiffAdd",      { "fg": s:faintGreen })
-call s:h("DiffChange",   { "fg": s:normRed })
-call s:h("DiffDelete",   { "fg": s:faintRed })
-call s:h("DiffText",     { "fg": s:darkBlue })
+call s:h("DiffAdd",      { "bg": s:faintGreen })
+call s:h("DiffChange",   { "bg": s:faintBlue })
+call s:h("DiffDelete",   { "bg": s:faintRed })
+call s:h("DiffText",     { "bg": s:faintOrange })
