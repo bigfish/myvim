@@ -172,7 +172,8 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 "plugin shortcuts -- Alt/Meta only works in GUI
 
 "*************** Navigation helpers
-nmap <C-n> :NERDTreeToggle<CR>
+"(d)irectory listing
+nnoremap <C-d> :NERDTreeToggle<CR>
 "nmap <C-p> <Plug>ToggleProject
 nnoremap <silent> <leader>t :TlistToggle<CR>
 nnoremap <C-e> :BufExplorer<CR>
@@ -205,7 +206,7 @@ nnoremap <C-w> <Esc>:wq!<CR>
 inoremap <C-q> <Esc>:q!<CR>
 nnoremap <C-q> <Esc>:q!<CR>
 "show line numbers
-map <leader>n <Esc>:set nu<cr>
+map <leader>n <Esc>:set nu!<cr>
 
  "}}}
  
@@ -220,6 +221,7 @@ inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
 
 "emacs like delete
 nnoremap <M-BS> dB
+inoremap <M-BS> dB
 
 "XML Tidy
 ":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
@@ -240,10 +242,10 @@ imap \fn <C-R>=expand("%:t:r")<CR>
 
 "colors
 "tab coloring
-:highlight TabLine cterm=NONE ctermbg=darkmagenta ctermfg=magenta
-:highlight TabLineSel cterm=NONE ctermfg=magenta ctermbg=black
-:highlight TabLineFill cterm=NONE ctermbg=darkmagenta ctermfg=black
-:highlight link TagListFileName Folded
+":highlight TabLine cterm=NONE ctermbg=darkmagenta ctermfg=magenta
+":highlight TabLineSel cterm=NONE ctermfg=magenta ctermbg=black
+":highlight TabLineFill cterm=NONE ctermbg=darkmagenta ctermfg=black
+":highlight link TagListFileName Folded
 "sign column
 :highlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
 
@@ -473,4 +475,9 @@ inoremap <Leader><Tab> <Tab>
 set clipboard=unnamed
 "fugitive tweaks
 autocmd BufReadPost fugitive://* set bufhidden=delete
-
+"gitv conf
+let g:Gitv_DoNotMapCtrlKey = 1
+"sparkup conf
+"Mapping used to execute sparkup.
+let g:sparkupExecuteMapping = '<c-e>'
+let g:sparkupNextMapping = '<c-n>'
