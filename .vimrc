@@ -103,8 +103,9 @@ set equalalways
 set splitright
 set splitbelow
 
-:set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+":set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2   " Always show the statusline
 "complete quotes
 ":inoremap [ []<left>
 ":inoremap ( ()<left>
@@ -172,8 +173,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 "plugin shortcuts -- Alt/Meta only works in GUI
 
 "*************** Navigation helpers
-"(d)irectory listing
-nnoremap <C-d> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 "nmap <C-p> <Plug>ToggleProject
 nnoremap <silent> <leader>t :TlistToggle<CR>
 nnoremap <C-e> :BufExplorer<CR>
@@ -481,3 +481,6 @@ let g:Gitv_DoNotMapCtrlKey = 1
 "Mapping used to execute sparkup.
 let g:sparkupExecuteMapping = '<c-e>'
 let g:sparkupNextMapping = '<c-n>'
+"set indentation for cucumber features
+autocmd FileType cucumber setlocal shiftwidth=2
+autocmd FileType ruby setlocal shiftwidth=2
