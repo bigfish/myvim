@@ -477,7 +477,3 @@ set clipboard=unnamed
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
-
-"set indentation for cucumber features
-autocmd FileType cucumber setlocal shiftwidth=2
-autocmd FileType ruby setlocal shiftwidth=2
