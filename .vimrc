@@ -477,10 +477,7 @@ set clipboard=unnamed
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
-"sparkup conf
-"Mapping used to execute sparkup.
-let g:sparkupExecuteMapping = '<c-e>'
-let g:sparkupNextMapping = '<c-n>'
+
 "set indentation for cucumber features
 autocmd FileType cucumber setlocal shiftwidth=2
 autocmd FileType ruby setlocal shiftwidth=2
