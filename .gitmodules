@@ -1,3 +1,0 @@
-[submodule "repos/vim-markdown"]
-	path = repos/vim-markdown
-	url = git@github.com:bigfish/vim-markdown.git

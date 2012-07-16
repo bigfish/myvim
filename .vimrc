@@ -467,9 +467,9 @@ set cul
 		
 "experimental -- Tab is Escape
 vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>
-inoremap <Tab> <Esc>`^
-inoremap <Leader><Tab> <Tab>
+"onoremap <Tab> <Esc>
+inoremap <Tab> <Esc>
+"inoremap <Leader><Tab> <Tab>
 
 "help copypaste to work
 set clipboard=unnamed
@@ -477,3 +477,5 @@ set clipboard=unnamed
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
+"handle handlebars templates
+:au BufEnter *.hbs set ft=html
