@@ -28,3 +28,25 @@ snippet req
 	require([${1}], function (${2}) {
 		${3}
 	});
+
+snippet mod
+	define([
+		"jquery",
+		"backbone",
+		"hbs!template/${1}"
+	], function ($, Backbone, template) {
+		"use strict";
+	
+	});
+
+snippet view
+	Backbone.View.extend({
+		events: {
+			${1}
+		},
+		render: function () {
+			this.$el.html(template());
+			return this;
+		}
+	});
+

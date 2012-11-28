@@ -13,13 +13,13 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 "don't clutter up workspace with backup & swap file
-set backupdir=/tmp,.
+set backupdir=~/tmp
+set noswapfile
 set history=100  
 set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
-" this slows down typing ;
-"let mapleader = ";"
+set autochdir
 
 call pathogen#infect()
 
@@ -69,7 +69,6 @@ let g:scaleFont = "Monaco"
 let g:scaleFontSize = 12
 
 "}}}
-set backupdir=$HOME/.vimbackups,.
 
 " Setup automatic text formatting/wrapping:
 "set formatoptions=
@@ -162,6 +161,8 @@ set completeopt=menu,preview
 "do omnicomplete (on supported filetypes
 imap <C-o> <C-x><C-o>
 imap <C-u> <C-x><C-u>
+"line completion
+imap <C-l> <C-x><C-l>
 "imap <C-k> <C-x><C-k>
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -467,7 +468,6 @@ set cul
 		
 "experimental -- Tab is Escape
 vnoremap <Tab> <Esc>gV
-"onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>
 "inoremap <Leader><Tab> <Tab>
 
