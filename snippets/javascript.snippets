@@ -16,7 +16,7 @@ snippet clos
 		${1}
 	}());
 
-snippet log
+snippet clog
 	console.log(${1})
 
 snippet define
@@ -49,4 +49,13 @@ snippet view
 			return this;
 		}
 	});
+
+snippet log
+	/*log "${1}"*/
+
+snippet err
+	/*err(${1}) throw new Error("${2}") */
+
+snippet alert
+	/*alert "${1}"*/
 

@@ -20,6 +20,10 @@ set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
 set autochdir
+set nu
+
+let mapleader = ","
+let maplocalleader = ";"
 
 call pathogen#infect()
 
@@ -263,20 +267,14 @@ if has("macunix")
 	:map µ :%s/\r/\r/g<cr>
 endif
 
-map ,c :sp $HOME/.vimrc<CR>
-map ,g :sp $HOME/.gvimrc<CR>
 "map ,b :sp $HOME/.bashrc<CR>
-noremap <silent> ,C :source $HOME/.vimrc<CR>
-map <silent> ,G :source $HOME/.gvimrc<CR>
-
-"(r)eload
-noremap <silent> ,r <Esc>,C,G,A
+noremap <leader>r :source $HOME/.vimrc<CR>
 
 "get snippets
-noremap ,s :sp $HOME/.vim/snippets/javascript.snippets<CR>
+noremap <leader>s :sp $HOME/.vim/snippets/javascript.snippets<CR>
 
 "reload snippets
-noremap ,r :call ReloadAllSnippets()<CR>
+noremap <leader>rs :call ReloadAllSnippets()<CR>
 
 "}}}
 
@@ -377,7 +375,9 @@ set shm=IsAat
 "set viminfo = "100,<50,s10,h,!"
 
 "no wrap by default
-set nowrap
+set wrap
+"mapping for toggling wrapping
+noremap <leader>w :set wrap!<cr>
 
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
