@@ -19,7 +19,6 @@ set history=100
 set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
-set autochdir
 set nu
 
 let mapleader = ","
@@ -468,4 +467,7 @@ let g:Gitv_DoNotMapCtrlKey = 1
 "handle handlebars templates
 :au BufEnter *.hbs set ft=html
 
+nnoremap <silent><C-g> :CommandT<CR>
+nnoremap <silent><C-e> :CommandTBuffer<CR>
+let g:CommandTMatchWindowAtTop = 1
 
