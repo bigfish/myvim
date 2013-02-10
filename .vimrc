@@ -267,43 +267,31 @@ if has("macunix")
 	:map µ :%s/\r/\r/g<cr>
 endif
 
-"map ,b :sp $HOME/.bashrc<CR>
-noremap <leader>r :source $HOME/.vimrc<CR>
+nnoremap <leader>c :sp $HOME/.vimrc<CR>
+nnoremap <leader>r :source $HOME/.vimrc<CR>
 
 "get snippets
-noremap <leader>s :sp $HOME/.vim/snippets/javascript.snippets<CR>
+nnoremap <leader>s :sp $HOME/.vim/snippets/javascript.snippets<CR>
 
 "reload snippets
-noremap <leader>rs :call ReloadAllSnippets()<CR>
+nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
-"}}}
+"toggle quickfix window
+let g:quickfix_is_open = 0
+nnoremap <leader>q :call QuickfixToggle()<cr>
 
-" ********************** Quickfix ******************************"{{{
-" recommend using location list to prevent jumping to wrong file
-" use :lmake rather than :make to force output to location list
-if has("macunix")
-	:noremap <D-q> :clist<cr>
-	:noremap <D-Q> :ccl<cr>
-	":nmap <D-n> :cne<cr>
-	":nmap <D-p> :cp<cr>
+function! QuickfixToggle()
+		if g:quickfix_is_open
+				cclose
+				let g:quickfix_is_open = 0
+				execute g:quickfix_return_to_window . "wincmd w"
+		else
+				let g:quickfix_return_to_window = winnr()
+				copen
+				let g:quickfix_is_open = 1
+		endif
+endfunction
 
-	:noremap <D-l> :llist<cr>
-	:noremap <D-L> :lcl<cr>
-	:noremap <D-n> :lne<cr>
-	:noremap <D-p> :lp<cr>
-else
-	:noremap <A-q> :clist<cr>
-	:noremap <A-Q> :ccl<cr>
-	":nmap <A-n> :cn<cr>
-	":nmap <A-p> :cp<cr>
-
-	:noremap <A-l> :llist<cr>
-	:noremap <A-L> :lcl<cr>
-	:noremap <A-n> :lne<cr>
-	:noremap <A-p> :lp<cr>
-	"(r)ewind
-	:noremap <A-r> :lr<cr>
-endif
 "}}}
 
 "system copy+paste
@@ -375,7 +363,7 @@ set shm=IsAat
 "set viminfo = "100,<50,s10,h,!"
 
 "no wrap by default
-set wrap
+set nowrap
 "mapping for toggling wrapping
 noremap <leader>w :set wrap!<cr>
 
@@ -479,3 +467,5 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:Gitv_DoNotMapCtrlKey = 1
 "handle handlebars templates
 :au BufEnter *.hbs set ft=html
+
+
