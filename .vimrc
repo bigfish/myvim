@@ -117,8 +117,8 @@ set laststatus=2   " Always show the statusline
 ":inoremap " ""<left>
 ":inoremap ' ''<left>
 
-"cd to file dir (mnemonic=(l)ocal)
-nmap <leader>l :lcd %:p:h<CR>
+"cd to file dir (mnemonic=(d)ir)
+nmap <leader>d :lcd %:p:h<CR>
 
 "markdown
 autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
@@ -274,22 +274,6 @@ nnoremap <leader>s :sp $HOME/.vim/snippets/javascript.snippets<CR>
 
 "reload snippets
 nnoremap <leader>rs :call ReloadAllSnippets()<CR>
-
-"toggle quickfix window
-let g:quickfix_is_open = 0
-nnoremap <leader>q :call QuickfixToggle()<cr>
-
-function! QuickfixToggle()
-		if g:quickfix_is_open
-				cclose
-				let g:quickfix_is_open = 0
-				execute g:quickfix_return_to_window . "wincmd w"
-		else
-				let g:quickfix_return_to_window = winnr()
-				copen
-				let g:quickfix_is_open = 1
-		endif
-endfunction
 
 "}}}
 
@@ -467,7 +451,6 @@ let g:Gitv_DoNotMapCtrlKey = 1
 "handle handlebars templates
 :au BufEnter *.hbs set ft=html
 
-nnoremap <silent><C-g> :CommandT<CR>
-nnoremap <silent><C-e> :CommandTBuffer<CR>
+nnoremap <silent><C-o> :CommandT<CR>
 let g:CommandTMatchWindowAtTop = 1
 
