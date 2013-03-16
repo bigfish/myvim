@@ -64,9 +64,10 @@ set mouse=a
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  " set hlsearch
 endif
- 
+" always use hlsearch
+set hlsearch
+
 "let g:snippets_dir = "$HOME/.vim/snippets"
 let g:scaleFont = "Monaco"
 let g:scaleFontSize = 12
@@ -252,6 +253,9 @@ imap \fn <C-R>=expand("%:t:r")<CR>
 ":highlight link TagListFileName Folded
 "sign column
 :highlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
+:highlight Search guibg=yellow cterm=NONE ctermbg=yellow ctermfg=black
+:highlight Search guibg=yellow cterm=NONE ctermbg=yellow ctermfg=black
+
 
 
 "Plugin settings
@@ -451,6 +455,5 @@ let g:Gitv_DoNotMapCtrlKey = 1
 "handle handlebars templates
 :au BufEnter *.hbs set ft=html
 
-nnoremap <silent><C-o> :CommandT<CR>
-let g:CommandTMatchWindowAtTop = 1
-
+"map control-o to ctrlP
+let g:ctrlp_map = '<c-o>'
