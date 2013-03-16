@@ -457,3 +457,5 @@ let g:Gitv_DoNotMapCtrlKey = 1
 
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
+
+let g:EasyMotion_leader_key = '<leader>m'
