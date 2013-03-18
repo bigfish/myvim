@@ -459,3 +459,4 @@ let g:Gitv_DoNotMapCtrlKey = 1
 let g:ctrlp_map = '<c-o>'
 
 let g:EasyMotion_leader_key = '<leader>m'
+let g:Powerline_symbols = 'fancy'
