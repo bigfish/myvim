@@ -251,7 +251,8 @@ imap \fn <C-R>=expand("%:t:r")<CR>
 ":highlight TabLineFill cterm=NONE ctermbg=darkmagenta ctermfg=black
 ":highlight link TagListFileName Folded
 "sign column
-:highlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
+":n ascending orderhighlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
+highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 
 
 "Plugin settings
@@ -453,4 +454,7 @@ let g:Gitv_DoNotMapCtrlKey = 1
 
 nnoremap <silent><C-o> :CommandT<CR>
 let g:CommandTMatchWindowAtTop = 1
+
+let g:jshint_onwrite = 1
+let g:jshint_goto_error = 0
 
