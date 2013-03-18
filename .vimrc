@@ -460,3 +460,6 @@ let g:ctrlp_map = '<c-o>'
 
 let g:EasyMotion_leader_key = '<leader>m'
 let g:Powerline_symbols = 'fancy'
+
+"map to git grep
+nnoremap <C-g> :Ggrep! /
