@@ -466,3 +466,5 @@ let g:jshint_goto_error = 0
 
 "map to git grep
 nnoremap <C-g> :Ggrep! /
+nnoremap <leader>l :lcd %:p:h<cr>
+
