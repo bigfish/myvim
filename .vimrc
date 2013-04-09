@@ -254,8 +254,8 @@ imap \fn <C-R>=expand("%:t:r")<CR>
 "sign column
 ":n ascending orderhighlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
-highlight Search guibg=yellow cterm=NONE ctermbg=yellow ctermfg=black
-highlight Search guibg=yellow cterm=NONE ctermbg=yellow ctermfg=black
+highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
+highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
 
 
 "Plugin settings
@@ -457,6 +457,9 @@ let g:Gitv_DoNotMapCtrlKey = 1
 
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
+"only search from curdir
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = "/tmp"
 
 let g:EasyMotion_leader_key = '<leader>m'
 let g:Powerline_symbols = 'fancy'
@@ -468,3 +471,7 @@ let g:jshint_goto_error = 0
 nnoremap <C-g> :Ggrep! /
 nnoremap <leader>l :lcd %:p:h<cr>
 
+autocmd User fugitive
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
