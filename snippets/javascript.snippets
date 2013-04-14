@@ -59,3 +59,18 @@ snippet err
 snippet alert
 	/*alert "${1}"*/
 
+snippet helper
+	define('template/helpers/${1:name}', ['Handlebars'],
+
+		function (Handlebars) {
+				"use strict";
+		
+				function $1 (${2:object}) {
+				    ${3}
+				    return ${4};
+				}
+		
+				Handlebars.registerHelper( '$1', $1 );
+		
+				return $1;
+		});

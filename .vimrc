@@ -458,6 +458,10 @@ let g:Gitv_DoNotMapCtrlKey = 1
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
 
+let g:ctrlp_by_filename = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = '/tmp'
+
 let g:EasyMotion_leader_key = '<leader>m'
 let g:Powerline_symbols = 'fancy'
 
@@ -466,5 +470,6 @@ let g:jshint_goto_error = 0
 
 "map to git grep
 nnoremap <C-g> :Ggrep! /
-nnoremap <leader>l :lcd %:p:h<cr>
+"conflicts with ? lint ?
+"nnoremap <leader>l :lcd %:p:h<cr>
 
