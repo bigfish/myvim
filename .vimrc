@@ -29,7 +29,7 @@ call pathogen#infect()
 " change colorscheme for editing
 function! EditMode()
 :set background=dark
-:colorscheme vividchalk
+:colorscheme molokai
 endfunction
 
 " change colorscheme for diffing
@@ -454,8 +454,6 @@ set clipboard=unnamed
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
-"handle handlebars templates
-:au BufEnter *.hbs set ft=html
 
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
