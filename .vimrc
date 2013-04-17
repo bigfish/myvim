@@ -308,10 +308,9 @@ set foldcolumn=0
 "make windows equal height and width
 noremap <leader>= <C-W>=
 "make wider
-noremap < <C-W><
-noremap > <C-W>>
+noremap _ <C-W><
+noremap - <C-W>>
 "make taller
-noremap - <C-W>-
 noremap + <C-W>+
 "make this the Only window
 noremap ,o <C-W>o
@@ -480,3 +479,8 @@ autocmd User fugitive
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
+
+
+let g:dbgPavimKeyContextGet = '<F10>'
+
+autocmd FileType ruby compiler ruby
