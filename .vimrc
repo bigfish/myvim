@@ -26,27 +26,27 @@ let maplocalleader = ";"
 
 call pathogen#infect()
 
+:set background=dark
+
 " change colorscheme for editing
 function! EditMode()
-:set background=dark
-":colorscheme vividchalk
 :colorscheme molokai
 endfunction
 
 " change colorscheme for diffing
 function! DiffMode()
-:set background=light
-:colorscheme hemisu
+:colorscheme vividchalk
 endfunction
 
 command! DiffMode call DiffMode()
 command! EditMode call EditMode()
 
+call EditMode()
+
 if &diff
 	:DiffMode
 endif
 
-call EditMode()
 " Enable file type detection.
 "
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
@@ -312,7 +312,10 @@ noremap <leader>= <C-W>=
 noremap _ <C-W><
 noremap - <C-W>>
 "make taller
+<<<<<<< HEAD
 "noremap - <C-W>-
+=======
+>>>>>>> 58cb950059fcdf7bcb82bc9a07bf2dbf5ad19fc3
 noremap + <C-W>+
 "make this the Only window
 noremap ,o <C-W>o
@@ -455,8 +458,6 @@ set clipboard=unnamed
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
-"handle handlebars templates
-:au BufEnter *.hbs set ft=html
 
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
@@ -482,13 +483,10 @@ nnoremap <C-a> :Ack
 
 "map to git grep
 "nnoremap <C-g> :Ggrep! /
-"
-"conflicts with ? lint ?
-"nnoremap <leader>l :lcd %:p:h<cr>
 
 autocmd User fugitive
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
-"<F11> is mapped to fullscreen on Ubuntu
+
 let g:dbgPavimKeyContextGet = '<F10>'
