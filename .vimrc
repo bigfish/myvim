@@ -312,10 +312,6 @@ noremap <leader>= <C-W>=
 noremap _ <C-W><
 noremap - <C-W>>
 "make taller
-<<<<<<< HEAD
-"noremap - <C-W>-
-=======
->>>>>>> 58cb950059fcdf7bcb82bc9a07bf2dbf5ad19fc3
 noremap + <C-W>+
 "make this the Only window
 noremap ,o <C-W>o
@@ -435,11 +431,6 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal tabstop=2
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
-
-"let g:NodelintConfig = $HOME . '/nodelint-config.js'
-"let g:NodelintPassive = 1
-" TODO: move to filetype plugin
-map <leader>b :JSBeautify<CR>
 
 hi clear CursorLine
 hi CursorLine ctermbg=18
