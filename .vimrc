@@ -29,7 +29,8 @@ call pathogen#infect()
 " change colorscheme for editing
 function! EditMode()
 :set background=dark
-:colorscheme vividchalk
+":colorscheme vividchalk
+:colorscheme molokai
 endfunction
 
 " change colorscheme for diffing
@@ -308,10 +309,10 @@ set foldcolumn=0
 "make windows equal height and width
 noremap <leader>= <C-W>=
 "make wider
-noremap < <C-W><
-noremap > <C-W>>
+noremap _ <C-W><
+noremap - <C-W>>
 "make taller
-noremap - <C-W>-
+"noremap - <C-W>-
 noremap + <C-W>+
 "make this the Only window
 noremap ,o <C-W>o
@@ -464,7 +465,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = "/tmp"
 
 let g:ctrlp_by_filename = 1
-let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = '/tmp'
 
 let g:EasyMotion_leader_key = '<leader>m'
@@ -473,8 +474,15 @@ let g:Powerline_symbols = 'fancy'
 let g:jshint_onwrite = 1
 let g:jshint_goto_error = 0
 
+"map Ctrl-G to Gstatus, coz its a pain to type
+nnoremap <C-g> :Gstatus<cr>
+
+"map C-A to Ack
+nnoremap <C-a> :Ack 
+
 "map to git grep
-nnoremap <C-g> :Ggrep! /
+"nnoremap <C-g> :Ggrep! /
+"
 "conflicts with ? lint ?
 "nnoremap <leader>l :lcd %:p:h<cr>
 
@@ -482,3 +490,5 @@ autocmd User fugitive
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
+"<F11> is mapped to fullscreen on Ubuntu
+let g:dbgPavimKeyContextGet = '<F10>'
