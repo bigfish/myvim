@@ -179,7 +179,9 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 "plugin shortcuts -- Alt/Meta only works in GUI
 
 "*************** Navigation helpers
-nnoremap <C-n> :NERDTreeToggle<CR>
+"nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <C-n> :Vex<CR>
+
 "nmap <C-p> <Plug>ToggleProject
 nnoremap <silent> <leader>t :TlistToggle<CR>
 nnoremap <C-e> :BufExplorer<CR>
@@ -480,4 +482,9 @@ autocmd User fugitive
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
-let g:dbgPavimKeyContextGet = '<F10>'
+"let g:dbgPavimKeyContextGet = '<F10>'
+
+let g:netrw_liststyle=3 " Use tree-mode as default view
+let g:netrw_browse_split=4 " Open file in previous buffer
+let g:netrw_preview=1 " preview window shown in a vertically split
+let g:netrw_winsize=25
