@@ -1,6 +1,6 @@
 "
 " Maintainer:  David Wilhelm
-" Last change: March 14 2012
+" Last change: May 14 2013
 "
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -21,31 +21,12 @@ set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
 set nu
 
-let mapleader = ","
-let maplocalleader = ";"
 
 call pathogen#infect()
 
 :set background=dark
 
-" change colorscheme for editing
-function! EditMode()
-:colorscheme molokai
-endfunction
-
-" change colorscheme for diffing
-function! DiffMode()
 :colorscheme vividchalk
-endfunction
-
-command! DiffMode call DiffMode()
-command! EditMode call EditMode()
-
-call EditMode()
-
-if &diff
-	:DiffMode
-endif
 
 " Enable file type detection.
 "
@@ -66,14 +47,11 @@ set mouse=a
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
+
+" **************************** OPTIONS *********************************
+"
 " always use hlsearch
 set hlsearch
-
-"let g:snippets_dir = "$HOME/.vim/snippets"
-let g:scaleFont = "Monaco"
-let g:scaleFontSize = 12
-
-"}}}
 
 " Setup automatic text formatting/wrapping:
 "set formatoptions=
@@ -99,7 +77,7 @@ autocmd BufReadPost *
 " Disable annoying beeps
 set noerrorbells
  
-"save files when new one opened using 'vi' command (mapped to Ctrl-N below)
+"save files when new one opened using 'vi' command
 set autowrite
 
 " Make window splitting behave
@@ -110,30 +88,28 @@ set splitbelow
 ":set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the statusline
-"complete quotes
-":inoremap [ []<left>
-":inoremap ( ()<left>
-" this is messing up cindent
-":inoremap { {<CR>}<Esc>O<C-t>
-":inoremap { {<CR><C-D>}<Esc>O
-":inoremap " ""<left>
-":inoremap ' ''<left>
+
+"
+" ****************************** MAPPINGS ***************************
+"
+"Tab is Escape
+vnoremap <Tab> <Esc>gV
+inoremap <Tab> <Esc>
+
+let mapleader = ","
+let maplocalleader = ";"
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
 
-"markdown
-autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
+nnoremap <leader>g :Gstatus<cr>
+nnoremap <leader>a :Ack 
  
 "set hidden
 :set switchbuf=useopen
 
 "****************** NAVIGATION MAPPINGS ***********************""{{{
 
-"jump to start/end of line in insert mode"
-:imap <C-A> <Esc>^
-":nmap <C-A> A
- 
 "map arrow keys to navigate wrapped lines
 map <DOWN> gj
 map <UP> gk
@@ -176,52 +152,30 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 "}}}
 
-"plugin shortcuts -- Alt/Meta only works in GUI
-
 "*************** Navigation helpers
-"nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <silent> <C-n> :Vex<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>v :Vex<CR>
+nnoremap <leader>s :Sex<CR>
+nnoremap <leader>e :BufExplorer<CR>
+nnoremap <leader>t :TlistToggle<CR>
 
-"nmap <C-p> <Plug>ToggleProject
-nnoremap <silent> <leader>t :TlistToggle<CR>
-nnoremap <C-e> :BufExplorer<CR>
-
-let g:proj_flags = "gmst"
-let g:proj_window_width = 40
-let g:proj_window_increment= 20
 "}}}
 "
 " ********************* Saving and Quitting ******************"{{{
 "save Ctrl / Command S 
-"save in insert mode switches to normal mode
-"as I found I always did that anyway
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>a
 
-nmap <C-s> :w<CR>
-imap <C-s> <ESC>:w<CR>
-
-"quit and save session
-"nmap <localleader>q :call SaveSessionAndQuit()<CR>
-
-"function! SaveSessionAndQuit()
-	"exec "SessionSave"
-	"exec 'wqa'
-"endfunction	
-
-"force quit (W)indow Ctrl / Com W
 inoremap <C-w> <Esc>:wq!<CR>
 nnoremap <C-w> <Esc>:wq!<CR>
-"save and quit all
 inoremap <C-q> <Esc>:q!<CR>
-nnoremap <C-q> <Esc>:q!<CR>
+nnoremap <C-q> :q!<CR>
+
 "show line numbers
 map <leader>n <Esc>:set nu!<cr>
 
  "}}}
  
-"************ Command key maps ************************
-"help on current word with \h
-"map <localleader>h <ESC>:exec "help ".expand("<cWORD>")<CR>
-
 "jump to (t)emplate placeholders 
 "or snipMate mappings 
 nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
@@ -234,6 +188,8 @@ inoremap <M-BS> dB
 "XML Tidy
 ":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
 
+"markdown
+autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
 " ************************** MARKDOWN *******************"{{{
 
 if has("macunix")
@@ -248,18 +204,9 @@ com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
 "insert filename
 imap \fn <C-R>=expand("%:t:r")<CR>
 
-"colors
-"tab coloring
-":highlight TabLine cterm=NONE ctermbg=darkmagenta ctermfg=magenta
-":highlight TabLineSel cterm=NONE ctermfg=magenta ctermbg=black
-":highlight TabLineFill cterm=NONE ctermbg=darkmagenta ctermfg=black
-":highlight link TagListFileName Folded
-"sign column
-":n ascending orderhighlight SignColumn guibg=darkblue cterm=NONE ctermbg=darkblue ctermfg=magenta
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
 highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
-
 
 "Plugin settings
 let Tlist_Use_Right_Window=1
@@ -268,20 +215,18 @@ let g:bufExplorerDefaultHelp=0
 
 set nocst
  
-"replace newlines
-if has("macunix")
-	:map µ :%s/\r/\r/g<cr>
-endif
-
 nnoremap <leader>c :sp $HOME/.vimrc<CR>
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
 "get snippets
-nnoremap <leader>s :sp $HOME/.vim/snippets/javascript.snippets<CR>
+nnoremap <leader>js :sp $HOME/.vim/snippets/javascript.snippets<CR>
 
 "reload snippets
 nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
+"make current file executable
+noremap <leader>x :!chmod +x %<CR>
+nnoremap <leader>h :nohl<cr>
 "}}}
 
 "system copy+paste
@@ -294,11 +239,9 @@ let g:gist_detect_filetype = 1
 ":set nu
 :set ts=4
 
-"save and load view of .vimprojects
-au BufWinLeave .vimprojects mkview!
-au BufWinEnter .vimprojects silent loadview
 "hide foldcolumn
 set foldcolumn=0
+
 " CTAGS these must be generated by ctags
 "*************************************** TAGS ***************"{{{
 "lookup tags in current and all parent folders
@@ -316,18 +259,7 @@ noremap - <C-W>>
 "make taller
 noremap + <C-W>+
 "make this the Only window
-noremap ,o <C-W>o
-noremap <leader>v :vsplit<CR>
-noremap <leader>h :split<CR>
-""rotate windows
-"noremap wr <C-W>r
-"noremap WR <C-W>W
-"noremap wx <C-W>x
-"capital HJKL- move window to left, bottom, top, right
-"noremap K <C-W>K
-"noremap J <C-W>J
-"noremap H <C-W>H overrides native behaviour required to restore cursor
-"position
+noremap <leader>o <C-W>o
 noremap L <C-W>L
 "move window to new tab
 noremap T <C-W>T 
@@ -382,27 +314,8 @@ command! -range CamelCase <line1>,<line2>call Camelize()
 :let html_use_encoding = ""
 :let use_xhtml = 1
 
-" ************************ tSkeleton settings ***************** "{{{
-let g:tskelUserName = "David Wilhelm"
-let g:tskelUserEmail = "dewilhelm@gmail.com"
-let g:tskelUserWWW = "www.dafishinsea.com"
-let g:tselLicense = "MIT Licensed"
-let g:tskelTypes = ["skeleton", "mini", "tags"]
-let g:tskelMenuPrefix = 1
-"uncommenting below line uses C-U for tSkeleton completion
-"let g:tskelMapComplete = 1
-let g:tskelQueryType = 'query'
-"tag functions
-
-"snippets
- let g:snips_author = 'David Wilhelm'
 "enable static folds
 "set foldmethod=marker
-
-"make current file executable
-noremap <leader>x :!chmod +x %<CR>
-inoremap <leader>x <esc>:!chmod +x %<CR>
-
 "always cd to files dir
 "this breaks fugitive Gdiff command!
 "autocmd BufEnter,BufRead * :lcd %:p:h
@@ -412,12 +325,8 @@ let g:completekey="<C-Space>"
 "no dashes in folds 
 set fillchars="fold:,vert:"
 
-"mapping to run jscover on unit tests
-"nmap <Leader>t :!run_jscover 2>&1 > /dev/null<cr>
-
 "js tags 
-:autocmd BufNewFile,BufRead *.js call SetJSTags()
-
+":autocmd BufNewFile,BufRead *.js call SetJSTags()
 function! SetJSTags()
 	"set javascript tags
 	set tags=tags;
@@ -440,9 +349,6 @@ au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
 		
-"experimental -- Tab is Escape
-vnoremap <Tab> <Esc>gV
-inoremap <Tab> <Esc>
 "inoremap <Leader><Tab> <Tab>
 
 "help copypaste to work
@@ -462,29 +368,57 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = '/tmp'
 
-let g:EasyMotion_leader_key = '<leader>m'
+"let g:EasyMotion_leader_key = '<leader>m'
 let g:Powerline_symbols = 'fancy'
 
 let g:jshint_onwrite = 1
 let g:jshint_goto_error = 0
 
-"map Ctrl-G to Gstatus, coz its a pain to type
-nnoremap <C-g> :Gstatus<cr>
-
-"map C-A to Ack
-nnoremap <C-a> :Ack 
-
-"map to git grep
-"nnoremap <C-g> :Ggrep! /
 
 autocmd User fugitive
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
 
-"let g:dbgPavimKeyContextGet = '<F10>'
-
 let g:netrw_liststyle=3 " Use tree-mode as default view
-let g:netrw_browse_split=4 " Open file in previous buffer
-let g:netrw_preview=1 " preview window shown in a vertically split
-let g:netrw_winsize=25
+"let g:netrw_browse_split=4 " Open file in previous buffer
+"let g:netrw_preview=1 " preview window shown in a vertically split
+"let g:netrw_winsize=25
+
+set cmdheight=2
+set encoding=utf-8
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+function! WPMStartCount()
+		execute ':w'
+		let g:wpm_start_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
+        let g:wpm_start_time = localtime()
+endfunction
+
+function! WPMLog(wpm)
+		let logStr = system("date +%s")
+		let logStr = substitute(logStr, '\n$', '', '')
+		let logStr = logStr . '|' . a:wpm
+		call system('echo "' . logStr . '" >> ~/.wpm_log')
+		echo a:wpm
+endfunction
+
+function! WPMStopCount()
+		execute ':w'
+		let g:wpm_end_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
+        let g:wpm_end_time = localtime()
+        let new_words = g:wpm_end_word_count - g:wpm_start_word_count
+		let secs = g:wpm_end_time - g:wpm_start_time
+		let wpm = (str2float(new_words) / secs) * 60
+		let wpm = float2nr(wpm)
+		"if wpm > 0
+				call WPMLog(wpm)
+		"endif
+endfunction
+
+augroup wpm
+		au!
+		autocmd BufEnter *.txt  :set tw=73
+		autocmd InsertEnter *.txt  :call WPMStartCount()
+		autocmd InsertLeave *.txt  :call WPMStopCount()
+augroup END
