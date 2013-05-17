@@ -108,8 +108,8 @@ nnoremap <leader>a :Ack
 "****************** MOVEMENT MAPPINGS ***********************""{{{
 
 "shift buffer up/down by one line
-nnoremap j <c-e>
-nnoremap k <c-y>
+nnoremap u <c-e>
+nnoremap U <c-y>
 
 "bouncing to block delimeter
 nnoremap <c-b> %
