@@ -108,10 +108,8 @@ nnoremap <leader>a :Ack
 "****************** MOVEMENT MAPPINGS ***********************""{{{
 
 "shift buffer up/down by one line
-nnoremap u <c-e>
-nnoremap U <c-y>
-"remap undo to ctrl U
-nnoremap <c-U> u
+nnoremap <c-u> <c-e>
+nnoremap <s-u> <c-y>
 
 "bouncing to block delimeter
 nnoremap <c-b> %
@@ -293,8 +291,8 @@ noremap _ <C-W><
 noremap - <C-W>>
 
 "make taller (l)onger
-noremap l <C-W>+
-noremap L <C-W>-
+noremap <c-l> <C-W>+
+noremap <s-l> <C-W>-
 
 "make this the Only window
 noremap <leader>o <C-W>o
