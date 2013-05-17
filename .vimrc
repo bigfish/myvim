@@ -110,6 +110,8 @@ nnoremap <leader>a :Ack
 "shift buffer up/down by one line
 nnoremap u <c-e>
 nnoremap U <c-y>
+"remap undo to ctrl U
+nnoremap <c-U> u
 
 "bouncing to block delimeter
 nnoremap <c-b> %
@@ -204,8 +206,9 @@ map <leader>n <Esc>:set nu!<cr>
 "nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
 "inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
 
-"buffer explorer -- now using ctrl-p
+"buffer explorer BufExplorer now using ctrl-p
 nnoremap <c-e> :CtrlPBuffer<CR>
+nnoremap <c-e> :BufExplorer<CR>
 
 "NERD Tree
 nnoremap <c-n> :NERDTreeToggle<CR>
