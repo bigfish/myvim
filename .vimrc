@@ -107,9 +107,9 @@ nnoremap <leader>a :Ack
 
 "****************** MOVEMENT MAPPINGS ***********************""{{{
 
-"shift buffer up/down by one line
-nnoremap <c-u> <c-e>
-nnoremap <s-u> <c-y>
+"raise up one line
+nnoremap U <c-e>
+nnoremap K <c-y>
 
 "bouncing to block delimeter
 nnoremap <c-b> %
@@ -117,8 +117,7 @@ nnoremap <c-b> %
 "map HTNS -> HJKL for Dvorak layout
 nnoremap t j
 nnoremap n k
-nnoremap s l
-
+nnoremap s l 
 vnoremap t j
 vnoremap n k
 vnoremap s l
@@ -185,14 +184,15 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 nnoremap <C-S> :w<CR>
 inoremap <C-S> <ESC>:w<CR>a
 
-inoremap Z <Esc>:wq!<CR>
 nnoremap Z <Esc>:wq!<CR>
 
-inoremap Q <Esc>:q!<CR>
-nnoremap Q :q!<CR>
+"Dump
+nnoremap D :q!<CR>
 
-inoremap X <Esc>:qa<CR>
 nnoremap X :qa<CR>
+
+"use emacs kill to delete rest of line
+nnoremap <C-k> D
 
 "show line numbers
 map <leader>n <Esc>:set nu!<cr>
@@ -205,14 +205,14 @@ map <leader>n <Esc>:set nu!<cr>
 "inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
 
 "buffer explorer BufExplorer now using ctrl-p
-nnoremap <c-e> :CtrlPBuffer<CR>
+"nnoremap <c-e> :CtrlPBuffer<CR>
 nnoremap <c-e> :BufExplorer<CR>
 
 "NERD Tree
 nnoremap <c-n> :NERDTreeToggle<CR>
 
-"Netrw: mnemonic = (l)ist files
-nnoremap <c-l> :Vex<CR>
+"Netrw: mnemonic = file e(x)plorer
+nnoremap <c-x> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -260,8 +260,8 @@ noremap <leader>x :!chmod +x %<CR>
 nnoremap <leader>h :nohl<cr>
 "}}}
 
-"system copy+paste
-nnoremap <c-y> "+y
+"system copy+paste -- 
+nnoremap Y "+y
 
 "Gist options
 let g:gist_clip_command = 'xclip -selection clipboard'
@@ -290,14 +290,14 @@ noremap <leader>= <C-W>=
 noremap _ <C-W><
 noremap - <C-W>>
 
-"make taller (l)onger
-noremap <c-l> <C-W>+
-noremap <s-l> <C-W>-
+"grow / diminish
+noremap g <C-W>+
+noremap <c-g> <C-W>-
 
 "make this the Only window
 noremap <leader>o <C-W>o
 "enter to goto tag
-"pop tag stack with Backspace
+"pop tag sTack with Backspace
 "this allows C-T to be used by tmux
 nnoremap <CR> <C-]>
 nnoremap <BS> <C-T>
@@ -348,7 +348,7 @@ endfunction
 "assuming one rule per line
 command! -range Hyphenate <line1>,<line2>call Hyphenize()
 command! -range CamelCase <line1>,<line2>call Camelize()
-					
+			
 "generate nice html
 :let html_ignore_folding=1
 :let html_use_css=1
@@ -369,12 +369,12 @@ set fillchars="fold:,vert:"
 "js tags 
 ":autocmd BufNewFile,BufRead *.js call SetJSTags()
 function! SetJSTags()
-	"set javascript tags
-	set tags=tags;
-	"set tags+=$EXT_HOME/tags
-	"set tags+=$JSCORE_HOME/tags
-	"set tags+=$HTML5_HOME/tags
-	"set tags+=$HTML5_HOME/webgl/tags
+"set javascript tags
+set tags=tags;
+"set tags+=$EXT_HOME/tags
+"set tags+=$JSCORE_HOME/tags
+"set tags+=$HTML5_HOME/tags
+"set tags+=$HTML5_HOME/webgl/tags
 endfunction
 
 let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
@@ -389,7 +389,7 @@ hi CursorLine ctermbg=18
 au InsertEnter * set nocul
 au InsertLeave * set cul
 set cul
-		
+
 "inoremap <Leader><Tab> <Tab>
 
 "help copypaste to work
@@ -414,9 +414,9 @@ let g:jshint_goto_error = 0
 
 
 autocmd User fugitive
-  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  \   nnoremap <buffer> .. :edit %:h<CR> |
-  \ endif
+\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+\   nnoremap <buffer> .. :edit %:h<CR> |
+\ endif
 
 let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer
@@ -428,16 +428,16 @@ set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 function! WPMStartCount()
-		execute ':w'
-		let g:wpm_start_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
-        let g:wpm_start_time = localtime()
+execute ':w'
+let g:wpm_start_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
+let g:wpm_start_time = localtime()
 endfunction
 
 function! WPMLog(wpm)
-		let logStr = system("date +%s")
-		let logStr = substitute(logStr, '\n$', '', '')
-		let logStr = logStr . '|' . a:wpm
-		call system('echo "' . logStr . '" >> ~/.wpm_log')
+let logStr = system("date +%s")
+let logStr = substitute(logStr, '\n$', '', '')
+let logStr = logStr . '|' . a:wpm
+call system('echo "' . logStr . '" >> ~/.wpm_log')
 		echo a:wpm
 endfunction
 
