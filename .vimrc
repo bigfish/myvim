@@ -33,9 +33,6 @@ call pathogen#infect()
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
  
 " In many terminal emulators the mouse works just fine, thus enable it.
 set mouse=a
@@ -97,7 +94,7 @@ vnoremap <Tab> <Esc>gV
 inoremap <Tab> <Esc>
 
 let mapleader = ","
-let maplocalleader = ";"
+let maplocalleader = "."
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
@@ -108,7 +105,44 @@ nnoremap <leader>a :Ack
 "set hidden
 :set switchbuf=useopen
 
-"****************** NAVIGATION MAPPINGS ***********************""{{{
+"****************** MOVEMENT MAPPINGS ***********************""{{{
+
+"shift buffer up/down by one line
+nnoremap j <c-e>
+nnoremap k <c-y>
+
+"bouncing to block delimeter
+nnoremap <c-b> %
+
+"map HTNS -> HJKL for Dvorak layout
+nnoremap t j
+nnoremap n k
+nnoremap s l
+
+vnoremap t j
+vnoremap n k
+vnoremap s l
+
+"window navigation with uppercase nav keys
+noremap H <c-w>h
+noremap T <c-w>j
+noremap N <c-w>k
+noremap S <c-w>l
+
+"remap Home motion
+nnoremap <c-h> H
+"goto Middle of buffer
+nnoremap <c-m> z.
+
+"window manipulation 
+noremap <localleader>h <c-w>H
+noremap <localleader>t <c-w>J
+noremap <localleader>n <c-w>K
+noremap <localleader>s <c-w>L
+
+"splits
+nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>s :split<cr>
 
 "map arrow keys to navigate wrapped lines
 map <DOWN> gj
@@ -116,12 +150,6 @@ map <UP> gk
 imap <UP> <ESC>gki
 imap <DOWN> <ESC>gji
  
-"window navigation with ctrl + nav keys
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-h> <c-w>h
-noremap <c-l> <c-w>l
-
  "}}}
 "************************* autocomplete setting **************************"{{{
 " completion priorities 
@@ -142,9 +170,8 @@ set completeopt=menu,preview
 "do omnicomplete (on supported filetypes
 imap <C-o> <C-x><C-o>
 imap <C-u> <C-x><C-u>
-"line completion
-imap <C-l> <C-x><C-l>
 "imap <C-k> <C-x><C-k>
+"
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
@@ -152,24 +179,20 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 "}}}
 
-"*************** Navigation helpers
-nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>v :Vex<CR>
-nnoremap <leader>s :Sex<CR>
-nnoremap <leader>e :BufExplorer<CR>
-nnoremap <leader>t :TlistToggle<CR>
-
-"}}}
 "
 " ********************* Saving and Quitting ******************"{{{
-"save Ctrl / Command S 
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>a
+"save = S 
+nnoremap <C-S> :w<CR>
+inoremap <C-S> <ESC>:w<CR>a
 
-inoremap <C-w> <Esc>:wq!<CR>
-nnoremap <C-w> <Esc>:wq!<CR>
-inoremap <C-q> <Esc>:q!<CR>
-nnoremap <C-q> :q!<CR>
+inoremap Z <Esc>:wq!<CR>
+nnoremap Z <Esc>:wq!<CR>
+
+inoremap Q <Esc>:q!<CR>
+nnoremap Q :q!<CR>
+
+inoremap X <Esc>:qa<CR>
+nnoremap X :qa<CR>
 
 "show line numbers
 map <leader>n <Esc>:set nu!<cr>
@@ -178,12 +201,19 @@ map <leader>n <Esc>:set nu!<cr>
  
 "jump to (t)emplate placeholders 
 "or snipMate mappings 
-nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
-inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
+"nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
+"inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
 
-"emacs like delete
-nnoremap <M-BS> dB
-inoremap <M-BS> dB
+"buffer explorer -- now using ctrl-p
+nnoremap <c-e> :CtrlPBuffer<CR>
+
+"NERD Tree
+nnoremap <c-n> :NERDTreeToggle<CR>
+
+"Netrw: mnemonic = (l)ist files
+nnoremap <c-l> :Vex<CR>
+
+nnoremap <leader>t :TlistToggle<CR>
 
 "XML Tidy
 ":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
@@ -230,7 +260,7 @@ nnoremap <leader>h :nohl<cr>
 "}}}
 
 "system copy+paste
-:noremap Y "+y
+nnoremap <c-y> "+y
 
 "Gist options
 let g:gist_clip_command = 'xclip -selection clipboard'
@@ -249,6 +279,8 @@ set foldcolumn=0
 "}}}
 
 "*************************** WINDOW AND TABS *******************"{{{
+"move windows
+"nnoremap <C-
 "resize windows- nb ^W is mapped to close window, -style
 "make taller / shorter
 "make windows equal height and width
@@ -256,13 +288,21 @@ noremap <leader>= <C-W>=
 "make wider
 noremap _ <C-W><
 noremap - <C-W>>
-"make taller
-noremap + <C-W>+
+
+"make taller (l)onger
+noremap l <C-W>+
+noremap L <C-W>-
+
 "make this the Only window
 noremap <leader>o <C-W>o
-noremap L <C-W>L
-"move window to new tab
-noremap T <C-W>T 
+"enter to goto tag
+"pop tag stack with Backspace
+"this allows C-T to be used by tmux
+nnoremap <CR> <C-]>
+nnoremap <BS> <C-T>
+
+"make capitalization more ergonomic
+nnoremap <C-C> ~
 
 "min height of active window
 set winheight=15
@@ -360,10 +400,7 @@ let g:Gitv_DoNotMapCtrlKey = 1
 
 "map control-o to ctrlP
 let g:ctrlp_map = '<c-o>'
-"only search from curdir
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = "/tmp"
-
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = '/tmp'
