@@ -436,7 +436,7 @@ function! s:BEMapKeys()
   nnoremap <buffer> <silent> <2-leftmouse> :call <SID>BESelectBuffer()<cr>
   nnoremap <buffer> <silent> <cr>          :call <SID>BESelectBuffer()<cr>
   nnoremap <buffer> <silent> o             :call <SID>BESelectBuffer()<cr>
-  nnoremap <buffer> <silent> t             :call <SID>BESelectBuffer("tab")<cr>
+  "nnoremap <buffer> <silent> t             :call <SID>BESelectBuffer("tab")<cr>
   nnoremap <buffer> <silent> <s-cr>        :call <SID>BESelectBuffer("tab")<cr>
 
   nnoremap <buffer> <silent> d             :call <SID>BERemoveBuffer("delete", "n")<cr>
@@ -453,10 +453,11 @@ function! s:BEMapKeys()
   nnoremap <buffer> <silent> S             :call <SID>BEReverseSortSelect()<cr>
   nnoremap <buffer> <silent> u             :call <SID>BEToggleShowUnlisted()<cr>
   nnoremap <buffer> <silent> f             :call <SID>BEToggleFindActive()<cr>
-  nnoremap <buffer> <silent> T             :call <SID>BEToggleShowTabBuffer()<cr>
+  "nnoremap <buffer> <silent> T             :call <SID>BEToggleShowTabBuffer()<cr>
   nnoremap <buffer> <silent> B             :call <SID>BEToggleOnlyOneTab()<cr>
 
-  for k in ["G", "n", "N", "L", "M", "H"]
+  "for k in ["G", "n", "N", "L", "M", "H"]
+  for k in ["G", "N", "L", "M", "H"]
     exec "nnoremap <buffer> <silent>" k ":keepjumps normal!" k."<cr>"
   endfor
 endfunction
@@ -1159,4 +1160,7 @@ let s:refreshBufferList = 1
 let s:MRU_Exclude_List = ["[BufExplorer]","__MRU_Files__"]
 "1}}}
 
+    noremap <buffer> t j
+    noremap <buffer> n k
+    noremap <buffer> s l
 " vim:ft=vim foldmethod=marker sw=2

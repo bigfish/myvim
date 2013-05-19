@@ -67,13 +67,13 @@ autocmd FileType text setlocal textwidth=78
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
 autocmd BufReadPost *
-   \ if line("'\"") > 0 && line("'\"") <= line("$") |
-   \ exe "normal! g`\"" |
-   \ endif
- 
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\ exe "normal! g`\"" |
+\ endif
+
 " Disable annoying beeps
 set noerrorbells
- 
+
 "save files when new one opened using 'vi' command
 set autowrite
 
@@ -94,50 +94,48 @@ vnoremap <Tab> <Esc>gV
 inoremap <Tab> <Esc>
 
 let mapleader = ","
-let maplocalleader = "."
+let maplocalleader = ";"
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
 
 nnoremap <leader>g :Gstatus<cr>
 nnoremap <leader>a :Ack 
- 
+
 "set hidden
 :set switchbuf=useopen
 
 "****************** MOVEMENT MAPPINGS ***********************""{{{
 
-"raise up one line
+"shift up/down one line
 nnoremap U <c-e>
 nnoremap K <c-y>
-
-"bouncing to block delimeter
-nnoremap <c-b> %
 
 "map HTNS -> HJKL for Dvorak layout
 nnoremap t j
 nnoremap n k
-nnoremap s l 
+nnoremap s l
 vnoremap t j
 vnoremap n k
 vnoremap s l
 
 "window navigation with uppercase nav keys
-noremap H <c-w>h
-noremap T <c-w>j
-noremap N <c-w>k
-noremap S <c-w>l
+nnoremap H <c-w>h
+nnoremap T <c-w>j
+nnoremap N <c-w>k
+nnoremap S <c-w>l
 
 "remap Home motion
 nnoremap <c-h> H
-"goto Middle of buffer
-nnoremap <c-m> z.
+"next/prev search result
+nnoremap <c-n> n
+nnoremap <c-p> N
 
 "window manipulation 
-noremap <localleader>h <c-w>H
-noremap <localleader>t <c-w>J
-noremap <localleader>n <c-w>K
-noremap <localleader>s <c-w>L
+nnoremap <localleader>h <c-w>H
+nnoremap <localleader>t <c-w>J
+nnoremap <localleader>n <c-w>K
+nnoremap <localleader>s <c-w>L
 
 "splits
 nnoremap <leader>v :vsplit<cr>
@@ -148,8 +146,8 @@ map <DOWN> gj
 map <UP> gk
 imap <UP> <ESC>gki
 imap <DOWN> <ESC>gji
- 
- "}}}
+
+"}}}
 "************************* autocomplete setting **************************"{{{
 " completion priorities 
 "1) User Completion (3rd party plugin or user-defined completefunctions)
@@ -184,35 +182,22 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 nnoremap <C-S> :w<CR>
 inoremap <C-S> <ESC>:w<CR>a
 
-nnoremap Z <Esc>:wq!<CR>
+nnoremap <C-w> <Esc>:wq!<CR>
 
-"Dump
-nnoremap D :q!<CR>
-
-nnoremap X :qa<CR>
-
-"use emacs kill to delete rest of line
-nnoremap <C-k> D
+"Kill
+nnoremap <C-k> :q!<CR>
 
 "show line numbers
 map <leader>n <Esc>:set nu!<cr>
 
- "}}}
- 
-"jump to (t)emplate placeholders 
-"or snipMate mappings 
-"nnoremap <S-BS> /<+.\{-}+><cr>c/+>/e<cr> 
-"inoremap <S-BS> <ESC>/<+.\{-}+><cr>c/+>/e<cr>
+"}}}
 
-"buffer explorer BufExplorer now using ctrl-p
-"nnoremap <c-e> :CtrlPBuffer<CR>
-nnoremap <c-e> :BufExplorer<CR>
+nnoremap <C-e> :BufExplorer<CR>
 
-"NERD Tree
-nnoremap <c-n> :NERDTreeToggle<CR>
-
-"Netrw: mnemonic = file e(x)plorer
-nnoremap <c-x> :Vex<CR>
+"Netrw Directory listing
+nnoremap D :Vex<CR>
+"remap delete line
+nnoremap <C-x> D
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -290,9 +275,9 @@ noremap <leader>= <C-W>=
 noremap _ <C-W><
 noremap - <C-W>>
 
-"grow / diminish
-noremap g <C-W>+
-noremap <c-g> <C-W>-
+"make Longer
+noremap <C-l> <C-W>+
+noremap L <C-W>-
 
 "make this the Only window
 noremap <leader>o <C-W>o
@@ -419,9 +404,11 @@ autocmd User fugitive
 \ endif
 
 let g:netrw_liststyle=3 " Use tree-mode as default view
-"let g:netrw_browse_split=4 " Open file in previous buffer
+let g:netrw_browse_split=4 " Open file in previous buffer
 "let g:netrw_preview=1 " preview window shown in a vertically split
 "let g:netrw_winsize=25
+"gx to open file
+let g:netrw_browsex_viewer= "gnome-open"
 
 set cmdheight=2
 set encoding=utf-8
@@ -460,3 +447,14 @@ augroup wpm
 		autocmd InsertEnter *.txt  :call WPMStartCount()
 		autocmd InsertLeave *.txt  :call WPMStopCount()
 augroup END
+
+augroup netrw_dvorak_fix
+    autocmd!
+    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
+augroup END
+
+function! Fix_netrw_maps_for_dvorak()
+    noremap <buffer> t j
+    noremap <buffer> n k
+    noremap <buffer> s l
+endfunction
