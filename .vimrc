@@ -126,10 +126,11 @@ nnoremap N <c-w>k
 nnoremap S <c-w>l
 
 "remap Home motion
-nnoremap <c-h> H
+nnoremap <leader>h H
+
 "next/prev search result
 nnoremap <c-n> n
-nnoremap <c-p> N
+nnoremap <c-h> N
 
 "window manipulation 
 nnoremap <localleader>h <c-w>H
@@ -194,10 +195,8 @@ map <leader>n <Esc>:set nu!<cr>
 
 nnoremap <C-e> :BufExplorer<CR>
 
-"Netrw Directory listing
-nnoremap D :Vex<CR>
-"remap delete line
-nnoremap <C-x> D
+"Netrw Directory listing (Go to ...)
+nnoremap <C-g> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -242,7 +241,7 @@ nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
 "make current file executable
 noremap <leader>x :!chmod +x %<CR>
-nnoremap <leader>h :nohl<cr>
+nnoremap <leader>n :nohl<cr>
 "}}}
 
 "system copy+paste -- 
