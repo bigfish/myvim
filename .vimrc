@@ -26,7 +26,7 @@ call pathogen#infect()
 
 :set background=dark
 
-:colorscheme vividchalk
+:colorscheme volcanic
 
 " Enable file type detection.
 "
@@ -166,8 +166,8 @@ set complete=.,w,b,u,t,i,k
 set completeopt=menu,preview
 
 "do omnicomplete (on supported filetypes
-imap <C-o> <C-x><C-o>
-imap <C-u> <C-x><C-u>
+"imap <C-o> <C-x><C-o>
+"imap <C-u> <C-x><C-u>
 "imap <C-k> <C-x><C-k>
 "
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -181,7 +181,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " ********************* Saving and Quitting ******************"{{{
 "save = S 
 nnoremap <C-S> :w<CR>
-inoremap <C-S> <ESC>:w<CR>a
+inoremap <C-S> <Esc>:w<CR>i
 
 nnoremap <C-w> <Esc>:wq!<CR>
 
@@ -196,7 +196,7 @@ map <leader>n <Esc>:set nu!<cr>
 nnoremap <C-e> :BufExplorer<CR>
 
 "Netrw Directory listing (Go to ...)
-nnoremap <C-g> :Vex<CR>
+nnoremap <C-v> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -286,9 +286,6 @@ noremap <leader>o <C-W>o
 nnoremap <CR> <C-]>
 nnoremap <BS> <C-T>
 
-"make capitalization more ergonomic
-nnoremap <C-C> ~
-
 "min height of active window
 set winheight=15
 set winwidth=15
@@ -351,7 +348,7 @@ let g:completekey="<C-Space>"
 set fillchars="fold:,vert:"
 
 "js tags 
-":autocmd BufNewFile,BufRead *.js call SetJSTags()
+":autocmD BufNewFile,BufRead *.js call SetJSTags()
 function! SetJSTags()
 "set javascript tags
 set tags=tags;
@@ -384,7 +381,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:Gitv_DoNotMapCtrlKey = 1
 
 "map control-o to ctrlP
-let g:ctrlp_map = '<c-o>'
+"let g:ctrlp_map = '<c-o>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
@@ -403,7 +400,7 @@ autocmd User fugitive
 \ endif
 
 let g:netrw_liststyle=3 " Use tree-mode as default view
-let g:netrw_browse_split=4 " Open file in previous buffer
+"let g:netrw_browse_split=4 " Open file in previous buffer
 "let g:netrw_preview=1 " preview window shown in a vertically split
 "let g:netrw_winsize=25
 "gx to open file
