@@ -367,8 +367,9 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 
 hi clear CursorLine
 hi CursorLine ctermbg=18
-au InsertEnter * set nocul
-au InsertLeave * set cul
+au InsertEnter,BufLeave * set nocul
+au InsertLeave,BufEnter * set cul
+
 set cul
 
 "inoremap <Leader><Tab> <Tab>

@@ -18,7 +18,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="molokai"
+let g:colors_name="volcanic"
 
 if exists("g:molokai_original")
     let s:molokai_original = g:molokai_original
@@ -130,19 +130,14 @@ end
 " Support for 256-color terminal
 "
 if &t_Co > 255
-   if s:molokai_original == 1
-      hi Normal                   ctermbg=234
-      hi CursorLine               ctermbg=235   cterm=none
-   else
-      hi Normal       ctermfg=252 ctermbg=NONE
-      hi CursorLine               ctermbg=NONE   cterm=none
-   endif
-   hi Boolean         ctermfg=164
+   hi Normal       ctermfg=252 ctermbg=NONE
+   hi CursorLine               ctermbg=18   cterm=none
+   hi Boolean         ctermfg=33
    hi Character       ctermfg=144
    hi Number          ctermfg=166
-   hi String          ctermfg=3
+   hi String          ctermfg=76
    hi Conditional     ctermfg=141               cterm=bold
-   hi Constant        ctermfg=10               cterm=bold
+   hi Constant        ctermfg=11               cterm=bold
    hi Cursor          ctermfg=16  ctermbg=NONE
    hi Debug           ctermfg=225               cterm=bold
    hi Define          ctermfg=134
@@ -165,7 +160,7 @@ if &t_Co > 255
    hi Ignore          ctermfg=244 ctermbg=232
    hi IncSearch       ctermfg=193 ctermbg=16
 
-   hi Keyword         ctermfg=4               cterm=bold
+   hi Keyword         ctermfg=12              cterm=bold
    hi Label           ctermfg=252               cterm=none
    hi Macro           ctermfg=193
    hi SpecialKey      ctermfg=1
@@ -191,20 +186,20 @@ if &t_Co > 255
    hi SignColumn      ctermfg=118 ctermbg=235
    hi SpecialChar     ctermfg=168               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
-   hi Special         ctermfg=10 
+   hi Special         ctermfg=214 
 
    "this is the color of HTML tags
    hi Statement       ctermfg=141               cterm=bold
    hi StatusLine      ctermfg=238 ctermbg=253
    hi StatusLineNC    ctermfg=244 ctermbg=232
    hi StorageClass    ctermfg=208
-   hi Structure       ctermfg=4
+   hi Structure       ctermfg=12
    hi Tag             ctermfg=168
    hi Title           ctermfg=166
    hi Todo            ctermfg=231 ctermbg=232   cterm=bold
 
-   hi Typedef         ctermfg=4
-   hi Type            ctermfg=4                cterm=bold
+   hi Typedef         ctermfg=12
+   hi Type            ctermfg=12               cterm=bold
    hi Underlined      ctermfg=244               cterm=underline
 
    hi VertSplit       ctermfg=207 ctermbg=232   cterm=bold
@@ -213,7 +208,7 @@ if &t_Co > 255
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Comment         ctermfg=2
+   hi Comment         ctermfg=241
    hi CursorColumn                ctermbg=234
    hi ColorColumn                 ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
