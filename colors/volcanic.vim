@@ -134,9 +134,9 @@ if &t_Co > 255
    hi CursorLine               ctermbg=18   cterm=none
    hi Boolean         ctermfg=33
    hi Character       ctermfg=144
-   hi Number          ctermfg=166
+   hi Number          ctermfg=162
    hi String          ctermfg=76
-   hi Conditional     ctermfg=141               cterm=bold
+   hi Conditional     ctermfg=214               cterm=bold
    hi Constant        ctermfg=11               cterm=bold
    hi Cursor          ctermfg=16  ctermbg=NONE
    hi Debug           ctermfg=225               cterm=bold
@@ -168,7 +168,8 @@ if &t_Co > 255
    hi MatchParen      ctermfg=81  ctermbg=none cterm=bold
    hi ModeMsg         ctermfg=229
    hi MoreMsg         ctermfg=229
-   hi Operator        ctermfg=141
+   "hi Operator        ctermfg=141
+   hi Operator        ctermfg=214
 
    " complete menu
    hi Pmenu           ctermfg=81  ctermbg=16
@@ -179,14 +180,15 @@ if &t_Co > 255
    hi PreCondit       ctermfg=118               cterm=bold
    hi PreProc         ctermfg=118
    hi Question        ctermfg=81
-   hi Repeat          ctermfg=141               cterm=bold
+   hi Repeat          ctermfg=214               cterm=bold
    hi Search          ctermfg=232 ctermbg=39
 
    " marks column
    hi SignColumn      ctermfg=118 ctermbg=235
    hi SpecialChar     ctermfg=168               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
-   hi Special         ctermfg=214 
+   "hi Special         ctermfg=214 
+   hi Special         ctermfg=141 
 
    "this is the color of HTML tags
    hi Statement       ctermfg=141               cterm=bold
@@ -208,7 +210,8 @@ if &t_Co > 255
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Comment         ctermfg=241
+   "hi Comment         ctermfg=241
+   hi Comment         ctermfg=243
    hi CursorColumn                ctermbg=234
    hi ColorColumn                 ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234

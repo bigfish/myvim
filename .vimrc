@@ -94,7 +94,7 @@ vnoremap <Tab> <Esc>gV
 inoremap <Tab> <Esc>
 
 let mapleader = ","
-let maplocalleader = ";"
+let maplocalleader = "."
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
@@ -125,8 +125,8 @@ nnoremap T <c-w>j
 nnoremap N <c-w>k
 nnoremap S <c-w>l
 
-"remap Home motion
-nnoremap <leader>h H
+"remap Home motion -- (t)op
+nnoremap <leader>t H
 
 "next/prev search result
 nnoremap <c-n> n
@@ -241,7 +241,8 @@ nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
 "make current file executable
 noremap <leader>x :!chmod +x %<CR>
-nnoremap <leader>n :nohl<cr>
+nnoremap <leader>h :nohl<cr>
+nnoremap <leader>n :set nu!<cr>
 "}}}
 
 "system copy+paste -- 
