@@ -47,7 +47,7 @@ function! CommonJSPackageJsonTemplate()
     \'    "type": "git",',
     \'    "url": "http://github.com/' . g:github_user . '/' . l:module_name . '.git"',
     \'  },',
-    \'  dependencies: {}',
+    \'  "dependencies:" {}',
     \ ] )
   endif
   call append(line('$')-1, [ '}' ] )

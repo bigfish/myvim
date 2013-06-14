@@ -134,14 +134,16 @@ if &t_Co > 255
    hi CursorLine               ctermbg=18   cterm=none
    hi Boolean         ctermfg=33
    hi Character       ctermfg=144
-   hi Number          ctermfg=162
-   hi String          ctermfg=76
+   "hi Number          ctermfg=162
+   hi Number          ctermfg=214
+   "hi String          ctermfg=76
+   hi String          ctermfg=112
    hi Conditional     ctermfg=214               cterm=bold
    hi Constant        ctermfg=11               cterm=bold
    hi Cursor          ctermfg=16  ctermbg=NONE
    hi Debug           ctermfg=225               cterm=bold
    hi Define          ctermfg=134
-   hi Delimiter       ctermfg=241
+   hi Delimiter       ctermfg=141
 
    hi DiffAdd ctermfg=231 ctermbg=28 cterm=bold guifg=#f8f8f2 guibg=#46830c gui=bold
    hi DiffDelete ctermfg=88 ctermbg=52 cterm=NONE guifg=#8b0807 guibg=NONE gui=NONE
@@ -169,7 +171,7 @@ if &t_Co > 255
    hi ModeMsg         ctermfg=229
    hi MoreMsg         ctermfg=229
    "hi Operator        ctermfg=141
-   hi Operator        ctermfg=214
+   hi Operator        ctermfg=170
 
    " complete menu
    hi Pmenu           ctermfg=81  ctermbg=16
