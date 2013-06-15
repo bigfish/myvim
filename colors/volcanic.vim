@@ -132,15 +132,15 @@ end
 if &t_Co > 255
    hi Normal       ctermfg=252 ctermbg=NONE
    hi CursorLine               ctermbg=18   cterm=none
-   hi Boolean         ctermfg=33
+   hi Boolean         ctermfg=162
    hi Character       ctermfg=144
    "hi Number          ctermfg=162
    hi Number          ctermfg=214
    "hi String          ctermfg=76
    hi String          ctermfg=112
-   hi Conditional     ctermfg=214               cterm=bold
+   hi Conditional     ctermfg=141               cterm=bold
    hi Constant        ctermfg=11               cterm=bold
-   hi Cursor          ctermfg=16  ctermbg=NONE
+   
    hi Debug           ctermfg=225               cterm=bold
    hi Define          ctermfg=134
    hi Delimiter       ctermfg=141
@@ -167,11 +167,11 @@ if &t_Co > 255
    hi Macro           ctermfg=193
    hi SpecialKey      ctermfg=1
 
-   hi MatchParen      ctermfg=81  ctermbg=none cterm=bold
+   hi MatchParen      ctermfg=162  ctermbg=none cterm=bold
    hi ModeMsg         ctermfg=229
    hi MoreMsg         ctermfg=229
-   "hi Operator        ctermfg=141
-   hi Operator        ctermfg=170
+   hi Operator        ctermfg=171
+   "hi Operator        ctermfg=170
 
    " complete menu
    hi Pmenu           ctermfg=81  ctermbg=16
@@ -182,7 +182,7 @@ if &t_Co > 255
    hi PreCondit       ctermfg=118               cterm=bold
    hi PreProc         ctermfg=118
    hi Question        ctermfg=81
-   hi Repeat          ctermfg=214               cterm=bold
+   hi Repeat          ctermfg=141               cterm=bold
    hi Search          ctermfg=232 ctermbg=39
 
    " marks column

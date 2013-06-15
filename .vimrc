@@ -88,9 +88,11 @@ set laststatus=2   " Always show the statusline
 
 "Tab is Escape
 inoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>
+
 
 let mapleader = ","
-let maplocalleader = "-"
+let maplocalleader = ";"
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
