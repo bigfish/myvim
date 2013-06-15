@@ -86,15 +86,11 @@ set splitbelow
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the statusline
 
-"
-" ****************************** MAPPINGS ***************************
-"
 "Tab is Escape
-vnoremap <Tab> <Esc>gV
 inoremap <Tab> <Esc>
 
 let mapleader = ","
-let maplocalleader = "."
+let maplocalleader = "-"
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
@@ -115,11 +111,10 @@ nnoremap K <c-y>
 nnoremap t j
 nnoremap n k
 nnoremap s l
-vnoremap t j
-vnoremap n k
-vnoremap s l
+xnoremap t j
+xnoremap n k
+xnoremap s l
 
-"window navigation with uppercase nav keys
 nnoremap H <c-w>h
 nnoremap T <c-w>j
 nnoremap N <c-w>k
@@ -196,7 +191,7 @@ map <leader>n <Esc>:set nu!<cr>
 nnoremap <C-e> :BufExplorer<CR>
 
 "Netrw Directory listing (Go to ...)
-nnoremap <C-v> :Vex<CR>
+nnoremap <C-g> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -372,8 +367,6 @@ au InsertEnter,BufLeave * set nocul
 au InsertLeave,BufEnter * set cul
 
 set cul
-
-"inoremap <Leader><Tab> <Tab>
 
 "help copypaste to work
 set clipboard=unnamed
