@@ -122,12 +122,12 @@ nnoremap T <c-w>j
 nnoremap N <c-w>k
 nnoremap S <c-w>l
 
-"remap Home motion -- (t)op
-nnoremap <leader>t H
+"remap Home motion -- (T)op
+nnoremap T H
 
 "next/prev search result
 nnoremap <c-n> n
-nnoremap <c-h> N
+nnoremap <c-p> N
 
 "window manipulation 
 nnoremap <localleader>h <c-w>H
@@ -178,7 +178,8 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " ********************* Saving and Quitting ******************"{{{
 "save = S 
 nnoremap <C-S> :w<CR>
-inoremap <C-S> <Esc>:w<CR>i
+
+"inoremap <C-S> <Esc>:w<CR>i
 
 nnoremap <C-w> <Esc>:wq!<CR>
 
@@ -192,8 +193,8 @@ map <leader>n <Esc>:set nu!<cr>
 
 nnoremap <C-e> :BufExplorer<CR>
 
-"Netrw Directory listing (Go to ...)
-nnoremap <C-g> :Vex<CR>
+"Netrw Directory Listing 
+nnoremap <C-l> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -272,9 +273,9 @@ noremap <leader>= <C-W>=
 noremap _ <C-W><
 noremap - <C-W>>
 
-"make Longer
-noremap <C-l> <C-W>+
-noremap L <C-W>-
+"make tall
+noremap + <C-W>+
+noremap & <C-W>-
 
 "make this the Only window
 noremap <leader>o <C-W>o
@@ -340,7 +341,7 @@ command! -range CamelCase <line1>,<line2>call Camelize()
 "this breaks fugitive Gdiff command!
 "autocmd BufEnter,BufRead * :lcd %:p:h
 "autocmd FileType idl set makeprg=idlj\ %
-let g:completekey="<C-Space>"
+"let g:completekey="<C-Space>"
 
 "no dashes in folds 
 set fillchars="fold:,vert:"
@@ -377,8 +378,8 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
 
-"map control-o to ctrlP
-"let g:ctrlp_map = '<c-o>'
+"map control-g --> ctrlP
+let g:ctrlp_map = '<c-g>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
@@ -388,8 +389,7 @@ let g:ctrlp_cache_dir = '/tmp'
 let g:Powerline_symbols = 'fancy'
 
 let g:jshint_onwrite = 1
-let g:jshint_goto_error = 0
-
+let g:jshint_goto_error = 1
 
 autocmd User fugitive
 \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
@@ -403,7 +403,9 @@ let g:netrw_liststyle=3 " Use tree-mode as default view
 "gx to open file
 let g:netrw_browsex_viewer= "gnome-open"
 
-set cmdheight=2
+let g:user_zen_leader_key = '<C-h>'
+
+"set cmdheight=2
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
@@ -421,6 +423,11 @@ call system('echo "' . logStr . '" >> ~/.wpm_log')
 		echo a:wpm
 endfunction
 
+
+function! SaveFile()
+		execute ':w'
+endfunction
+
 function! WPMStopCount()
 		execute ':w'
 		let g:wpm_end_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
@@ -436,7 +443,6 @@ endfunction
 
 augroup wpm
 		au!
-		autocmd BufEnter *.txt  :set tw=73
 		autocmd InsertEnter *.txt  :call WPMStartCount()
 		autocmd InsertLeave *.txt  :call WPMStopCount()
 augroup END
@@ -446,8 +452,14 @@ augroup netrw_dvorak_fix
     autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
 augroup END
 
+augroup save_on_edit
+    autocmd! 
+	autocmd InsertLeave * :call SaveFile()
+augroup END
+
 function! Fix_netrw_maps_for_dvorak()
     noremap <buffer> t j
     noremap <buffer> n k
     noremap <buffer> s l
 endfunction
+
