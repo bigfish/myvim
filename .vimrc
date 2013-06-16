@@ -123,7 +123,7 @@ nnoremap N <c-w>k
 nnoremap S <c-w>l
 
 "remap Home motion -- (T)op
-nnoremap T H
+nnoremap <C-t> H
 
 "next/prev search result
 nnoremap <c-n> n
@@ -163,8 +163,8 @@ set complete=.,w,b,u,t,i,k
 set completeopt=menu,preview
 
 "do omnicomplete (on supported filetypes
-"imap <C-o> <C-x><C-o>
-"imap <C-u> <C-x><C-u>
+imap <C-o> <C-x><C-o>
+imap <C-u> <C-x><C-u>
 "imap <C-k> <C-x><C-k>
 "
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -243,7 +243,7 @@ nnoremap <leader>h :nohl<cr>
 nnoremap <leader>n :set nu!<cr>
 "}}}
 
-"system copy+paste -- 
+"system copy
 nnoremap Y "+y
 
 "Gist options
@@ -281,8 +281,7 @@ noremap & <C-W>-
 noremap <leader>o <C-W>o
 "enter to goto tag
 "pop tag sTack with Backspace
-"this allows C-T to be used by tmux
-nnoremap <CR> <C-]>
+nnoremap <C-j> <C-]>
 nnoremap <BS> <C-T>
 
 "min height of active window
