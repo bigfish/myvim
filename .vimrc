@@ -125,9 +125,14 @@ nnoremap S <c-w>l
 "remap Home motion -- (T)op
 nnoremap <C-t> H
 
+"fix (t)il maps
+nnoremap dt dt
+nnoremap ct ct
+nnoremap yt yt
+
 "next/prev search result
 nnoremap <c-n> n
-nnoremap <c-p> N
+nnoremap <c-m> N
 
 "window manipulation 
 nnoremap <localleader>h <c-w>H
@@ -166,6 +171,7 @@ set completeopt=menu,preview
 imap <C-o> <C-x><C-o>
 imap <C-u> <C-x><C-u>
 "imap <C-k> <C-x><C-k>
+imap <C-f> <C-x><C-f>
 "
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -244,7 +250,10 @@ nnoremap <leader>n :set nu!<cr>
 "}}}
 
 "system copy
-nnoremap Y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
 
 "Gist options
 let g:gist_clip_command = 'xclip -selection clipboard'
@@ -377,8 +386,6 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
 
-"map control-g --> ctrlP
-let g:ctrlp_map = '<c-g>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
@@ -404,7 +411,7 @@ let g:netrw_browsex_viewer= "gnome-open"
 
 let g:user_zen_leader_key = '<C-h>'
 
-"set cmdheight=2
+set cmdheight=2
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
