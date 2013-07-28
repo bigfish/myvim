@@ -19,7 +19,7 @@ keycode  25 = comma less w W dead_cedilla dead_caron
 keycode  26 = period greater e E dead_abovedot periodcentered
 keycode  27 = p P r R
 keycode  28 = y Y t T
-keycode  29 = f F asciitilde 0
+keycode  29 = f F asciitilde numbersign
 keycode  30 = g G braceleft 1 
 keycode  31 = c C braceright 2 
 keycode  32 = r R asciicircum 3 
@@ -33,25 +33,27 @@ keycode  39 = o O s S
 keycode  40 = e E d D
 keycode  41 = u U f F
 keycode  42 = i I i I
-keycode  43 = d D colon period 
+keycode  43 = d D plus ampersand
 keycode  44 = h H parenleft 4
 keycode  45 = t T parenright 5 
-keycode  46 = n N asterisk 6
-keycode  47 = s S plus ampersand 
-keycode  48 = minus underscore equal bar
+keycode  46 = n N equal 6
+keycode  47 = s S semicolon 0
+keycode  48 = minus underscore colon bar 
 keycode  49 = grave asciitilde grave asciitilde dead_grave dead_tilde
 keycode  50 = Shift_L NoSymbol Shift_L
 keycode  51 = backslash bar backslash bar  
-keycode  52 = semicolon colon z Z dead_ogonek dead_doubleacute
+!redeem the highly unergonomic ; key - mode shifted it is , and shift-modeswitched it is . this is useful during data entry 
+!keycode  52 = semicolon colon z Z dead_ogonek dead_doubleacute
+keycode  52 = semicolon colon comma period 
 keycode  53 = q Q x X
 keycode  54 = j J c C
 keycode  55 = k K v V
 keycode  56 = x X b B
-keycode  57 = b B semicolon comma
+keycode  57 = b B slash asterisk 
 keycode  58 = m M bracketleft 7 
 keycode  59 = w W bracketright 8 
 keycode  60 = v V at 9
-keycode  61 = z Z exclam numbersign 
+keycode  61 = z Z exclam question
 keycode  62 = Shift_R NoSymbol Shift_R
 keycode  63 = KP_Multiply KP_Multiply KP_Multiply KP_Multiply KP_Multiply KP_Multiply XF86ClearGrab KP_Multiply KP_Multiply XF86ClearGrab
 keycode  64 = Alt_L Meta_L Alt_L Meta_L
@@ -258,9 +260,15 @@ keycode 255 =
 !mod4        Super_L (0x85),  Super_R (0x86),  Super_L (0xce),  Hyper_L (0xcf)
 !mod5        ISO_Level3_Shift (0x5c),  Mode_switch (0xcb)
 
+clear mod1
+clear mod4
 clear mod5
 clear Control
 
+keycode 64 = Super_L
 keycode 37 = Mode_switch
+keycode 133 = Alt_L Meta_L
 
 add control = Caps_Lock
+add mod4 = Super_L
+add mod1 = Alt_L Meta_L

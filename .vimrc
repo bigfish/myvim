@@ -93,7 +93,7 @@ snoremap <Tab> <Esc>
 
 
 let mapleader = ","
-let maplocalleader = ";"
+let maplocalleader = "."
 
 "cd to file dir (mnemonic=(d)ir)
 nmap <leader>d :lcd %:p:h<CR>
@@ -120,17 +120,17 @@ nnoremap T <c-w>j
 nnoremap N <c-w>k
 nnoremap S <c-w>l
 
-"remap Home motion -- (T)op
-nnoremap <C-t> H
+"remap Home motion
+nnoremap <C-h> H
 
 "fix (t)il maps
 nnoremap dt dt
 nnoremap ct ct
 nnoremap yt yt
 
-"next/prev search result
+"next/last search result
 nnoremap <c-n> n
-nnoremap <c-m> N
+nnoremap <c-l> N
 
 "window manipulation 
 nnoremap <localleader>h <c-w>H
@@ -197,8 +197,8 @@ map <leader>n <Esc>:set nu!<cr>
 
 nnoremap <C-e> :BufExplorer<CR>
 
-"Netrw Directory Listing 
-nnoremap <C-l> :Vex<CR>
+"Netrw Directory Tree Listing 
+nnoremap <C-t> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
 
@@ -248,8 +248,8 @@ nnoremap <leader>n :set nu!<cr>
 "}}}
 
 "system copy
-vnoremap <leader>y "+y
-nnoremap <leader>y "+y
+vnoremap Y "+y
+nnoremap Y "+y
 vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
@@ -286,7 +286,6 @@ noremap & <C-W>-
 
 "make this the Only window
 noremap <leader>o <C-W>o
-"enter to goto tag
 "pop tag sTack with Backspace
 nnoremap <C-j> <C-]>
 nnoremap <BS> <C-T>
@@ -424,11 +423,12 @@ let logStr = system("date +%s")
 let logStr = substitute(logStr, '\n$', '', '')
 let logStr = logStr . '|' . a:wpm
 call system('echo "' . logStr . '" >> ~/.wpm_log')
-		echo a:wpm
+		echom a:wpm
 endfunction
 
 
 function! SaveFile()
+		"execute ':silent! w'
 		execute ':w'
 endfunction
 
@@ -449,6 +449,7 @@ augroup wpm
 		au!
 		autocmd InsertEnter *.txt  :call WPMStartCount()
 		autocmd InsertLeave *.txt  :call WPMStopCount()
+		autocmd InsertLeave * :call SaveFile()
 augroup END
 
 augroup netrw_dvorak_fix
@@ -456,10 +457,10 @@ augroup netrw_dvorak_fix
     autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
 augroup END
 
-augroup save_on_edit
-    autocmd! 
-	autocmd InsertLeave * :call SaveFile()
-augroup END
+"augroup save_on_edit
+	"autocmd InsertLeave * :call SaveFile()
+    "autocmd! 
+"augroup END
 
 function! Fix_netrw_maps_for_dvorak()
     noremap <buffer> t j
