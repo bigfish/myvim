@@ -21,33 +21,55 @@ function! AddCoverageSigns(filePath, cvg)
 endfunction
 
 
-function! Blanket()
-
-		let blanketOutput = system("grunt mocha:verbose")
+function! Blanket(cmd, startDelim, endDelim)
+		let blanketOutput = system(a:cmd)
 		let blanketOutput = substitute(blanketOutput, 'null', -1, "g")
 		let outputLines = split(blanketOutput, '\n')
 		let blanketJSON = ""
 		let capture = 0
-
-
 		for line in outputLines
-				if capture && match(line, 'COVERAGE_END') != -1
+				if capture && match(line, a:endDelim) != -1
 						let capture = 0
 				endif
 				if capture
-						let blanketJSON .= line
+						let blanketJSON .= substitute(line, '\n', '', 'g')
 				endif
-				if match(line, 'COVERAGE_START') != -1
+				if match(line, a:startDelim) != -1
 						let capture = 1
 				endif
 		endfor
 
 		let coverage = {}
 
-
 		exe 'let coverage = ' . blanketJSON
 		
-		for [jsfile, cvg] in items(coverage)
+		"normalize json-cov format to simpler format
+		"same as global _$blanket object in browser
+		if has_key(coverage, 'files')
+
+				let cvgDict = {}
+				for fileCvg in coverage.files
+						let cvg = []
+						"line 0 is always uncovered
+						call add(cvg, -1)
+
+						for [lineNo, lineCvg] in items(fileCvg.source)
+								if lineCvg.coverage == "" 
+										call add(cvg, -1)
+								else 
+										call add(cvg, lineCvg.coverage)
+								end
+						endfor
+
+						let cvgDict[fileCvg.filename] = cvg
+
+				endfor
+		
+		else
+				let cvgDict = coverage
+		end
+
+		for [jsfile, cvg] in items(cvgDict)
 				"normalize filepath --
 				"assume is under src/
 				let srcPos = stridx(jsfile, 'src')

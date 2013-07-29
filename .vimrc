@@ -449,7 +449,22 @@ augroup wpm
 		au!
 		autocmd InsertEnter *.txt  :call WPMStartCount()
 		autocmd InsertLeave *.txt  :call WPMStopCount()
-		autocmd InsertLeave * :call SaveFile()
+		autocmd InsertLeave *.txt :call SaveFile()
+augroup END
+
+let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
+let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
+augroup blanket
+		au!
+
+		autocmd BufWritePost ~/flatland/src/common/*.js :exe getClientCoverage
+		autocmd BufWritePost ~/flatland/test/specs/common/*.js :exe getClientCoverage
+
+		autocmd BufWritePost ~/flatland/src/client/*.js :exe getClientCoverage
+		autocmd BufWritePost ~/flatland/test/specs/client/*.js :exe getClientCoverage
+
+		autocmd BufWritePost ~/flatland/src/server/*.js :exe getServerCoverage
+		autocmd BufWritePost ~/flatland/test/specs/server/*.js :exe getServerCoverage
 augroup END
 
 augroup netrw_dvorak_fix
