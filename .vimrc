@@ -381,12 +381,12 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
 
-hi clear CursorLine
-hi CursorLine ctermbg=18
-au InsertEnter,BufLeave * set nocul
-au InsertLeave,BufEnter * set cul
+"hi clear CursorLine
+"hi CursorLine ctermbg=18
+"au InsertEnter,BufLeave * set nocul
+"au InsertLeave,BufEnter * set cul
 
-set cul
+"set cul
 
 "help copypaste to work
 set clipboard=unnamed
@@ -499,4 +499,25 @@ function! Fix_netrw_maps_for_dvorak()
 endfunction
 
 "let g:funcjs_colors = []
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
 
+nnoremap rl :call NumberToggle()<cr>
+"easier diff jumps
+nnoremap [[ [c
+nnoremap ]] ]c
+
+"highlight MyComment ctermfg=red
+
+let g:js_context_colors_enabled = 0
+"let g:js_context_colors_usemaps = 1
+"let g:js_context_colors_comment_higroup = 'MyComment' 
+"
+"let g:js_context_colors_colorize_comments = 1
+"
+au BufNewFile,BufRead /home/david/javascript/angular-phonecat/**/*.js :set smarttab sts=2 sw=2

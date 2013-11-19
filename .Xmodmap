@@ -42,10 +42,14 @@ keycode  48 = minus underscore colon bar
 keycode  49 = grave asciitilde grave asciitilde dead_grave dead_tilde
 keycode  50 = Shift_L NoSymbol Shift_L
 keycode  51 = backslash bar backslash bar  
-!redeem the highly unergonomic ; key - mode shifted it is , and shift-modeswitched it is . this is useful during data entry 
+! ****** redeem the highly unergonomic ; key - mode shifted or shift-modeswitched it is ,
+! ****** while the neighbouring q, when modeswitched or shift-modeswitched, is . 
+! ****** this mirrors the normal ordering of ,. in the dvorak layout
+! ****** and typing these keys with the left hand is more natural with the middle
+! ****** and index finger, while holding down the modeswitch key
 !keycode  52 = semicolon colon z Z dead_ogonek dead_doubleacute
-keycode  52 = semicolon colon comma period 
-keycode  53 = q Q x X
+keycode  52 = semicolon colon comma comma 
+keycode  53 = q Q period period
 keycode  54 = j J c C
 keycode  55 = k K v V
 keycode  56 = x X b B
