@@ -3,7 +3,7 @@
 " Author: Tomas Restrepo <tomas@winterdom.com>
 "
 " Note: Based on the monokai theme for textmate
-" by Wimer Hazenberg and its darker variant 
+" by Wimer Hazenberg and its darker variant
 " by Hamish Stuart Macpherson
 "
 
@@ -57,7 +57,8 @@ hi IncSearch       guifg=#C4BE89 guibg=#000000
 hi Keyword         guifg=#F92672               gui=bold
 hi Label           guifg=#E6DB74               gui=none
 hi Macro           guifg=#C4BE89               gui=italic
-hi SpecialKey      guifg=#66D9EF               gui=italic
+"hi SpecialKey      guifg=#66D9EF               gui=italic
+hi SpecialKey      guifg=#960050 guibg=#1E0010
 
 hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
 hi ModeMsg         guifg=#E6DB74
@@ -140,7 +141,7 @@ if &t_Co > 255
    hi String          ctermfg=112
    hi Conditional     ctermfg=141               cterm=bold
    hi Constant        ctermfg=11               cterm=bold
-   
+
    hi Debug           ctermfg=225               cterm=bold
    hi Define          ctermfg=134
    hi Delimiter       ctermfg=141
@@ -165,7 +166,6 @@ if &t_Co > 255
    hi Keyword         ctermfg=12              cterm=bold
    hi Label           ctermfg=252               cterm=none
    hi Macro           ctermfg=193
-   hi SpecialKey      ctermfg=1
 
    hi MatchParen      ctermfg=162  ctermbg=none cterm=bold
    hi ModeMsg         ctermfg=229
@@ -189,8 +189,8 @@ if &t_Co > 255
    hi SignColumn      ctermfg=118 ctermbg=235
    hi SpecialChar     ctermfg=168               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
-   "hi Special         ctermfg=214 
-   hi Special         ctermfg=141 
+   "hi Special         ctermfg=214
+   hi Special         ctermfg=141
 
    "this is the color of HTML tags
    hi Statement       ctermfg=141               cterm=bold
@@ -218,6 +218,6 @@ if &t_Co > 255
    hi ColorColumn                 ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
    hi NonText         ctermfg=59
-   hi SpecialKey      ctermfg=59
+   hi SpecialKey      ctermfg=255 ctermbg=18
 
 end

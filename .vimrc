@@ -15,12 +15,12 @@ set backspace=indent,eol,start
 "don't clutter up workspace with backup & swap file
 set backupdir=~/tmp
 set noswapfile
-set history=100  
+set history=100
 set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
 set nu
-
+set expandtab
 
 call pathogen#infect()
 
@@ -33,12 +33,12 @@ call pathogen#infect()
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
- 
+
 " In many terminal emulators the mouse works just fine, thus enable it.
 set mouse=a
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
- 
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -59,7 +59,7 @@ set formatoptions+=o " Automatically continue comments when hitting 'o' or 'O'
 set formatoptions+=q " Allow formatting of comments with 'gq'
 set formatoptions+=n " Recognize numbered lists
 set formatoptions+=l " Don't break long lines that were already there
- 
+
 " From settings above, this is only for comments
 autocmd FileType text setlocal textwidth=78
 
@@ -82,7 +82,7 @@ set equalalways
 set splitright
 set splitbelow
 
-":set statusline=%F%m%r%h%w\ %y\ [%{&ff}] 
+":set statusline=%F%m%r%h%w\ %y\ [%{&ff}]
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the statusline
 
@@ -123,16 +123,33 @@ nnoremap S <c-w>l
 "remap Home motion
 nnoremap <C-h> H
 
+"goto bottom of window
+
+
 "fix (t)il maps
 nnoremap dt dt
 nnoremap ct ct
 nnoremap yt yt
 
-"next/last search result
-nnoremap <c-n> n
-nnoremap <c-l> N
+"=====[ Highlight matches when jumping to next ]=============
+" This rewires c-n and c-l to do the highlighing...
+nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
+nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
 
-"window manipulation 
+" OR ELSE just highlight the match in red...
+function! HLNext (blinktime)
+       highlight WhiteOnRed ctermfg=white ctermbg=red
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let target_pat = '\c\%#'.@/
+        let ring = matchadd('WhiteOnRed', target_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+endfunction
+
+"window manipulation
 nnoremap <localleader>h <c-w>H
 nnoremap <localleader>t <c-w>J
 nnoremap <localleader>n <c-w>K
@@ -160,11 +177,11 @@ inoremap <C-e> <Esc>$a
 
 "}}}
 "************************* autocomplete setting **************************"{{{
-" completion priorities 
+" completion priorities
 "1) User Completion (3rd party plugin or user-defined completefunctions)
 "2) Omni Completion (filetype completefunctions distributed with Vim)
 "3) Ctrl-N/P (known word completion.. includes tags, see complete opts below)
-"not using supertab as it conflicts with snipMate"  
+"not using supertab as it conflicts with snipMate"
 "SuperTab -- use contextual completion
 "let g:SuperTabDefaultCompletionType = "context"
 "NB: SuperTab uses completefunc if found even if it returns no results
@@ -191,7 +208,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 "
 " ********************* Saving and Quitting ******************"{{{
-"save = S 
+"save = S
 nnoremap <C-S> :w<CR>
 
 "inoremap <C-S> <Esc>:w<CR>i
@@ -209,7 +226,7 @@ map <leader>n <Esc>:set nu!<cr>
 nnoremap <C-e> :BufExplorer<CR>
 
 
-"Netrw Directory Tree Listing 
+"Netrw Directory Tree Listing
 nnoremap <C-t> :Vex<CR>
 
 nnoremap <leader>t :TlistToggle<CR>
@@ -229,7 +246,7 @@ else "why different mapping for linux ? -- verify
 endif
 
 com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
- 
+
 "insert filename
 imap \fn <C-R>=expand("%:t:r")<CR>
 
@@ -240,10 +257,10 @@ highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
 "Plugin settings
 let Tlist_Use_Right_Window=1
 
-let g:bufExplorerDefaultHelp=0 
+let g:bufExplorerDefaultHelp=0
 
 set nocst
- 
+
 nnoremap <leader>c :sp $HOME/.vimrc<CR>
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
@@ -345,7 +362,7 @@ endfunction
 "assuming one rule per line
 command! -range Hyphenate <line1>,<line2>call Hyphenize()
 command! -range CamelCase <line1>,<line2>call Camelize()
-			
+
 "generate nice html
 :let html_ignore_folding=1
 :let html_use_css=1
@@ -360,10 +377,10 @@ command! -range CamelCase <line1>,<line2>call Camelize()
 "autocmd FileType idl set makeprg=idlj\ %
 "let g:completekey="<C-Space>"
 
-"no dashes in folds 
+"no dashes in folds
 set fillchars="fold:,vert:"
 
-"js tags 
+"js tags
 ":autocmD BufNewFile,BufRead *.js call SetJSTags()
 function! SetJSTags()
 "set javascript tags
@@ -435,51 +452,51 @@ let logStr = system("date +%s")
 let logStr = substitute(logStr, '\n$', '', '')
 let logStr = logStr . '|' . a:wpm
 call system('echo "' . logStr . '" >> ~/.wpm_log')
-		echom a:wpm
+        echom a:wpm
 endfunction
 
 
 function! SaveFile()
-		execute ':w'
+        execute ':w'
 endfunction
 
 function! SilentSaveFile()
-		execute ':silent! w'
+        execute ':silent! w'
 endfunction
 
 function! WPMStopCount()
-		execute ':w'
-		let g:wpm_end_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
+        execute ':w'
+        let g:wpm_end_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
         let g:wpm_end_time = localtime()
         let new_words = g:wpm_end_word_count - g:wpm_start_word_count
-		let secs = g:wpm_end_time - g:wpm_start_time
-		let wpm = (str2float(new_words) / secs) * 60
-		let wpm = float2nr(wpm)
-		"if wpm > 0
-				call WPMLog(wpm)
-		"endif
+        let secs = g:wpm_end_time - g:wpm_start_time
+        let wpm = (str2float(new_words) / secs) * 60
+        let wpm = float2nr(wpm)
+        "if wpm > 0
+                call WPMLog(wpm)
+        "endif
 endfunction
 
 augroup wpm
-		au!
-		autocmd InsertEnter *.txt  :call WPMStartCount()
-		autocmd InsertLeave *.txt  :call WPMStopCount()
-		"autocmd InsertLeave *.txt :call SilentSaveFile()
+        au!
+        autocmd InsertEnter *.txt  :call WPMStartCount()
+        autocmd InsertLeave *.txt  :call WPMStopCount()
+        "autocmd InsertLeave *.txt :call SilentSaveFile()
 augroup END
 
 let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 augroup blanket
-		au!
+        au!
 
-		autocmd BufWritePost ~/flatland/src/common/*.js :exe getClientCoverage
-		autocmd BufWritePost ~/flatland/test/specs/common/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/flatland/src/common/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/flatland/test/specs/common/*.js :exe getClientCoverage
 
-		autocmd BufWritePost ~/flatland/src/client/*.js :exe getClientCoverage
-		autocmd BufWritePost ~/flatland/test/specs/client/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/flatland/src/client/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/flatland/test/specs/client/*.js :exe getClientCoverage
 
-		autocmd BufWritePost ~/flatland/src/server/*.js :exe getServerCoverage
-		autocmd BufWritePost ~/flatland/test/specs/server/*.js :exe getServerCoverage
+        autocmd BufWritePost ~/flatland/src/server/*.js :exe getServerCoverage
+        autocmd BufWritePost ~/flatland/test/specs/server/*.js :exe getServerCoverage
 augroup END
 
 augroup netrw_dvorak_fix
@@ -488,8 +505,8 @@ augroup netrw_dvorak_fix
 augroup END
 
 "augroup save_on_edit
-	"autocmd InsertLeave * :call SaveFile()
-    "autocmd! 
+    "autocmd InsertLeave * :call SaveFile()
+    "autocmd!
 "augroup END
 
 function! Fix_netrw_maps_for_dvorak()
@@ -514,10 +531,26 @@ nnoremap ]] ]c
 
 "highlight MyComment ctermfg=red
 
-let g:js_context_colors_enabled = 0
+"let g:js_context_colors_enabled = 0
 "let g:js_context_colors_usemaps = 1
-"let g:js_context_colors_comment_higroup = 'MyComment' 
+"let g:js_context_colors_comment_higroup = 'MyComment'
 "
 "let g:js_context_colors_colorize_comments = 1
 "
-au BufNewFile,BufRead /home/david/javascript/angular-phonecat/**/*.js :set smarttab sts=2 sw=2
+au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
+"quick command line access
+let g:mustache_abbreviations = 1
+
+
+"====[ Make text over 80 chars long stand out ]====================
+highlight ColorColumn ctermbg=18
+call matchadd('ColorColumn', '\%>81v', 100)
+
+"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
+exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
+set list
+
+"remove trailing whitespace
+nnoremap <localleader>s :%s/\s\+$//g<cr>
+
