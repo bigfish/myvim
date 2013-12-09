@@ -1,0 +1,172 @@
+
+"Tab is Escape
+inoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>
+snoremap <Tab> <Esc>
+
+"****************** MOVEMENT MAPPINGS ***********************""{{{
+"map HTNS -> HJKL for Dvorak layout
+nnoremap t j
+nnoremap n k
+nnoremap s l
+xnoremap t j
+xnoremap n k
+xnoremap s l
+
+"map arrow keys to navigate wrapped lines
+map <DOWN> gj
+map <UP> gk
+imap <UP> <ESC>gki
+imap <DOWN> <ESC>gji
+
+"************** INSERT MODE MAPPINGS ****************
+"map emacs movements in insert mode to arrow keys
+"remap C-c to complete C-n / C-p, since those mappings are going to be masked
+inoremap <C-c> <C-p>
+
+inoremap <C-f> <RIGHT>
+inoremap <C-b> <LEFT>
+inoremap <C-p> <UP>
+inoremap <C-n> <DOWN>
+inoremap <C-a> <Esc>^i
+inoremap <C-e> <Esc>$a
+
+"shift up/down one line
+nnoremap U <c-e>
+nnoremap K <c-y>
+
+"remap Home motion
+nnoremap <C-h> H
+"note M=move to middle line
+"L = move to bottom line
+"
+"move to window
+nnoremap H <c-w>h
+nnoremap T <c-w>j
+nnoremap N <c-w>k
+nnoremap S <c-w>l
+
+"*************************** WINDOW AND TABS *******************"{{{
+"
+"splits
+nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>s :split<cr>
+
+"change window position
+nnoremap <localleader>h <c-w>H
+nnoremap <localleader>t <c-w>J
+nnoremap <localleader>n <c-w>K
+nnoremap <localleader>s <c-w>L
+
+"make window taller / shorter
+"
+"make wider
+noremap _ <C-W><
+noremap - <C-W>>
+
+"make tall
+noremap + <C-W>+
+noremap & <C-W>-
+
+"make this the Only window
+noremap <leader>o <C-W>o
+
+"fix (t)il maps
+"noremap prevents capturing  't' by movement mapping above
+nnoremap dt dt
+nnoremap ct ct
+nnoremap yt yt
+
+"=====[ Highlight matches when jumping to next ]=============
+" This rewires c-n and c-l to do the highlighing...
+nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
+nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
+
+" just highlight the match in red...
+function! HLNext (blinktime)
+       highlight WhiteOnRed ctermfg=white ctermbg=red
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let target_pat = '\c\%#'.@/
+        let ring = matchadd('WhiteOnRed', target_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+endfunction
+
+"cd to file dir (mnemonic=(d)ir)
+nmap <leader>d :lcd %:p:h<CR>
+
+" ********************* Saving and Quitting ******************"{{{
+"save = S
+nnoremap <C-S> :w<CR>
+
+nnoremap <C-w> <Esc>:wq!<CR>
+
+"Kill window
+nnoremap <C-k> :q!<CR>
+
+
+" ********************* PLUGIN MAPPINGS ***************
+"
+"Netrw Directory (T)ree Listing
+nnoremap <C-t> :Vex<CR>
+
+"Buf (E)xplorer
+nnoremap <C-e> :BufExplorer<CR>
+
+"show line numbers
+map <leader>n <Esc>:set nu!<cr>
+
+"TagList toggle
+nnoremap <leader>t :TlistToggle<CR>
+
+" MARKDOWN
+
+if has("macunix")
+  imap <F6> <ESC>:w!<CR>:!Markdown % > %.html && open %.html<CR><CR>a
+  nmap <F6> :w!<CR>:!Markdown % > %.html && open %.html<CR>
+else "why different mapping for linux ? -- verify
+  imap <F6> <ESC>:w!<CR>:!Markdown % > %.html && open %.html<CR><CR>a
+endif
+
+com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
+
+" ******************** CONFIG FILE EDITING *********
+"
+"shortcuts to open and reload vimrc (c)onfig
+nnoremap <leader>c :sp $HOME/.vimrc<CR>
+nnoremap <leader>r :source $HOME/.vimrc<CR>
+
+"get (javascript) snippets
+nnoremap <leader>js :sp $HOME/.vim/snippets/javascript.snippets<CR>
+
+"reload snippets
+nnoremap <leader>rs :call ReloadAllSnippets()<CR>
+
+"****************** COMMANDS ****************
+"make current file executable
+noremap <leader>x :!chmod +x %<CR>
+
+"system copy
+vnoremap Y "+y
+nnoremap Y "+y
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
+
+"pop tag sTack with Backspace
+nnoremap <C-j> <C-]>
+nnoremap <BS> <C-T>
+
+"insert filename
+imap \fn <C-R>=expand("%:t:r")<CR>
+" ******************* TOGGLE OPTIONS ****************
+
+"toggle options
+nnoremap <leader>h :nohl<cr>
+nnoremap <leader>n :set nu!<cr>
+"wrapping
+noremap <leader>w :set wrap!<cr>
+noremap <leader>l :set wrap!<cr>
+

@@ -6,6 +6,7 @@
 if v:progname =~? "evim"
   finish
 endif
+
 " ************************ GLOBAL OPTIONS ********************************
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -86,94 +87,15 @@ set splitbelow
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the statusline
 
-"Tab is Escape
-inoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>
-snoremap <Tab> <Esc>
 
 
 let mapleader = ","
 let maplocalleader = "."
 
-"cd to file dir (mnemonic=(d)ir)
-nmap <leader>d :lcd %:p:h<CR>
-
 "set hidden
 :set switchbuf=useopen
 
-"****************** MOVEMENT MAPPINGS ***********************""{{{
-
-"shift up/down one line
-nnoremap U <c-e>
-nnoremap K <c-y>
-
-"map HTNS -> HJKL for Dvorak layout
-nnoremap t j
-nnoremap n k
-nnoremap s l
-xnoremap t j
-xnoremap n k
-xnoremap s l
-
-nnoremap H <c-w>h
-nnoremap T <c-w>j
-nnoremap N <c-w>k
-nnoremap S <c-w>l
-
-"remap Home motion
-nnoremap <C-h> H
-
-"goto bottom of window
-
-
-"fix (t)il maps
-nnoremap dt dt
-nnoremap ct ct
-nnoremap yt yt
-
-"=====[ Highlight matches when jumping to next ]=============
-" This rewires c-n and c-l to do the highlighing...
-nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
-nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
-
-" OR ELSE just highlight the match in red...
-function! HLNext (blinktime)
-       highlight WhiteOnRed ctermfg=white ctermbg=red
-        let [bufnum, lnum, col, off] = getpos('.')
-        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-        let target_pat = '\c\%#'.@/
-        let ring = matchadd('WhiteOnRed', target_pat, 101)
-        redraw
-        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-        call matchdelete(ring)
-        redraw
-endfunction
-
-"window manipulation
-nnoremap <localleader>h <c-w>H
-nnoremap <localleader>t <c-w>J
-nnoremap <localleader>n <c-w>K
-nnoremap <localleader>s <c-w>L
-
-"splits
-nnoremap <leader>v :vsplit<cr>
-nnoremap <leader>s :split<cr>
-
-"map arrow keys to navigate wrapped lines
-map <DOWN> gj
-map <UP> gk
-imap <UP> <ESC>gki
-imap <DOWN> <ESC>gji
-
-"map emacs movements in insert mode to arrow keys
-"remap C-c to complete C-n / C-p, since those mappings are going to be masked
-inoremap <C-c> <C-p>
-inoremap <C-f> <RIGHT>
-inoremap <C-b> <LEFT>
-inoremap <C-p> <UP>
-inoremap <C-n> <DOWN>
-inoremap <C-a> <Esc>^i
-inoremap <C-e> <Esc>$a
+so mappings.vim
 
 "}}}
 "************************* autocomplete setting **************************"{{{
@@ -192,6 +114,7 @@ inoremap <C-e> <Esc>$a
 set complete=.,w,b,u,t,i,k
 set completeopt=menu,preview
 
+set nocst
 "do omnicomplete (on supported filetypes
 imap <C-o> <C-x><C-o>
 imap <C-u> <C-x><C-u>
@@ -204,51 +127,11 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-"}}}
-
-"
-" ********************* Saving and Quitting ******************"{{{
-"save = S
-nnoremap <C-S> :w<CR>
-
-"inoremap <C-S> <Esc>:w<CR>i
-
-nnoremap <C-w> <Esc>:wq!<CR>
-
-"Kill
-nnoremap <C-k> :q!<CR>
-
-"show line numbers
-map <leader>n <Esc>:set nu!<cr>
-
-"}}}
-
-nnoremap <C-e> :BufExplorer<CR>
-
-
-"Netrw Directory Tree Listing
-nnoremap <C-t> :Vex<CR>
-
-nnoremap <leader>t :TlistToggle<CR>
-
 "XML Tidy
 ":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
-
 "markdown
+"
 autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
-" ************************** MARKDOWN *******************"{{{
-
-if has("macunix")
-  imap <F6> <ESC>:w!<CR>:!Markdown % > %.html && open %.html<CR><CR>a
-  nmap <F6> :w!<CR>:!Markdown % > %.html && open %.html<CR>
-else "why different mapping for linux ? -- verify
-  imap <F6> <ESC>:w!<CR>:!Markdown % > %.html && open %.html<CR><CR>a
-endif
-
-com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
-
-"insert filename
-imap \fn <C-R>=expand("%:t:r")<CR>
 
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
@@ -259,65 +142,18 @@ let Tlist_Use_Right_Window=1
 
 let g:bufExplorerDefaultHelp=0
 
-set nocst
-
-nnoremap <leader>c :sp $HOME/.vimrc<CR>
-nnoremap <leader>r :source $HOME/.vimrc<CR>
-
-"get snippets
-nnoremap <leader>js :sp $HOME/.vim/snippets/javascript.snippets<CR>
-
-"reload snippets
-nnoremap <leader>rs :call ReloadAllSnippets()<CR>
-
-"make current file executable
-noremap <leader>x :!chmod +x %<CR>
-nnoremap <leader>h :nohl<cr>
-nnoremap <leader>n :set nu!<cr>
-"}}}
-
-"system copy
-vnoremap Y "+y
-nnoremap Y "+y
-vnoremap <leader>p "+p
-nnoremap <leader>p "+p
 
 "Gist options
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
 
-":set nu
-:set ts=4
-
 "hide foldcolumn
 set foldcolumn=0
 
 " CTAGS these must be generated by ctags
-"*************************************** TAGS ***************"{{{
+"*************************************** TAGS ***************"
 "lookup tags in current and all parent folders
 :set tags=tags;
-"}}}
-
-"*************************** WINDOW AND TABS *******************"{{{
-"move windows
-"nnoremap <C-
-"resize windows- nb ^W is mapped to close window, -style
-"make taller / shorter
-"make windows equal height and width
-noremap <leader>= <C-W>=
-"make wider
-noremap _ <C-W><
-noremap - <C-W>>
-
-"make tall
-noremap + <C-W>+
-noremap & <C-W>-
-
-"make this the Only window
-noremap <leader>o <C-W>o
-"pop tag sTack with Backspace
-nnoremap <C-j> <C-]>
-nnoremap <BS> <C-T>
 
 "min height of active window
 set winheight=15
@@ -342,8 +178,6 @@ set shm=IsAat
 
 "no wrap by default
 set nowrap
-"mapping for toggling wrapping
-noremap <leader>w :set wrap!<cr>
 
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
@@ -398,12 +232,13 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal shiftwidth=2
 :au BufEnter *.coffee setlocal expandtab
 
-"hi clear CursorLine
+hi clear CursorLine
 "hi CursorLine ctermbg=18
-"au InsertEnter,BufLeave * set nocul
-"au InsertLeave,BufEnter * set cul
+hi CursorLine ctermbg=237
+au InsertEnter,BufLeave * set nocul
+au InsertLeave,BufEnter * set cul
 
-"set cul
+set cul
 
 "help copypaste to work
 set clipboard=unnamed
@@ -550,6 +385,10 @@ call matchadd('ColorColumn', '\%>81v', 100)
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 set list
+
+"hide whitespace markers in insert mode so they are less distracting
+au InsertEnter,BufLeave * set nolist
+au InsertLeave,BufEnter * set list
 
 "remove trailing whitespace
 nnoremap <localleader>s :%s/\s\+$//g<cr>
