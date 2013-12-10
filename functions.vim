@@ -76,7 +76,7 @@ endfunction
 "let g:funcjs_colors = []
 function! NumberToggle()
   if(&relativenumber == 1)
-    set number
+    set nornu
   else
     set relativenumber
   endif

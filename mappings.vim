@@ -39,7 +39,7 @@ nnoremap K <c-y>
 nnoremap <C-h> H
 "note M=move to middle line
 "L = move to bottom line
-"
+
 "move to window
 nnoremap H <c-w>h
 nnoremap T <c-w>j
@@ -53,13 +53,13 @@ nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>s :split<cr>
 
 "change window position
-nnoremap <localleader>h <c-w>H
-nnoremap <localleader>t <c-w>J
-nnoremap <localleader>n <c-w>K
-nnoremap <localleader>s <c-w>L
+"capitalized to avoid conflicts with unimpaired mappings
+"which use localleader & t(tab), n(scm conflict)
+nnoremap <leader>H <c-w>H
+nnoremap <leader>T <c-w>J
+nnoremap <leader>N <c-w>K
+nnoremap <leader>S <c-w>L
 
-"make window taller / shorter
-"
 "make wider
 noremap _ <C-W><
 noremap - <C-W>>
@@ -116,11 +116,8 @@ nnoremap <C-t> :Vex<CR>
 "Buf (E)xplorer
 nnoremap <C-e> :BufExplorer<CR>
 
-"show line numbers
-map <leader>n <Esc>:set nu!<cr>
-
 "TagList toggle
-nnoremap <leader>t :TlistToggle<CR>
+nnoremap -t :TlistToggle<CR>
 
 " MARKDOWN
 
@@ -136,7 +133,8 @@ com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
 " ******************** CONFIG FILE EDITING *********
 "
 "shortcuts to open and reload vimrc (c)onfig
-nnoremap <leader>c :sp $HOME/.vimrc<CR>
+
+nnoremap <localleader>v :sp $HOME/.vimrc<CR>
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
 "get (javascript) snippets
@@ -147,7 +145,7 @@ nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
 "****************** COMMANDS ****************
 "make current file executable
-noremap <leader>x :!chmod +x %<CR>
+noremap <c-x> :!chmod +x %<CR>
 
 "system copy
 vnoremap Y "+y
@@ -161,16 +159,18 @@ nnoremap <BS> <C-T>
 
 "insert filename
 imap \fn <C-R>=expand("%:t:r")<CR>
+                
+"remove trailing whitespace
+nnoremap <localleader>s :%s/\s\+$//g<cr>
+
 " ******************* TOGGLE OPTIONS ****************
-
+"
 "toggle options
-nnoremap <leader>h :nohl<cr>
-nnoremap <leader>n :set nu!<cr>
-"wrapping
-noremap <leader>w :set wrap!<cr>
-nnoremap <leader>r :call NumberToggle()<cr>
+nnoremap -h :nohl<cr>
+nnoremap -n :set nu!<cr>
+nnoremap -r :set rnu!<cr>
+nnoremap -w :set wrap!<cr>
+nnoremap -l :set list!<cr>
 
-"easier diff jumps
-nnoremap [[ [c
-nnoremap ]] ]c
+" Other mappings are provided by Unimpaired.vim --use ,. instead of []
 

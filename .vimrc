@@ -7,29 +7,12 @@ if v:progname =~? "evim"
   finish
 endif
 
-" ************************ GLOBAL OPTIONS ********************************
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-"don't clutter up workspace with backup & swap file
-set backupdir=~/tmp
-set noswapfile
-set history=100
-set ruler    " show the cursor position all the time
-set showcmd    " display incomplete commands
-set incsearch    " do incremental searching
-set nu
-set expandtab
-"speedup timeout after a map which is also part of a multichar map
-set timeoutlen=500
-
+        
 call pathogen#infect()
-
-:set background=dark
-
-:colorscheme volcanic
 
 " Enable file type detection.
 "
@@ -48,7 +31,46 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-" **************************** OPTIONS *********************************
+colorscheme volcanic
+
+" ************************ OPTIONS ********************************
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+"don't clutter up workspace with backup & swap file
+set backupdir=~/tmp
+set expandtab
+set history=100
+set incsearch    " do incremental searching
+set noswapfile
+set nu
+set ruler    " show the cursor position all the time
+set showcmd    " display incomplete commands
+"speedup timeout after a map which is also part of a multichar map
+set timeoutlen=500
+
+"min height of active window
+set winheight=15
+set winwidth=15
+"set winminheight=2
+"set winminwidth=2
+
+" Make window splitting behav
+set splitright
+"set splitbelow
+set eadirection=both
+
+"manage buffers - note these slow down b command
+set shm=IsAat
+
+set viminfo='1000,f1,<500,s100,h,:500,@500,/500,!
+
+"no wrap by default
+set nowrap
+
+set background=dark
+
 "
 " always use hlsearch
 set hlsearch
@@ -62,17 +84,6 @@ set formatoptions+=o " Automatically continue comments when hitting 'o' or 'O'
 set formatoptions+=q " Allow formatting of comments with 'gq'
 set formatoptions+=n " Recognize numbered lists
 set formatoptions+=l " Don't break long lines that were already there
-
-" From settings above, this is only for comments
-autocmd FileType text setlocal textwidth=78
-
-" When eding a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\ exe "normal! g`\"" |
-\ endif
 
 " Disable annoying beeps
 set noerrorbells
@@ -97,6 +108,17 @@ let maplocalleader = "."
 
 so $HOME/.vim/functions.vim
 so $HOME/.vim/mappings.vim
+
+" From settings above, this is only for comments
+autocmd FileType text setlocal textwidth=78
+
+" When eding a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\ exe "normal! g`\"" |
+\ endif
 
 "}}}
 "************************* autocomplete setting **************************"{{{
@@ -143,10 +165,11 @@ let Tlist_Use_Right_Window=1
 
 let g:bufExplorerDefaultHelp=0
 
-
 "Gist options
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
+
+let g:startify_bookmarks = [ '~/.vimrc', '~/.mappings.vim', '~/.bashrc.vim' ]
 
 "hide foldcolumn
 set foldcolumn=0
@@ -156,29 +179,6 @@ set foldcolumn=0
 "lookup tags in current and all parent folders
 :set tags=tags;
 
-"min height of active window
-set winheight=15
-set winwidth=15
-"set winminheight=2
-"set winminwidth=2
-"maps to split cur window horizontally or vertically
-" Make window splitting behav
-set equalalways
-set splitright
-"set splitbelow
-
-set eadirection=both
-"}}}
-
-"manage buffers - note these slow down b command
-set shm=IsAat
-"session maps
-"map <localleader>s <Esc>:SessionList<CR>
-"map <localleader>o <Esc>:SessionOpenLast<CR>
-"set viminfo = "100,<50,s10,h,!"
-
-"no wrap by default
-set nowrap
 
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
@@ -250,10 +250,11 @@ let g:netrw_browsex_viewer= "gnome-open"
 
 let g:user_zen_leader_key = '<C-h>'
 
+"this prevents messages from blocking
 set cmdheight=2
+
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
 
 let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
@@ -279,6 +280,7 @@ augroup END
 "
 au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
+
 "quick command line access
 let g:mustache_abbreviations = 1
 
@@ -288,12 +290,5 @@ call matchadd('ColorColumn', '\%>81v', 100)
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
-set list
 
-"hide whitespace markers in insert mode so they are less distracting
-au InsertEnter,BufLeave * set nolist
-au InsertLeave,BufEnter * set list
-
-"remove trailing whitespace
-"nnoremap <localleader>s :%s/\s\+$//g<cr>
 
