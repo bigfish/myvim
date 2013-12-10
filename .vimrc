@@ -22,6 +22,8 @@ set showcmd    " display incomplete commands
 set incsearch    " do incremental searching
 set nu
 set expandtab
+"speedup timeout after a map which is also part of a multichar map
+set timeoutlen=500
 
 call pathogen#infect()
 
@@ -87,15 +89,14 @@ set splitbelow
 "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set laststatus=2   " Always show the statusline
 
-
-
 let mapleader = ","
 let maplocalleader = "."
 
 "set hidden
 :set switchbuf=useopen
 
-so mappings.vim
+so $HOME/.vim/functions.vim
+so $HOME/.vim/mappings.vim
 
 "}}}
 "************************* autocomplete setting **************************"{{{
@@ -182,21 +183,6 @@ set nowrap
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
 
-function! Hyphenize()
-s/\([A-Z]\)/-\L\1/
-endfunction
-
-function! Camelize()
-s/-\([a-z]\)/\U\1/
-endfunction
-
-"css helper convert camel case to hyphen case & back (must have selection):
-"note - will only work on first instance on a line, and if there isn't one,
-"it will probably do something unintended. But it works great with Flex CSS
-"assuming one rule per line
-command! -range Hyphenate <line1>,<line2>call Hyphenize()
-command! -range CamelCase <line1>,<line2>call Camelize()
-
 "generate nice html
 :let html_ignore_folding=1
 :let html_use_css=1
@@ -214,16 +200,7 @@ command! -range CamelCase <line1>,<line2>call Camelize()
 "no dashes in folds
 set fillchars="fold:,vert:"
 
-"js tags
-":autocmD BufNewFile,BufRead *.js call SetJSTags()
-function! SetJSTags()
-"set javascript tags
 set tags=tags;
-"set tags+=$EXT_HOME/tags
-"set tags+=$JSCORE_HOME/tags
-"set tags+=$HTML5_HOME/tags
-"set tags+=$HTML5_HOME/webgl/tags
-endfunction
 
 let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 
@@ -242,6 +219,7 @@ set cul
 
 "help copypaste to work
 set clipboard=unnamed
+
 "fugitive tweaks
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
@@ -276,51 +254,10 @@ set cmdheight=2
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-function! WPMStartCount()
-execute ':w'
-let g:wpm_start_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
-let g:wpm_start_time = localtime()
-endfunction
-
-function! WPMLog(wpm)
-let logStr = system("date +%s")
-let logStr = substitute(logStr, '\n$', '', '')
-let logStr = logStr . '|' . a:wpm
-call system('echo "' . logStr . '" >> ~/.wpm_log')
-        echom a:wpm
-endfunction
-
-
-function! SaveFile()
-        execute ':w'
-endfunction
-
-function! SilentSaveFile()
-        execute ':silent! w'
-endfunction
-
-function! WPMStopCount()
-        execute ':w'
-        let g:wpm_end_word_count = system('wc -w ' . shellescape(expand('%')) . "|cut -d' ' -f1")
-        let g:wpm_end_time = localtime()
-        let new_words = g:wpm_end_word_count - g:wpm_start_word_count
-        let secs = g:wpm_end_time - g:wpm_start_time
-        let wpm = (str2float(new_words) / secs) * 60
-        let wpm = float2nr(wpm)
-        "if wpm > 0
-                call WPMLog(wpm)
-        "endif
-endfunction
-
-augroup wpm
-        au!
-        autocmd InsertEnter *.txt  :call WPMStartCount()
-        autocmd InsertLeave *.txt  :call WPMStopCount()
-        "autocmd InsertLeave *.txt :call SilentSaveFile()
-augroup END
 
 let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
+
 augroup blanket
         au!
 
@@ -334,38 +271,6 @@ augroup blanket
         autocmd BufWritePost ~/flatland/test/specs/server/*.js :exe getServerCoverage
 augroup END
 
-augroup netrw_dvorak_fix
-    autocmd!
-    autocmd filetype netrw call Fix_netrw_maps_for_dvorak()
-augroup END
-
-"augroup save_on_edit
-    "autocmd InsertLeave * :call SaveFile()
-    "autocmd!
-"augroup END
-
-function! Fix_netrw_maps_for_dvorak()
-    noremap <buffer> t j
-    noremap <buffer> n k
-    noremap <buffer> s l
-endfunction
-
-"let g:funcjs_colors = []
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap rl :call NumberToggle()<cr>
-"easier diff jumps
-nnoremap [[ [c
-nnoremap ]] ]c
-
-"highlight MyComment ctermfg=red
-
 "let g:js_context_colors_enabled = 0
 "let g:js_context_colors_usemaps = 1
 "let g:js_context_colors_comment_higroup = 'MyComment'
@@ -376,7 +281,6 @@ au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
 "quick command line access
 let g:mustache_abbreviations = 1
-
 
 "====[ Make text over 80 chars long stand out ]====================
 highlight ColorColumn ctermbg=18
@@ -391,5 +295,5 @@ au InsertEnter,BufLeave * set nolist
 au InsertLeave,BufEnter * set list
 
 "remove trailing whitespace
-nnoremap <localleader>s :%s/\s\+$//g<cr>
+"nnoremap <localleader>s :%s/\s\+$//g<cr>
 

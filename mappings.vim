@@ -168,5 +168,9 @@ nnoremap <leader>h :nohl<cr>
 nnoremap <leader>n :set nu!<cr>
 "wrapping
 noremap <leader>w :set wrap!<cr>
-noremap <leader>l :set wrap!<cr>
+nnoremap <leader>r :call NumberToggle()<cr>
+
+"easier diff jumps
+nnoremap [[ [c
+nnoremap ]] ]c
 
