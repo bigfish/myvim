@@ -1,0 +1,7 @@
+.VimballRecord
+.netrwhist
+bundle/
+doc
+plugin/CHANGELOG
+session/
+sessions/
