@@ -68,9 +68,9 @@ augroup END
 "augroup END
 
 function! Fix_netrw_maps_for_dvorak()
-    noremap <buffer> t j
-    noremap <buffer> n k
-    noremap <buffer> s l
+    nnoremap <buffer> t j
+    nnoremap <buffer> n k
+    "nnoremap <buffer> s l
 endfunction
 
 "let g:funcjs_colors = []

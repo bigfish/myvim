@@ -291,4 +291,5 @@ call matchadd('ColorColumn', '\%>81v', 100)
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 
-
+let g:netrw_list_hide = '\.\+'
+let g:netrw_browsex_viewer= "gnome-open"
