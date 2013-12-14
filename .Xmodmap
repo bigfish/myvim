@@ -273,6 +273,11 @@ keycode 64 = Super_L
 keycode 37 = Mode_switch
 keycode 133 = Alt_L Meta_L
 
+
 add control = Caps_Lock
 add mod4 = Super_L
 add mod1 = Alt_L Meta_L
+
+clear lock
+keycode 134 = Caps_Lock
+add Lock = Caps_Lock

@@ -4,6 +4,9 @@ inoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>
 snoremap <Tab> <Esc>
 
+"in normal mode tab jumps to previous window
+nnoremap <Tab> <C-W>p
+
 "****************** MOVEMENT MAPPINGS ***********************""{{{
 "map HTNS -> HJKL for Dvorak layout
 nnoremap t j
@@ -135,6 +138,8 @@ com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
 "shortcuts to open and reload vimrc (c)onfig
 
 nnoremap <localleader>v :sp $HOME/.vimrc<CR>
+nnoremap <localleader>m :sp $HOME/.vim/mappings.vim<CR>
+
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
 "get (javascript) snippets

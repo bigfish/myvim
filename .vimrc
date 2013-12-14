@@ -48,7 +48,7 @@ set nu
 set ruler    " show the cursor position all the time
 set showcmd    " display incomplete commands
 "speedup timeout after a map which is also part of a multichar map
-set timeoutlen=500
+"set timeoutlen=500
 
 "min height of active window
 set winheight=15
@@ -210,8 +210,8 @@ let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 :au BufEnter *.coffee setlocal expandtab
 
 hi clear CursorLine
-"hi CursorLine ctermbg=18
-hi CursorLine ctermbg=237
+hi CursorLine ctermbg=18
+"hi CursorLine ctermbg=237
 au InsertEnter,BufLeave * set nocul
 au InsertLeave,BufEnter * set cul
 
@@ -241,12 +241,13 @@ autocmd User fugitive
 \   nnoremap <buffer> .. :edit %:h<CR> |
 \ endif
 
-let g:netrw_liststyle=3 " Use tree-mode as default view
+"let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer
 "let g:netrw_preview=1 " preview window shown in a vertically split
 "let g:netrw_winsize=25
 "gx to open file
-let g:netrw_browsex_viewer= "gnome-open"
+let g:netrw_keepdir=0
+"let g:netrw_browsex_viewer= "gnome-open"
 
 let g:user_zen_leader_key = '<C-h>'
 
@@ -279,17 +280,21 @@ augroup END
 "let g:js_context_colors_colorize_comments = 1
 "
 au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
 
 "quick command line access
 let g:mustache_abbreviations = 1
 
 "====[ Make text over 80 chars long stand out ]====================
-highlight ColorColumn ctermbg=18
-call matchadd('ColorColumn', '\%>81v', 100)
+highlight ColorColumn ctermbg=237
+set colorcolumn=81
+"call matchadd('ColorColumn', '\%>81v', 100)
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 
-let g:netrw_list_hide = '\.\+'
-let g:netrw_browsex_viewer= "gnome-open"
+"use R for Replace, not REPLACE mode, which I never use
+"
+nnoremap R :%s//g<LEFT><LEFT>
+

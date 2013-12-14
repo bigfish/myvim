@@ -68,9 +68,12 @@ augroup END
 "augroup END
 
 function! Fix_netrw_maps_for_dvorak()
+    "use dvorak up-down motions
     nnoremap <buffer> t j
     nnoremap <buffer> n k
-    "nnoremap <buffer> s l
+    "use s for netrw sorting -- can use l for moving right
+    "use S to move to right window -- overrides edit sort order of netrw 
+    nnoremap <buffer> S <c-w>l         
 endfunction
 
 "let g:funcjs_colors = []
