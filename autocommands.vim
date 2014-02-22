@@ -1,0 +1,79 @@
+
+" From settings above, this is only for comments
+autocmd FileType text setlocal textwidth=78
+
+" When eding a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\ exe "normal! g`\"" |
+\ endif
+
+"
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
+
+"fugitive tweaks
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+autocmd User fugitive
+\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+\   nnoremap <buffer> .. :edit %:h<CR> |
+\ endif
+
+augroup blanket
+        au!
+
+        "autocmd BufWritePost ~/shoppinglist/src/common/*.js :exe getClientCoverage
+        "autocmd BufWritePost ~/shoppinglist/test/specs/common/*.js :exe getClientCoverage
+
+        autocmd BufWritePost ~/shoppinglist/src/client/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/shoppinglist/test/specs/client/*.js :exe getClientCoverage
+
+        "autocmd BufWritePost ~/shoppinglist/src/server/*.js :exe getServerCoverage
+        "autocmd BufWritePost ~/shoppinglist/test/specs/server/*.js :exe getServerCoverage
+augroup END
+
+au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
+au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
+
+" coffeescript -- move to after/ftplugin
+:au BufEnter *.coffee setlocal tabstop=2
+:au BufEnter *.coffee setlocal shiftwidth=2
+:au BufEnter *.coffee setlocal expandtab
+
+:au BufEnter *.vim setlocal softtabstop=4
+:au BufEnter *.vim setlocal shiftwidth=4
+:au BufEnter *.vim setlocal expandtab
+
+"always cd to files dir
+"this breaks fugitive Gdiff command!
+"autocmd BufEnter,BufRead * :lcd %:p:h
+"autocmd FileType idl set makeprg=idlj\ %
+"let g:completekey="<C-Space>"
+"cul option seems to slow rendering and cursor movement...
+"augroup CurrentLineHighlight
+    "au!
+    "au InsertEnter,BufLeave * set nocul
+    "au InsertLeave,BufEnter * set cul
+    ""don't use cul on js files as it looks ugly with context coloring
+    "au InsertLeave,BufEnter *.js set nocul
+"augroup END
+"XML Tidy
+":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
+"markdown
+"
+"TEMPLATES
+augroup templates
+    autocmd BufNewFile *.html :0r $HOME/.vim/templates/html5.html
+    autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
+
+":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
+augroup end
+

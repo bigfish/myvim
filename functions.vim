@@ -83,4 +83,40 @@ function! NumberToggle()
   else
     set relativenumber
   endif
-endfunc
+endfunction
+
+
+function! GoToSpec()
+
+    "define the src and spec dirs relative to common parent
+    let srcdir = "src"
+    let specdir = "test/specs"
+
+    "get current file name and path
+    let curpath = expand("%:p")
+    let basepath_arr = split(curpath, '/')
+    "remove the filename from the path array
+    call remove(basepath_arr, -1)
+    "get the root of the filename (no extension)
+    let curfile = expand("%:t:r")
+    "derive the name of the spec
+    let specname = curfile . '_' . 'spec.js'
+    "split the path on 'src' dir
+    let relpath_arr = []
+    let specpath = ""
+    while (len(basepath_arr) > 0)
+        "remove the last dir from the basepath and prepend into relpath
+        let dir = remove(basepath_arr, -1)
+        "if we reach the src dir, do not add to relpath, but construct the
+        "specpath
+        if (dir == srcdir)
+            let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . join(relpath_arr, '/') . '/' . specname
+            break
+        else
+            call insert(relpath_arr, dir)
+        endif
+    endwhile
+
+    exe 'vsplit' . specpath
+
+endfunction

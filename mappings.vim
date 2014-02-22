@@ -104,6 +104,7 @@ nmap <leader>d :lcd %:p:h<CR>
 " ********************* Saving and Quitting ******************"{{{
 "save = S
 nnoremap <C-S> :w<CR>
+"inoremap <C-S> <Esc>:w<CR>
 
 nnoremap <C-w> <Esc>:wq!<CR>
 
@@ -173,9 +174,18 @@ nnoremap <localleader>s :%s/\s\+$//g<cr>
 "toggle options
 nnoremap -h :nohl<cr>
 nnoremap -n :set nu!<cr>
-nnoremap -r :set rnu!<cr>
+nnoremap -r :                                                        ;set rnu!<cr>
 nnoremap -w :set wrap!<cr>
 nnoremap -l :set list!<cr>
-
 " Other mappings are provided by Unimpaired.vim --use ,. instead of []
+
+"Go To Spec (mocha)
+"
+nnoremap gs :call GoToSpec()<cr>
+
+
+"TEMPLATE
+nnoremap <c-space> /<+.\{-1,}+><cr>c/+>/e<cr>
+inoremap <c-space> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
+
 

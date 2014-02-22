@@ -39,7 +39,9 @@ keycode  45 = t T parenright 5
 keycode  46 = n N equal 6
 keycode  47 = s S semicolon 0
 keycode  48 = minus underscore colon bar 
-keycode  49 = grave asciitilde grave asciitilde dead_grave dead_tilde
+!keycode  49 = grave asciitilde grave asciitilde dead_grave dead_tilde
+!experimental - use backtick/tilde as caps-lock
+keycode  49 = Caps_Lock asciitilde grave asciitilde dead_grave dead_tilde
 keycode  50 = Shift_L NoSymbol Shift_L
 keycode  51 = backslash bar backslash bar  
 ! ****** redeem the highly unergonomic ; key - mode shifted or shift-modeswitched it is ,
@@ -278,6 +280,6 @@ add control = Caps_Lock
 add mod4 = Super_L
 add mod1 = Alt_L Meta_L
 
-clear lock
-keycode 134 = Caps_Lock
-add Lock = Caps_Lock
+!clear lock
+!keycode 134 = Caps_Lock
+!add Lock = Caps_Lock

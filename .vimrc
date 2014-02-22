@@ -11,7 +11,7 @@ endif
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-        
+
 call pathogen#infect()
 
 " Enable file type detection.
@@ -108,17 +108,8 @@ let maplocalleader = "."
 
 so $HOME/.vim/functions.vim
 so $HOME/.vim/mappings.vim
+so $HOME/.vim/autocommands.vim
 
-" From settings above, this is only for comments
-autocmd FileType text setlocal textwidth=78
-
-" When eding a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\ exe "normal! g`\"" |
-\ endif
 
 "}}}
 "************************* autocomplete setting **************************"{{{
@@ -144,17 +135,7 @@ imap <C-u> <C-x><C-u>
 "imap <C-k> <C-x><C-k>
 "file completion: mnemonic: (L)ookup file... C-f is taken in insert by movement mapping
 imap <C-l> <C-x><C-f>
-"
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-"XML Tidy
-":autocmd BufNewFile,BufRead *.xml,*.mxml map <localleader>t <Esc>:1,$!tidy --input-xml true --indent-spaces 4 --indent-attributes yes -i -q<CR>
-"markdown
-"
-autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
 
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
@@ -191,11 +172,6 @@ iabbrev shb #!/bin/bash<cr>
 
 "enable static folds
 "set foldmethod=marker
-"always cd to files dir
-"this breaks fugitive Gdiff command!
-"autocmd BufEnter,BufRead * :lcd %:p:h
-"autocmd FileType idl set makeprg=idlj\ %
-"let g:completekey="<C-Space>"
 
 "no dashes in folds
 set fillchars="fold:,vert:"
@@ -204,24 +180,13 @@ set tags=tags;
 
 let g:maintainer='{ "name": "David Wilhelm", "web": "http://dafishinsea.com" }'
 
-" coffeescript -- move to after/ftplugin
-:au BufEnter *.coffee setlocal tabstop=2
-:au BufEnter *.coffee setlocal shiftwidth=2
-:au BufEnter *.coffee setlocal expandtab
-
 hi clear CursorLine
 hi CursorLine ctermbg=18
 "hi CursorLine ctermbg=237
-au InsertEnter,BufLeave * set nocul
-au InsertLeave,BufEnter * set cul
-
-set cul
 
 "help copypaste to work
 set clipboard=unnamed
 
-"fugitive tweaks
-autocmd BufReadPost fugitive://* set bufhidden=delete
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
 
@@ -236,18 +201,13 @@ let g:Powerline_symbols = 'fancy'
 let g:jshint_onwrite = 1
 let g:jshint_goto_error = 1
 
-autocmd User fugitive
-\ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-\   nnoremap <buffer> .. :edit %:h<CR> |
-\ endif
-
 "let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer
 "let g:netrw_preview=1 " preview window shown in a vertically split
 "let g:netrw_winsize=25
 "gx to open file
 let g:netrw_keepdir=0
-"let g:netrw_browsex_viewer= "gnome-open"
+let g:netrw_browsex_viewer= "gnome-open"
 
 let g:user_zen_leader_key = '<C-h>'
 
@@ -260,29 +220,12 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
-augroup blanket
-        au!
-
-        autocmd BufWritePost ~/flatland/src/common/*.js :exe getClientCoverage
-        autocmd BufWritePost ~/flatland/test/specs/common/*.js :exe getClientCoverage
-
-        autocmd BufWritePost ~/flatland/src/client/*.js :exe getClientCoverage
-        autocmd BufWritePost ~/flatland/test/specs/client/*.js :exe getClientCoverage
-
-        autocmd BufWritePost ~/flatland/src/server/*.js :exe getServerCoverage
-        autocmd BufWritePost ~/flatland/test/specs/server/*.js :exe getServerCoverage
-augroup END
-
-"let g:js_context_colors_enabled = 0
-"let g:js_context_colors_usemaps = 1
+"let g:js_context_colors_enabled = 1
+"let g:js_context_colors_debug = 1
 "let g:js_context_colors_comment_higroup = 'MyComment'
+let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
+"let g:js_context_colors_colorize_comments = 0
 "
-"let g:js_context_colors_colorize_comments = 1
-"
-au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
-au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
-au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
-
 "quick command line access
 let g:mustache_abbreviations = 1
 
@@ -297,4 +240,5 @@ exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 "use R for Replace, not REPLACE mode, which I never use
 "
 nnoremap R :%s//g<LEFT><LEFT>
-
+"experimental : save on leave insert mode
+au InsertLeave *  execute ':w'
