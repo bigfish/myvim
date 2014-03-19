@@ -35,11 +35,13 @@ augroup blanket
         autocmd BufWritePost ~/shoppinglist/src/client/*.js :exe getClientCoverage
         autocmd BufWritePost ~/shoppinglist/test/specs/client/*.js :exe getClientCoverage
 
+        autocmd BufWritePost ~/javascript/flux/src/client/*.js :exe getClientCoverage
+        autocmd BufWritePost ~/javascript/flux/test/specs/client/*.js :exe getClientCoverage
         "autocmd BufWritePost ~/shoppinglist/src/server/*.js :exe getServerCoverage
         "autocmd BufWritePost ~/shoppinglist/test/specs/server/*.js :exe getServerCoverage
 augroup END
 
-au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+au BufNewFile,BufRead *.js :set expandtab sw=2 sts=2
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
 
@@ -73,7 +75,20 @@ au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
 augroup templates
     autocmd BufNewFile *.html :0r $HOME/.vim/templates/html5.html
     autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
+    autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
+    autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
+
 
 ":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
 augroup end
 
+" autocmd that will set up the w:created variable
+autocmd VimEnter * autocmd WinEnter * let w:created=1
+
+" Consider this one, since WinEnter doesn't fire on the first window created when Vim launches.
+" You'll need to set any options for the first window in your vimrc,
+" or in an earlier VimEnter autocmd if you include this
+"autocmd VimEnter * let w:created=1
+
+" Example of how to use w:created in an autocmd to initialize a window-local option
+autocmd WinEnter *.js if !exists('w:created') | call JSCC_Colorize() | endif

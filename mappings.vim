@@ -99,7 +99,9 @@ function! HLNext (blinktime)
 endfunction
 
 "cd to file dir (mnemonic=(d)ir)
-nmap <leader>d :lcd %:p:h<CR>
+"nmap <leader>d :lcd %:p:h<CR>
+nnoremap ,d [c
+nnoremap .d ]c
 
 " ********************* Saving and Quitting ******************"{{{
 "save = S
@@ -185,7 +187,7 @@ nnoremap gs :call GoToSpec()<cr>
 
 
 "TEMPLATE
-nnoremap <c-space> /<+.\{-1,}+><cr>c/+>/e<cr>
-inoremap <c-space> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
+nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
+inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
 

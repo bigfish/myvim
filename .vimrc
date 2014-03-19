@@ -225,7 +225,7 @@ let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Runnin
 "let g:js_context_colors_comment_higroup = 'MyComment'
 let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
 "let g:js_context_colors_colorize_comments = 0
-"
+"let g:js_context_colors_insertmode = 1
 "quick command line access
 let g:mustache_abbreviations = 1
 
@@ -236,9 +236,11 @@ set colorcolumn=81
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
-
+set list
 "use R for Replace, not REPLACE mode, which I never use
 "
 nnoremap R :%s//g<LEFT><LEFT>
 "experimental : save on leave insert mode
 au InsertLeave *  execute ':w'
+"debug autocmds
+"set verbose=9
