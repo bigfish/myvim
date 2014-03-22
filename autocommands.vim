@@ -63,7 +63,7 @@ au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
 "augroup CurrentLineHighlight
     "au!
     "au InsertEnter,BufLeave * set nocul
-    "au InsertLeave,BufEnter * set cul
+    
     ""don't use cul on js files as it looks ugly with context coloring
     "au InsertLeave,BufEnter *.js set nocul
 "augroup END
@@ -92,3 +92,4 @@ autocmd VimEnter * autocmd WinEnter * let w:created=1
 
 " Example of how to use w:created in an autocmd to initialize a window-local option
 autocmd WinEnter *.js if !exists('w:created') | call JSCC_Colorize() | endif
+

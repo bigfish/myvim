@@ -190,4 +190,12 @@ nnoremap gs :call GoToSpec()<cr>
 nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
 inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
+let g:user_emmet_leader_key='<C-h>'
+
+"open file with associated app
+if has('macunix')
+nnoremap <C-o> :!open %<cr>
+else
+nnoremap <C-o> :!gnome-open %<cr>
+end
 
