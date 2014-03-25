@@ -31,8 +31,9 @@ inoremap <C-f> <RIGHT>
 inoremap <C-b> <LEFT>
 inoremap <C-p> <UP>
 inoremap <C-n> <DOWN>
-inoremap <C-a> <Esc>^i
-inoremap <C-e> <Esc>$a
+
+"inoremap <C-a> <Esc>^i
+"inoremap <C-e> <Esc>$a
 
 "shift up/down one line
 nnoremap U <c-e>
@@ -192,8 +193,7 @@ nnoremap gs :call GoToSpec()<cr>
 nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
 inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
-"(f)ill out html :)
-let g:user_emmet_leader_key='<C-f>'
+let g:user_emmet_expandabbr_key='<C-e>'
 
 "open file with associated app
 if has('macunix')
