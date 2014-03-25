@@ -92,4 +92,4 @@ autocmd VimEnter * autocmd WinEnter * let w:created=1
 
 " Example of how to use w:created in an autocmd to initialize a window-local option
 autocmd WinEnter *.js if !exists('w:created') | call JSCC_Colorize() | endif
-
+autocmd FileType less set sw=4

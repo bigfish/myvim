@@ -191,6 +191,7 @@ set clipboard=unnamed
 let g:Gitv_DoNotMapCtrlKey = 1
 
 let g:ctrlp_cmd = 'CtrlP'
+
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = '/tmp'
@@ -208,8 +209,6 @@ let g:jshint_goto_error = 1
 "gx to open file
 let g:netrw_keepdir=0
 let g:netrw_browsex_viewer= "gnome-open"
-
-let g:user_zen_leader_key = '<C-h>'
 
 "this prevents messages from blocking
 set cmdheight=2
@@ -237,9 +236,6 @@ set colorcolumn=81
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 set list
-"use R for Replace, not REPLACE mode, which I never use
-"
-nnoremap R :%s//g<LEFT><LEFT>
 "experimental : save on leave insert mode
 au InsertLeave *  execute ':w'
 "debug autocmds

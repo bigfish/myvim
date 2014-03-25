@@ -153,7 +153,10 @@ nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 
 "****************** COMMANDS ****************
 "make current file executable
-noremap <c-x> :!chmod +x %<CR>
+noremap <leader>x :!chmod +x %<CR>
+
+"bail
+noremap <c-x> :qa!<CR>
 
 "system copy
 vnoremap Y "+y
@@ -185,17 +188,19 @@ nnoremap -l :set list!<cr>
 "
 nnoremap gs :call GoToSpec()<cr>
 
-
 "TEMPLATE
 nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
 inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
-let g:user_emmet_leader_key='<C-h>'
+"(f)ill out html :)
+let g:user_emmet_leader_key='<C-f>'
 
 "open file with associated app
 if has('macunix')
-nnoremap <C-o> :!open %<cr>
+    nnoremap <localleader>o :!open %<cr>
 else
-nnoremap <C-o> :!gnome-open %<cr>
+    nnoremap <localleader>o :!gnome-open %<cr>
 end
 
+"use R for Replace, not REPLACE mode, which I never use
+nnoremap R :%s//g<LEFT><LEFT>

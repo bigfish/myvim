@@ -191,6 +191,9 @@ alias nf="noflo"
 #not using xmodmap on mac as it doesn't work
 #xmodmap ~/.Xmodmap
 export NODE_ENV=local
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux
-fi
+#if [[ ! $TERM =~ screen ]]; then
+    #exec tmux
+#fi
+#e = edit
+alias e=vim
+alias t=tmux
