@@ -195,6 +195,10 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = '/tmp'
+let g:ctrlp_open_new_file = 'v'
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$'
+      \}
 
 "let g:EasyMotion_leader_key = '<leader>m'
 let g:Powerline_symbols = 'fancy'

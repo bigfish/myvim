@@ -82,9 +82,9 @@ nnoremap ct ct
 nnoremap yt yt
 
 "=====[ Highlight matches when jumping to next ]=============
-" This rewires c-n and c-l to do the highlighing...
+" This rewires c-n and c-o to do the highlighing...
 nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
-nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
+nnoremap <silent> <c-o>  N:call HLNext(0.4)<cr>
 
 " just highlight the match in red...
 function! HLNext (blinktime)

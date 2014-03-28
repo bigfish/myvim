@@ -179,7 +179,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 set -o emacs
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+export PATH=$PATH:$HOME/testcases/bin
 export RUBYDB_LIB=$HOME/KomodoIDE/INSTALLDIR/lib/support/dbgp/rubylib
 export RUBYDB_OPTS="HOST=localhost PORT=9000"
 alias ruby_debug="ruby -I$RUBYDB_LIB -r $RUBYDB_LIB/rdbgp.rb"
