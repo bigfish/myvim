@@ -125,7 +125,8 @@ so $HOME/.vim/autocommands.vim
 "set where C-N & C-P search for completion, and additional completions (eg
 "keyword, thesaurus, tags)
 "set complete=.,w,b,u,t,i,],k
-set complete=.,w,b,u,t,i,k
+"set complete=.,w,b,u,t,i
+set complete=.,w,b,u,i
 set completeopt=menu,preview
 
 set nocst
@@ -224,11 +225,15 @@ let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_ST
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
 "let g:js_context_colors_enabled = 1
-"let g:js_context_colors_debug = 1
+let g:js_context_colors_debug = 0
 "let g:js_context_colors_comment_higroup = 'MyComment'
 let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
 "let g:js_context_colors_colorize_comments = 0
-"let g:js_context_colors_insertmode = 1
+let g:js_context_colors_insertmode = 0
+let g:js_context_colors_insertmode_keystrokes_threshold = 2
+let g:js_context_colors_show_error_message = 1
+"let g:js_context_colors_no_highlight_on_syntax_error = 0
+
 "quick command line access
 let g:mustache_abbreviations = 1
 
@@ -244,3 +249,9 @@ set list
 au InsertLeave *  execute ':w'
 "debug autocmds
 "set verbose=9
+"
+inoremap ' ''<left>
+inoremap " ""<left>
+inoremap { {}<left>
+inoremap ( ()<left>
+inoremap [ []<left>

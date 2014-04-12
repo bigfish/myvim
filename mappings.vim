@@ -166,7 +166,7 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-nnoremap <C-j> <C-]>
+nnoremap <C-m> <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename

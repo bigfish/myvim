@@ -41,9 +41,9 @@ augroup blanket
         "autocmd BufWritePost ~/shoppinglist/test/specs/server/*.js :exe getServerCoverage
 augroup END
 
-au BufNewFile,BufRead *.js :set expandtab sw=2 sts=2
+au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
-au BufNewFile,BufRead *.css :set smarttab sts=2 sw=2
+au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 
 " coffeescript -- move to after/ftplugin
 :au BufEnter *.coffee setlocal tabstop=2
@@ -77,6 +77,11 @@ augroup templates
     autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
     autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
+    autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
+    "cleverstack
+    autocmd BufNewFile /home/david/clevertech/**/backend/**/models/orm/*Model.js :0r $HOME/.vim/templates/cleverstack/ORMModel.js | :%s/MODEL_NAME/\=expand('%:t:r')/g
+    autocmd BufNewFile /home/david/clevertech/**/backend/**/controllers/*Controller.js :0r $HOME/.vim/templates/cleverstack/CleverController.js | :%s/BASENAME/\=substitute(expand('%:t:r'), 'Controller', '', '')/g
+    autocmd BufNewFile /home/david/clevertech/**/backend/**/services/*Service.js :0r $HOME/.vim/templates/cleverstack/CleverService.js | :%s/BASENAME/\=substitute(expand('%:t:r'), 'Service', '', '')/g
 
 
 ":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
@@ -93,3 +98,7 @@ autocmd VimEnter * autocmd WinEnter * let w:created=1
 " Example of how to use w:created in an autocmd to initialize a window-local option
 autocmd WinEnter *.js if !exists('w:created') | call JSCC_Colorize() | endif
 autocmd FileType less set sw=4
+
+au! FileType html setlocal complete=k~/.vim/dict/directives.txt,.,w,b,u,t,i,
+au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
+
