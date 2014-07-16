@@ -12,10 +12,50 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-call pathogen#infect()
+"call pathogen#infect()
 
 " Enable file type detection.
-"
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'mileszs/ack.vim.git'
+Plugin 'bigfish/angular-vim-snippets.git'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'mattn/gist-vim.git'
+Plugin 'bigfish/js-taglist.git'
+Plugin 'Valloric/ListToggle.git'
+Plugin 'tomasr/molokai.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'tyru/open-browser.vim.git'
+Plugin 'Lokaltog/powerline.git'
+Plugin 'bigfish/snipmate.vim.git'
+Plugin 'joonty/vdebug.git'
+Plugin 'bigfish/vim4js.git'
+Plugin 'tpope/vim-cucumber.git'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'bigfish/vim-js-beautify.git'
+Plugin 'bigfish/vim-js-context-coloring.git'
+Plugin 'bigfish/vim-jshint.git'
+Plugin 'groenewege/vim-less.git'
+Plugin 'mustache/vim-mustache-handlebars.git'
+Plugin 'bigfish/vim-ragtag.git'
+Plugin 'tpope/vim-repeat.git'
+Plugin 'mhinz/vim-startify.git'
+Plugin 'tpope/vim-surround.git'
+Plugin 'bigfish/vim-unimpaired.git'
+Plugin 'guns/xterm-color-table.vim.git'
+Plugin 'mattn/emmet-vim.git'
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
@@ -225,13 +265,13 @@ let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_ST
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
 "let g:js_context_colors_enabled = 1
-let g:js_context_colors_debug = 0
-"let g:js_context_colors_comment_higroup = 'MyComment'
-let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
+"let g:js_context_colors_debug = 1
+"let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
 "let g:js_context_colors_colorize_comments = 0
-let g:js_context_colors_insertmode = 0
-let g:js_context_colors_insertmode_keystrokes_threshold = 2
-let g:js_context_colors_show_error_message = 1
+let g:js_context_colors_highlight_function_names = 1
+"let g:js_context_colors_foldlevel = 2
+
+"let g:js_context_colors_show_error_message = 1
 "let g:js_context_colors_no_highlight_on_syntax_error = 0
 
 "quick command line access

@@ -66,6 +66,8 @@ $endif
 "\C-s": "ls\C-m"
 "\C-t": "ls -la\C-m"
 "\C-k": "exit\C-m"
+"\C-u": "cd ..\C-m"
+
 
 $endif
 
