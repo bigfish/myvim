@@ -23,6 +23,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'mileszs/ack.vim.git'
+Plugin 'bling/vim-airline'
 Plugin 'bigfish/angular-vim-snippets.git'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'mattn/gist-vim.git'
@@ -31,7 +32,6 @@ Plugin 'Valloric/ListToggle.git'
 Plugin 'tomasr/molokai.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'tyru/open-browser.vim.git'
-Plugin 'Lokaltog/powerline.git'
 Plugin 'bigfish/snipmate.vim.git'
 Plugin 'joonty/vdebug.git'
 Plugin 'bigfish/vim4js.git'
@@ -49,6 +49,7 @@ Plugin 'tpope/vim-surround.git'
 Plugin 'bigfish/vim-unimpaired.git'
 Plugin 'guns/xterm-color-table.vim.git'
 Plugin 'mattn/emmet-vim.git'
+Plugin 'marijnh/tern_for_vim'
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -266,7 +267,6 @@ let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Runnin
 
 "let g:js_context_colors_enabled = 1
 "let g:js_context_colors_debug = 1
-"let g:js_context_colors = [ 252, 10, 11, 172, 1, 161, 63 ]
 "let g:js_context_colors_colorize_comments = 0
 let g:js_context_colors_highlight_function_names = 1
 "let g:js_context_colors_foldlevel = 2
@@ -295,3 +295,18 @@ inoremap " ""<left>
 inoremap { {}<left>
 inoremap ( ()<left>
 inoremap [ []<left>
+
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" old vim-powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+let g:airline_theme='volcanic'
