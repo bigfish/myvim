@@ -246,7 +246,7 @@ let g:ctrlp_custom_ignore = {
 let g:Powerline_symbols = 'fancy'
 
 let g:jshint_onwrite = 1
-let g:jshint_goto_error = 1
+let g:jshint_goto_error = 0
 
 "let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer

@@ -36,8 +36,8 @@ inoremap <C-n> <DOWN>
 "inoremap <C-e> <Esc>$a
 
 "shift up/down one line
-nnoremap U <c-e>
-nnoremap K <c-y>
+nnoremap j <c-e>
+nnoremap k <c-y>
 
 "remap Home motion
 nnoremap <C-h> H
@@ -82,9 +82,9 @@ nnoremap ct ct
 nnoremap yt yt
 
 "=====[ Highlight matches when jumping to next ]=============
-" This rewires c-n and c-o to do the highlighing...
+" This rewires c-n and c-l to do the highlighing...
 nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
-nnoremap <silent> <c-o>  N:call HLNext(0.4)<cr>
+nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
 
 " just highlight the match in red...
 function! HLNext (blinktime)
@@ -166,7 +166,8 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-nnoremap <C-m> <C-]>
+"(g)o to tag
+nnoremap <C-g> <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -204,3 +205,7 @@ end
 
 "use R for Replace, not REPLACE mode, which I never use
 nnoremap R :%s//g<LEFT><LEFT>
+
+"location list - jump to next item
+nnoremap <c-j> :lne<cr>
+nnoremap <c-k> :lp<cr>
