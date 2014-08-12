@@ -36,8 +36,8 @@ inoremap <C-n> <DOWN>
 "inoremap <C-e> <Esc>$a
 
 "shift up/down one line
-nnoremap U <c-e>
-nnoremap K <c-y>
+nnoremap j <c-e>
+nnoremap k <c-y>
 
 "remap Home motion
 nnoremap <C-h> H
@@ -82,9 +82,9 @@ nnoremap ct ct
 nnoremap yt yt
 
 "=====[ Highlight matches when jumping to next ]=============
-" This rewires c-n and c-o to do the highlighing...
+" This rewires c-n and c-l to do the highlighing...
 nnoremap <silent> <c-n>   n:call HLNext(0.4)<cr>
-nnoremap <silent> <c-o>  N:call HLNext(0.4)<cr>
+nnoremap <silent> <c-l>  N:call HLNext(0.4)<cr>
 
 " just highlight the match in red...
 function! HLNext (blinktime)
@@ -166,7 +166,8 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-nnoremap <C-m> <C-]>
+"(g)o to tag
+nnoremap <C-g> <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -189,9 +190,9 @@ nnoremap -l :set list!<cr>
 "
 nnoremap gs :call GoToSpec()<cr>
 
-"TEMPLATE
-nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
-inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
+"TEMPLATE - Jump to placeholder
+nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>
+inoremap <c-j> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
 let g:user_emmet_expandabbr_key='<C-e>'
 
@@ -204,3 +205,7 @@ end
 
 "use R for Replace, not REPLACE mode, which I never use
 nnoremap R :%s//g<LEFT><LEFT>
+
+"location list - next previous
+nnoremap <localleader>t :lne<cr>
+nnoremap <localleader>n :lp<cr>

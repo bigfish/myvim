@@ -246,7 +246,7 @@ let g:ctrlp_custom_ignore = {
 let g:Powerline_symbols = 'fancy'
 
 let g:jshint_onwrite = 1
-let g:jshint_goto_error = 1
+let g:jshint_goto_error = 0
 
 "let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer
@@ -262,7 +262,9 @@ set cmdheight=2
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
+"let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
+let getClientCoverage = "call Blanket('grunt --no-color spec --spec=','COVERAGE_START', 'COVERAGE_END')"
+
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
 "let g:js_context_colors_enabled = 1
