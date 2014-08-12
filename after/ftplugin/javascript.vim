@@ -21,26 +21,43 @@ function! AddCoverageSigns(filePath, cvg)
     endfor	
 endfunction
 
+function! ParseFileName(filename)
 
-function! Blanket(cmd, startDelim, endDelim)
-    "echom 'Blanket(' . a:cmd . ',' . a:startDelim . ',' . a:endDelim . ')'
-    let blanketOutput = system(a:cmd)
+        let matches = matchlist(a:filename, '\v(.*)(_spec)?\.js')
+        if len(matches)
+            let basename = matches[1]
+        else
+            let basename = split(a:filename, '\.')[0]
+        endif
+
+        return basename
+endfunction
+
+function! Blanket()
+    "echom 'Blanket()'
+    let startDelim = 'COVERAGE_START'
+    let endDelim = 'COVERAGE_END'
+    let curfilename = expand('%:t')
+    let curfilebasename = ParseFileName(curfilename)
+    let cmd = 'grunt --no-color spec --spec=' . curfilebasename
+    let blanketOutput = system(cmd)
     let blanketOutput = substitute(blanketOutput, 'null', -1, "g")
     let outputLines = split(blanketOutput, '\n')
     let blanketJSON = ""
     let capture = 0
     for line in outputLines
-        if capture && match(line, a:endDelim) != -1
+        if capture && match(line, endDelim) != -1
             let capture = 0
         endif
         if capture
             let blanketJSON .= substitute(line, '\n', '', 'g')
         endif
-        if match(line, a:startDelim) != -1
+        if match(line, startDelim) != -1
             let capture = 1
         endif
     endfor
 
+    "echom blanketJSON
     let coverage = {}
     if (blanketJSON != '')
         let coverage = eval(blanketJSON)
@@ -77,16 +94,11 @@ function! Blanket(cmd, startDelim, endDelim)
     end
 
     for [jsfile, cvg] in items(cvgDict)
-        "use only the filename itself 
+        "remove the file:// prefix"
+        let filepath = strpart(jsfile, 6)
 
-        if (stridx(jsfile, '/') != -1)
-            let filename = split(jsfile, '/')[-1]
-        else
-            let filename = jsfile
-        endif
-
-        if bufloaded(filename)
-            call AddCoverageSigns(filename, cvg)
+        if bufloaded(filepath)
+            call AddCoverageSigns(filepath, cvg)
         end
     endfor
 

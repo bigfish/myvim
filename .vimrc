@@ -262,7 +262,9 @@ set cmdheight=2
 set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
+"let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
+let getClientCoverage = "call Blanket('grunt --no-color spec --spec=','COVERAGE_START', 'COVERAGE_END')"
+
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
 "let g:js_context_colors_enabled = 1

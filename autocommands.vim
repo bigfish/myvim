@@ -39,6 +39,8 @@ augroup blanket
         autocmd BufWritePost ~/javascript/flux/test/specs/client/*.js :exe getClientCoverage
         "autocmd BufWritePost ~/shoppinglist/src/server/*.js :exe getServerCoverage
         "autocmd BufWritePost ~/shoppinglist/test/specs/server/*.js :exe getServerCoverage
+        autocmd BufWritePost ~/git/vim-blanket/js/*.js :call Blanket()
+        autocmd BufWritePost ~/git/vim-blanket/test/spec/*.js :call Blanket()
 augroup END
 
 au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4

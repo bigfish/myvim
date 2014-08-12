@@ -190,9 +190,9 @@ nnoremap -l :set list!<cr>
 "
 nnoremap gs :call GoToSpec()<cr>
 
-"TEMPLATE
-nnoremap <c-y> /<+.\{-1,}+><cr>c/+>/e<cr>
-inoremap <c-y> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
+"TEMPLATE - Jump to placeholder
+nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>
+inoremap <c-j> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
 let g:user_emmet_expandabbr_key='<C-e>'
 
@@ -206,6 +206,6 @@ end
 "use R for Replace, not REPLACE mode, which I never use
 nnoremap R :%s//g<LEFT><LEFT>
 
-"location list - jump to next item
-nnoremap <c-j> :lne<cr>
-nnoremap <c-k> :lp<cr>
+"location list - next previous
+nnoremap <localleader>t :lne<cr>
+nnoremap <localleader>n :lp<cr>

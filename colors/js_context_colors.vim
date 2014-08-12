@@ -21,7 +21,7 @@ hi JSCC_Level_6 ctermfg=63
 hi Comment ctermfg=243
 hi Todo ctermfg=black ctermbg=220
 
-if !g:js_context_colors_colorize_comments
+if exists('g:js_context_colors_colorize_comments') && !g:js_context_colors_colorize_comments
     hi link javaScriptComment              Comment
     hi link javaScriptLineComment          Comment
     hi link javaScriptDocComment           Comment
