@@ -95,8 +95,12 @@ function! Blanket()
 
     for [jsfile, cvg] in items(cvgDict)
         "remove the file:// prefix"
-        let filepath = strpart(jsfile, 6)
-
+        if stridx(jsfile, 'file://') == 0
+            let filepath = strpart(jsfile, 6)
+        else
+            let filepath = jsfile
+        endif
+        
         if bufloaded(filepath)
             call AddCoverageSigns(filepath, cvg)
         end
