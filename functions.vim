@@ -120,3 +120,39 @@ function! GoToSpec()
     exe 'vsplit' . specpath
 
 endfunction
+
+"simpler version of above -- no hierarchy
+function! GoToSpec2()
+
+    let srcdir = "src"
+    let specdir = "ui_test/spec"
+
+    "get current file name and path
+    let curpath = expand("%:p")
+    let basepath_arr = split(curpath, '/')
+    "remove the filename from the path array
+    call remove(basepath_arr, -1)
+    "get the root of the filename (no extension)
+    let curfile = expand("%:t:r")
+    "derive the name of the spec
+    let specname = curfile . '_' . 'spec.js'
+
+    "split the path on 'src' dir
+    let relpath_arr = []
+    let specpath = ""
+    while (len(basepath_arr) > 0)
+        "remove the last dir from the basepath and prepend into relpath
+        let dir = remove(basepath_arr, -1)
+        "if we reach the src dir, do not add to relpath, but construct the
+        "specpath
+        if dir == srcdir
+            let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . specname
+            break
+        else
+            call insert(relpath_arr, dir)
+        endif
+    endwhile
+
+    exe 'vsplit' . specpath
+
+endfunction

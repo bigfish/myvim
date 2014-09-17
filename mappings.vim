@@ -36,8 +36,10 @@ inoremap <C-n> <DOWN>
 "inoremap <C-e> <Esc>$a
 
 "shift up/down one line
-nnoremap j <c-e>
-nnoremap k <c-y>
+"also keep cursor in same place
+"relative to screen
+nnoremap j <c-e>j
+nnoremap k <c-y>k
 
 "remap Home motion
 nnoremap <C-h> H
@@ -167,7 +169,7 @@ nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
 "(g)o to tag
-nnoremap <C-g> <C-]>
+nnoremap gt <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -188,7 +190,7 @@ nnoremap -l :set list!<cr>
 
 "Go To Spec (mocha)
 "
-nnoremap gs :call GoToSpec()<cr>
+nnoremap gs :call GoToSpec2()<cr>
 
 "TEMPLATE - Jump to placeholder
 nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>

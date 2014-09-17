@@ -80,7 +80,8 @@ au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 augroup templates
     autocmd BufNewFile *.html :0r $HOME/.vim/templates/html5.html
     autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
-    autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
+    "autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
+    autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
     "cleverstack
@@ -108,3 +109,5 @@ autocmd FileType less set sw=4
 au! FileType html setlocal complete=k~/.vim/dict/directives.txt,.,w,b,u,t,i,
 au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
 
+" use dos format for work stuff
+au! BufNewFile /home/david/work/**/*.* :set ff=dos
