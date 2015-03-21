@@ -47,6 +47,7 @@ augroup blanket
 augroup END
 
 au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 

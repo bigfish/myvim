@@ -24,7 +24,7 @@ call vundle#begin()
 
 Plugin 'mileszs/ack.vim.git'
 Plugin 'bling/vim-airline'
-Plugin 'bigfish/angular-vim-snippets.git'
+"Plugin 'bigfish/angular-vim-snippets.git'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'mattn/gist-vim.git'
 Plugin 'bigfish/js-taglist.git'
@@ -34,7 +34,7 @@ Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'tyru/open-browser.vim.git'
 Plugin 'bigfish/snipmate.vim.git'
 Plugin 'joonty/vdebug.git'
-Plugin 'bigfish/vim4js.git'
+"Plugin 'bigfish/vim4js.git'
 Plugin 'tpope/vim-cucumber.git'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'bigfish/vim-js-beautify.git'
@@ -49,7 +49,13 @@ Plugin 'tpope/vim-surround.git'
 Plugin 'bigfish/vim-unimpaired.git'
 Plugin 'guns/xterm-color-table.vim.git'
 Plugin 'mattn/emmet-vim.git'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'STRML/JSXHint'
+Plugin 'bigfish/vim-react.git'
+Plugin 'bigfish/vim-react-snippets'
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -267,7 +273,7 @@ let getClientCoverage = "call Blanket('grunt --no-color spec --spec=','COVERAGE_
 
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
-"let g:js_context_colors_enabled = 1
+let g:js_context_colors_enabled = 1
 "let g:js_context_colors_debug = 1
 "let g:js_context_colors_colorize_comments = 0
 let g:js_context_colors_highlight_function_names = 1
@@ -312,4 +318,7 @@ let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.linenr = '⭡'
 
 let g:airline_theme='night'
+
+let g:javascript_enable_domhtmlcss = 1       
+let g:jsx_ext_required = 0
 
