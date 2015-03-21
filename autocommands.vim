@@ -84,10 +84,6 @@ augroup templates
     autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
-    "cleverstack
-    autocmd BufNewFile /home/david/clevertech/**/backend/**/models/orm/*Model.js :0r $HOME/.vim/templates/cleverstack/ORMModel.js | :%s/MODEL_NAME/\=expand('%:t:r')/g
-    autocmd BufNewFile /home/david/clevertech/**/backend/**/controllers/*Controller.js :0r $HOME/.vim/templates/cleverstack/CleverController.js | :%s/BASENAME/\=substitute(expand('%:t:r'), 'Controller', '', '')/g
-    autocmd BufNewFile /home/david/clevertech/**/backend/**/services/*Service.js :0r $HOME/.vim/templates/cleverstack/CleverService.js | :%s/BASENAME/\=substitute(expand('%:t:r'), 'Service', '', '')/g
 
 
 ":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
