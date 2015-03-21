@@ -35,6 +35,10 @@ endfunction
 
 function! Blanket()
     "echom 'Blanket()'
+    if g:disable_blanket
+        return
+    endif
+
     let startDelim = 'COVERAGE_START'
     let endDelim = 'COVERAGE_END'
     let curfilename = expand('%:t')

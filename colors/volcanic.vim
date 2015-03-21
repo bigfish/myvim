@@ -208,8 +208,8 @@ if &t_Co > 255
 
    hi VertSplit       ctermfg=207 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=238
-   "hi Visual                      ctermbg=52
-   hi Visual                      ctermbg=4
+   "hi Visual                      ctermbg=4
+   hi Visual           ctermfg=195           ctermbg=125
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 

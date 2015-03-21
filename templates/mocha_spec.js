@@ -1,14 +1,29 @@
-describe('<+MODULE+>', function () {
-  'use strict';
+define([], function () {
+    describe('MODULE', function () {
 
-  var mod;
+        beforeEach(function (done) {
+            this.mockDeps('MODULE', done);
 
-  beforeEach(function (done) {
-    //use requirejs to prevent conflict with node require
-    requirejs(['<+MOD+>'], function (_mod) {
-      mod = _mod;
-      done();
+            //require new module 
+            require(['custom_controls/MODULE']); 
+
+            //clear out scaffold area
+            $('#scaffold').html('');
+        });
+
+        afterEach(function () {
+
+            this.unMockDeps();
+
+            this.MODULE = undefined;
+
+            require.undef('custom_controls/MODULE');
+             
+        });
+
+        it('should export the Control', function () {
+            expect(this.MODULE).to.be.a('function');
+        });
+
     });
-  });
-
 });
