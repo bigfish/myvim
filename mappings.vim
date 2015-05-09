@@ -183,7 +183,7 @@ nnoremap <localleader>s :%s/\s\+$//g<cr>
 "toggle options
 nnoremap -h :nohl<cr>
 nnoremap -n :set nu!<cr>
-nnoremap -r :                                                        ;set rnu!<cr>
+nnoremap -r :set rnu!<cr>
 nnoremap -w :set wrap!<cr>
 nnoremap -l :set list!<cr>
 " Other mappings are provided by Unimpaired.vim --use ,. instead of []
