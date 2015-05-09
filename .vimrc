@@ -20,6 +20,8 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
+set rtp+=~/.vim/bundle/vim-msc
+
 call vundle#begin()
 
 Plugin 'mileszs/ack.vim.git'
@@ -49,19 +51,22 @@ Plugin 'tpope/vim-surround.git'
 Plugin 'bigfish/vim-unimpaired.git'
 Plugin 'guns/xterm-color-table.vim.git'
 Plugin 'mattn/emmet-vim.git'
+"Plugin 'marijnh/tern_for_vim'
+Plugin 'guns/vim-clojure-static'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'STRML/JSXHint'
 Plugin 'bigfish/vim-react.git'
 Plugin 'bigfish/vim-react-snippets'
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
+"Plugin 'tpope/vim-fireplace'
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+
 
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
@@ -79,6 +84,8 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 colorscheme volcanic
+
+
 
 " ************************ OPTIONS ********************************
 
@@ -287,8 +294,8 @@ let g:js_context_colors_highlight_function_names = 1
 let g:mustache_abbreviations = 1
 
 "====[ Make text over 80 chars long stand out ]====================
-highlight ColorColumn ctermbg=237
-set colorcolumn=81
+"highlight ColorColumn ctermbg=237
+"set colorcolumn=81
 "call matchadd('ColorColumn', '\%>81v', 100)
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
