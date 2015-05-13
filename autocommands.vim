@@ -82,7 +82,7 @@ augroup templates
     autocmd BufNewFile *.html :0r $HOME/.vim/templates/html5.html
     autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
     "autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
-    autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
+    "autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
 
