@@ -78,7 +78,7 @@ colorscheme volcanic
 set backspace=indent,eol,start
 
 "don't clutter up workspace with backup & swap file
-set backupdir=C:/tmp
+set backupdir=$HOME/tmp
 set expandtab
 set history=100
 set incsearch    " do incremental searching
@@ -146,7 +146,7 @@ let maplocalleader = "."
 :set switchbuf=useopen
 
 so $HOME/vimfiles/functions.vim
-so $HOME/vimfiles/mappings.vim
+so $HOME/vimfiles/_mappings.vim
 so $HOME/vimfiles/autocommands.vim
 
 
