@@ -44,6 +44,9 @@ Plugin 'mhinz/vim-startify.git'
 Plugin 'tpope/vim-surround.git'
 Plugin 'bigfish/vim-unimpaired.git'
 Plugin 'mattn/emmet-vim.git'
+Plugin 'mattn/webapi-vim'
+Plugin 'shougo/vimproc.vim'
+Plugin 'cd01/poshcomplete-vim'
 
 
 " let Vundle manage Vundle, required
@@ -75,7 +78,7 @@ colorscheme volcanic
 set backspace=indent,eol,start
 
 "don't clutter up workspace with backup & swap file
-set backupdir="C:\tmp"
+set backupdir=C:/tmp
 set expandtab
 set history=100
 set incsearch    " do incremental searching
@@ -277,7 +280,7 @@ let g:mustache_abbreviations = 1
 
 "====[ Make text over 80 chars long stand out ]====================
 highlight ColorColumn ctermbg=237
-set colorcolumn=81
+"set colorcolumn=81
 "call matchadd('ColorColumn', '\%>81v', 100)
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
