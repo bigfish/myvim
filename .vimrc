@@ -40,7 +40,10 @@ Plugin 'bigfish/snipmate.vim.git'
 "Plugin 'tpope/vim-cucumber.git'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'bigfish/vim-js-beautify.git'
+
+Plugin 'pangloss/vim-javascript'
 Plugin 'bigfish/vim-js-context-coloring.git'
+
 Plugin 'bigfish/vim-jshint.git'
 "Plugin 'groenewege/vim-less.git'
 "Plugin 'mustache/vim-mustache-handlebars.git'
@@ -53,12 +56,12 @@ Plugin 'guns/xterm-color-table.vim.git'
 Plugin 'mattn/emmet-vim.git'
 "Plugin 'marijnh/tern_for_vim'
 Plugin 'guns/vim-clojure-static'
-Plugin 'pangloss/vim-javascript'
 "Plugin 'mxw/vim-jsx'
 "Plugin 'STRML/JSXHint'
 Plugin 'bigfish/vim-react.git'
 Plugin 'bigfish/vim-react-snippets'
 "Plugin 'tpope/vim-fireplace'
+Plugin 'bigfish/vim-fireplace'
 Plugin 'bigfish/vim-msc.git'
 
 " let Vundle manage Vundle, required
@@ -66,8 +69,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-
-
 
 " Use the default filetype settings, so that mail gets 'tw' set to 72,'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
@@ -301,7 +302,10 @@ exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 set nolist
 
 "experimental : save on leave insert mode
-au InsertLeave *  execute ':w'
+"au InsertLeave *  execute ':w'
+"this could be made into a toggle-able function with -s
+"this causes issue in command line window
+
 "debug autocmds
 "set verbose=9
 "
@@ -326,9 +330,15 @@ let g:airline_symbols.linenr = '⭡'
 
 let g:airline_theme='night'
 
+let g:js_context_colors_enabled = 1
 let g:javascript_enable_domhtmlcss = 1       
 let g:jsx_ext_required = 0
 let g:js_context_colors_debug = 0
 let g:js_context_colors_usemaps = 0
 
 let g:disable_blanket = 1
+let g:js_context_colors_es5 = 0
+let g:js_context_colors_jsx = 1
+let g:js_context_colors_block_scope = 0
+let g:js_context_colors_block_scope_with_let = 1
+let g:js_context_colors_highlight_function_names = 1

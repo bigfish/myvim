@@ -36,6 +36,18 @@ hi JSCC_Level_5 ctermfg=160
 hi JSCC_Level_6 ctermfg=166
 hi JSCC_Level_7 ctermfg=136
 
+hi JSCC_UndeclaredGlobal ctermfg=172
+
+"hi JSCC_Level_0 ctermfg=3
+"hi JSCC_Level_1 ctermfg=2
+"hi JSCC_Level_2 ctermfg=6
+"hi JSCC_Level_3 ctermfg=4
+"hi JSCC_Level_4 ctermfg=39
+"hi JSCC_Level_5 ctermfg=69
+"hi JSCC_Level_6 ctermfg=212
+"hi JSCC_Level_7 ctermfg=9
+
+
 hi Comment ctermfg=243
 hi Todo ctermfg=black ctermbg=220
 

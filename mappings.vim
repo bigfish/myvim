@@ -158,8 +158,8 @@ nnoremap <leader>rs :call ReloadAllSnippets()<CR>
 "make current file executable
 noremap <leader>x :!chmod +x %<CR>
 
-"bail
-noremap <c-x> :qa!<CR>
+"bail --saving mapping for eXecute
+"noremap <c-x> :qa!<CR>
 
 "system copy
 vnoremap Y "+y
@@ -207,8 +207,10 @@ else
 end
 
 "use R for Replace, not REPLACE mode, which I never use
-nnoremap R :%s//g<LEFT><LEFT>
+    nnoremap R :%s//g<LEFT><LEFT>
 
 "location list - next previous
 "nnoremap <localleader>t :lne<cr>
 nnoremap <localleader>n :lp<cr>
+
+"set cedit=<C-g>
