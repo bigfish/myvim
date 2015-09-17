@@ -103,11 +103,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 ############################################# PERSONAL #########################################
-source /etc/profile.d/autojump.sh
+. /usr/share/autojump/autojump.sh
 ################## ALIASES ###########################
 alias ga='git add'
 alias gp='git push'
-alias gps='gitpush'
+alias gps='git push'
 alias gl='git log'
 alias gs='git status'
 alias gd='git diff'
@@ -125,7 +125,7 @@ alias grs='git reset --hard HEAD'
 alias ks='ls -lhFGv'
 alias cls=clear
 alias ff="firefox &>/dev/null &"
-export NODE_PATH=/usr/local/lib/node_modules
+#export NODE_PATH=/usr/local/lib/node_modules
 export EDITOR=vim
 export PAGER=less
 #enable 256 colors in vim
@@ -136,14 +136,15 @@ stty -ixon
 stty stop ''
 stty start ''
 #RVM (ruby version manager)
-source ~/.rvm/scripts/rvm
+#source ~/.rvm/scripts/rvm
 #tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 alias vi=vim
+alias vs="vim --servername VIM"
 alias chat="weechat-curses irc://exinda-mvnrepo.wat.exinda.com"
 alias apti="sudo apt-get install"
-alias repache='sudo apache2ctl restart'
+alias repache='sudo apache2ctl graceful'
 alias rebash=". ~/.bashrc"
 alias psa="ps aux | grep"
 alias dev="bundle exec guard"
@@ -152,19 +153,23 @@ alias my="mysql -uroot -pexinda -hlocalhost"
 alias phpi="sudo vim /etc/php5/apache2/php.ini"
 alias alog="tail -f /var/log/apache2/error.log"
 alias hosts="sudo vim /etc/hosts"
+alias remap="xmodmap ~/.Xmodmap"
 #LESS COLORS
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 #CONFIGURE PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/google_appengine:$PATH
 export LESS=' -R '
-export MAVEN_HOME=/usr/share/maven
-export PATH=$MAVEN_HOME/bin:$PATH
-export SDP_HOME=$HOME/exinda/sdp
-export GLASSFISH_HOME=$HOME/glassfish3
-export LIQUIBASE_HOME=$HOME/liquibase
 export CUCUMBER_BROWSER=chrome
-export CLOJURESCRIPT_HOME=$HOME/clojure/clojurescript
+export CLOJURESCRIPT_HOME=$HOME/git/clojurescript
+export PATH=$CLOJURESCRIPT_HOME/bin:$PATH
+export JSCC_HOME=$HOME/.vim/bundle/vim-js-context-coloring
+#alias emacs="emacs -nw"
+alias scheme="mit-scheme"
+alias edwin="mit-scheme --edit --heap 100000"
+export LTHOME=$HOME/LightTable
+export PATH=$PATH:$LTHOME
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -184,16 +189,16 @@ export PATH=$PHANTOMJS/bin:$PATH
 
 set -o emacs
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-export PATH=$PATH:/home/david/clojure/clojure-1.5.1
-export RUBYDB_LIB=$HOME/KomodoIDE/INSTALLDIR/lib/support/dbgp/rubylib
-export RUBYDB_OPTS="HOST=localhost PORT=9000"
-alias ruby_debug="ruby -I$RUBYDB_LIB -r $RUBYDB_LIB/rdbgp.rb"
+#export PATH=$PATH:/home/david/clojure/clojure-1.5.1
+#export RUBYDB_LIB=$HOME/KomodoIDE/INSTALLDIR/lib/support/dbgp/rubylib
+#export RUBYDB_OPTS="HOST=localhost PORT=9000"
+#alias ruby_debug="ruby -I$RUBYDB_LIB -r $RUBYDB_LIB/rdbgp.rb"
 alias dv="setxkbmap dvorak"
 alias us="setxkbmap us"
 alias nf="noflo"
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-xmodmap ~/.Xmodmap
-export NODE_ENV=local
+#export PATH="/usr/local/heroku/bin:$PATH"
+#xmodmap ~/.Xmodmap
+#export NODE_ENV=local
