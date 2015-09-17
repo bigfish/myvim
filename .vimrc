@@ -163,7 +163,7 @@ let maplocalleader = "."
 so $HOME/.vim/functions.vim
 so $HOME/.vim/mappings.vim
 so $HOME/.vim/autocommands.vim
-
+so $HOME/.vim/macros.vim
 
 "}}}
 "************************* autocomplete setting **************************"{{{
@@ -301,6 +301,7 @@ let g:mustache_abbreviations = 1
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 set nolist
+
 "experimental : save on leave insert mode
 au InsertLeave *  execute ':w'
 "debug autocmds
@@ -329,5 +330,6 @@ let g:airline_theme='night'
 
 let g:javascript_enable_domhtmlcss = 1       
 let g:jsx_ext_required = 0
+let g:js_context_colors_debug = 0
 
 let g:disable_blanket = 1

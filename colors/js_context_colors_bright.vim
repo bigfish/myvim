@@ -27,14 +27,16 @@
 "hi JSCC_Level_6 ctermfg=37
 "hi JSCC_Level_7 ctermfg=64
 
-hi JSCC_Level_0 ctermfg=64
-hi JSCC_Level_1 ctermfg=37
-hi JSCC_Level_2 ctermfg=33
-hi JSCC_Level_3 ctermfg=61
-hi JSCC_Level_4 ctermfg=125
-hi JSCC_Level_5 ctermfg=160
-hi JSCC_Level_6 ctermfg=166
-hi JSCC_Level_7 ctermfg=136
+
+hi JSCC_Level_0 ctermfg=white
+hi JSCC_Level_1 ctermfg=green
+hi JSCC_Level_2 ctermfg=yellow
+hi JSCC_Level_3 ctermfg=214
+hi JSCC_Level_4 ctermfg=39
+hi JSCC_Level_5 ctermfg=69
+hi JSCC_Level_6 ctermfg=212
+hi JSCC_Level_7 ctermfg=9
+
 
 hi Comment ctermfg=243
 hi Todo ctermfg=black ctermbg=220

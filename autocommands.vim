@@ -108,3 +108,12 @@ au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
 
 " use dos format for work stuff
 au! BufNewFile /home/david/work/**/*.* :set ff=dos
+
+" mocha specs
+" [m]ocha [o]nly
+au BufNewFile,BufRead *_spec.js nnoremap <localleader>o :call Only()<CR>
+
+" [n]ot [o]nly
+au BufNewFile,BufRead *_spec.js nnoremap <localleader>n :call NotOnly()<CR>
+
+

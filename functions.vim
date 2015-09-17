@@ -156,3 +156,13 @@ function! GoToSpec2()
     exe 'vsplit' . specpath
 
 endfunction
+
+function Only()
+   :silent! s/describe(/describe.only(/
+   :silent! s/it(/it.only(/
+endfunction
+
+"remove .only() from a spec
+function NotOnly()
+   :silent! s/\.only//g
+endfunction

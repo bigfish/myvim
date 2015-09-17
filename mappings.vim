@@ -186,6 +186,7 @@ nnoremap -n :set nu!<cr>
 nnoremap -r :set rnu!<cr>
 nnoremap -w :set wrap!<cr>
 nnoremap -l :set list!<cr>
+nnoremap -c :set ignorecase!<cr>
 " Other mappings are provided by Unimpaired.vim --use ,. instead of []
 
 "Go To Spec (mocha)
