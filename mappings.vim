@@ -168,8 +168,8 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-"(g)o to tag
-nnoremap gt <C-]>
+"go to tag
+nnoremap <localleader>t <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -210,5 +210,5 @@ end
 nnoremap R :%s//g<LEFT><LEFT>
 
 "location list - next previous
-nnoremap <localleader>t :lne<cr>
+"nnoremap <localleader>t :lne<cr>
 nnoremap <localleader>n :lp<cr>

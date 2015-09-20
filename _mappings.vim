@@ -168,8 +168,8 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-"(g)o to tag
-nnoremap gt <C-]>
+"easy jump to tag
+nnoremap <localleader>t <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -208,6 +208,7 @@ end
 "use R for Replace, not REPLACE mode, which I never use
 nnoremap R :%s//g<LEFT><LEFT>
 
+
 "location list - next previous
-nnoremap <localleader>t :lne<cr>
-nnoremap <localleader>n :lp<cr>
+"nnoremap <localleader>t :lne<cr>
+nnoremap <localleader>n :lne<cr>
