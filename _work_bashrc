@@ -179,6 +179,8 @@ export MSC_TEST=$MSC_HOME/ui_test
 export MSC_SPEC=$MSC_TEST/spec
 export MSC_MOCK=$MSC_TEST/mock
 
+export NEOVIM_JS_DEBUG=$HOME/.nvjslog
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }

@@ -120,7 +120,7 @@ nnoremap <C-k> :q!<CR>
 " ********************* PLUGIN MAPPINGS ***************
 "
 "Netrw Directory (T)ree Listing
-nnoremap <C-t> :Vex<CR>
+nnoremap <C-t> :Lexplore<CR>
 
 "Buf (E)xplorer
 nnoremap <C-e> :BufExplorer<CR>
@@ -168,8 +168,8 @@ vnoremap <leader>p "+p
 nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
-"go to tag
-nnoremap <localleader>t <C-]>
+"(g)o to tag
+nnoremap gt <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename

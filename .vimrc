@@ -31,7 +31,6 @@ Plugin 'kien/ctrlp.vim.git'
 "Plugin 'mattn/gist-vim.git'
 "Plugin 'bigfish/js-taglist.git'
 "Plugin 'Valloric/ListToggle.git'
-"Plugin 'tomasr/molokai.git'
 Plugin 'scrooloose/nerdcommenter.git'
 "Plugin 'tyru/open-browser.vim.git'
 Plugin 'bigfish/snipmate.vim.git'
@@ -56,13 +55,13 @@ Plugin 'guns/xterm-color-table.vim.git'
 Plugin 'mattn/emmet-vim.git'
 "Plugin 'marijnh/tern_for_vim'
 "Plugin 'guns/vim-clojure-static'
-"Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 "Plugin 'STRML/JSXHint'
 "Plugin 'bigfish/vim-react.git'
 "Plugin 'bigfish/vim-react-snippets'
 "Plugin 'bigfish/vim-fireplace'
 Plugin 'bigfish/vim-msc.git'
+Plugin 'cakebaker/scss-syntax.vim.git'
 
 if has('nvim')
 Plugin 'neovim/node-host'
@@ -285,16 +284,6 @@ let getClientCoverage = "call Blanket('grunt --no-color spec --spec=','COVERAGE_
 
 let getServerCoverage = "call Blanket('grunt --no-color server-json-cov','Running \"mochaTest:json\" (mochaTest) task','Done, without errors.')"
 
-let g:js_context_colors_enabled = 1
-"let g:js_context_colors_debug = 1
-"let g:js_context_colors_colorize_comments = 0
-let g:js_context_colors_highlight_function_names = 1
-"let g:js_context_colors_foldlevel = 2
-let g:js_context_colors_usemaps = 0
-
-"let g:js_context_colors_show_error_message = 1
-"let g:js_context_colors_no_highlight_on_syntax_error = 0
-
 "quick command line access
 let g:mustache_abbreviations = 1
 
@@ -348,14 +337,11 @@ set noshelltemp
 let g:js_context_colors_enabled = 1
 let g:javascript_enable_domhtmlcss = 1       
 let g:jsx_ext_required = 0
-let g:js_context_colors_debug = 0
-let g:js_context_colors_usemaps = 0
 
-let g:disable_blanket = 1
-let g:js_context_colors_es5 = 0
-"let g:js_context_colors_debug = 0
+let g:js_context_colors_debug = 0
+"let g:js_context_colors_show_error_message = 1
 "let g:js_context_colors_es5 = 0
-let g:js_context_colors_jsx = 1
+"let g:js_context_colors_jsx = 1
 "let g:js_context_colors_block_scope = 0
-"let g:js_context_colors_block_scope_with_let = 1
-"let g:js_context_colors_highlight_function_names = 1
+let g:js_context_colors_block_scope_with_let = 1
+let g:js_context_colors_highlight_function_names = 1

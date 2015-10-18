@@ -120,13 +120,14 @@ nnoremap <C-k> :q!<CR>
 " ********************* PLUGIN MAPPINGS ***************
 "
 "Netrw Directory (T)ree Listing
-nnoremap <C-t> :Vex<CR>
+nnoremap <C-t> :Lexplore<CR>
 
 "Buf (E)xplorer
 nnoremap <C-e> :BufExplorer<CR>
 
 "TagList toggle
-nnoremap -t :TlistToggle<CR>
+"i dont really use this, except by accident
+"nnoremap -t :TlistToggle<CR>
 
 " MARKDOWN
 
