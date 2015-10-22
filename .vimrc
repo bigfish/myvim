@@ -32,6 +32,7 @@ Plugin 'kien/ctrlp.vim.git'
 "Plugin 'bigfish/js-taglist.git'
 "Plugin 'Valloric/ListToggle.git'
 Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdtree.git'
 "Plugin 'tyru/open-browser.vim.git'
 Plugin 'bigfish/snipmate.vim.git'
 "Plugin 'joonty/vdebug.git'
@@ -222,7 +223,7 @@ set foldcolumn=0
 "*************************************** TAGS ***************"
 "lookup tags in current and all parent folders
 :set tags=tags;/
-"set autochdir
+set autochdir
 
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
