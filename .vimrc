@@ -32,6 +32,7 @@ Plugin 'kien/ctrlp.vim.git'
 "Plugin 'bigfish/js-taglist.git'
 "Plugin 'Valloric/ListToggle.git'
 Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdtree.git'
 "Plugin 'tyru/open-browser.vim.git'
 Plugin 'bigfish/snipmate.vim.git'
 "Plugin 'joonty/vdebug.git'
@@ -210,6 +211,9 @@ let g:bufExplorerDefaultHelp=0
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_detect_filetype = 1
 
+"use system clipboard
+"set clipboard+=unnamedplus
+
 let g:startify_bookmarks = [ '~/.vimrc', '~/.mappings.vim', '~/.bashrc.vim' ]
 
 "hide foldcolumn
@@ -219,7 +223,7 @@ set foldcolumn=0
 "*************************************** TAGS ***************"
 "lookup tags in current and all parent folders
 :set tags=tags;/
-"set autochdir
+set autochdir
 
 "shell scripting
 iabbrev shb #!/bin/bash<cr>
@@ -338,10 +342,12 @@ let g:js_context_colors_enabled = 1
 let g:javascript_enable_domhtmlcss = 1       
 let g:jsx_ext_required = 0
 
-let g:js_context_colors_debug = 0
-"let g:js_context_colors_show_error_message = 1
-"let g:js_context_colors_es5 = 0
-"let g:js_context_colors_jsx = 1
-"let g:js_context_colors_block_scope = 0
-let g:js_context_colors_block_scope_with_let = 1
+let g:js_context_colors_debug = 1
+let g:js_context_colors_usemaps = 0
+"let g:js_context_colors_enabled = 1
+"let g:js_context_colors_colorize_comments = 0
 let g:js_context_colors_highlight_function_names = 1
+"let g:js_context_colors_foldlevel = 2
+"let g:js_context_colors_show_error_message = 1
+"let g:js_context_colors_no_highlight_on_syntax_error = 0
+let g:js_context_colors_block_scope_with_let = 1

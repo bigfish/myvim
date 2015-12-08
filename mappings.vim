@@ -120,7 +120,7 @@ nnoremap <C-k> :q!<CR>
 " ********************* PLUGIN MAPPINGS ***************
 "
 "Netrw Directory (T)ree Listing
-nnoremap <C-t> :Lexplore<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
 
 "Buf (E)xplorer
 nnoremap <C-e> :BufExplorer<CR>
@@ -214,3 +214,11 @@ end
 nnoremap <localleader>n :lp<cr>
 
 "set cedit=<C-g>
+function! NERDTreeMaps()
+    nnoremap <buffer> t <C-J>
+    nmap <buffer> n <C-K>
+endfunction
+
+au FileType nerdtree :call NERDTreeMaps()
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
