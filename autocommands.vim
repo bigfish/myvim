@@ -116,4 +116,8 @@ au BufNewFile,BufRead *_spec.js nnoremap <localleader>o :call Only()<CR>
 " [n]ot [o]nly
 au BufNewFile,BufRead *_spec.js nnoremap <localleader>n :call NotOnly()<CR>
 
-
+" auto-close quickfix window
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END

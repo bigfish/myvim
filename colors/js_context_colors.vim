@@ -27,7 +27,7 @@
 "hi JSCC_Level_6 ctermfg=37
 "hi JSCC_Level_7 ctermfg=64
 
-hi JSCC_Level_0 ctermfg=64
+hi JSCC_Level_0 ctermfg=76
 hi JSCC_Level_1 ctermfg=37
 hi JSCC_Level_2 ctermfg=33
 hi JSCC_Level_3 ctermfg=61

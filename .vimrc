@@ -21,6 +21,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 set rtp+=~/.vim/bundle/vim-msc
+set rtp+=~/.vim/bundle/neovim-eslint
 
 call vundle#begin()
 
@@ -197,10 +198,7 @@ imap <C-u> <C-x><C-u>
 "file completion: mnemonic: (L)ookup file... C-f is taken in insert by movement mapping
 imap <C-l> <C-x><C-f>
 
-
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
-highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
-highlight Search guibg=cyan cterm=NONE ctermbg=cyan ctermfg=black
 
 "Plugin settings
 let Tlist_Use_Right_Window=1
@@ -339,10 +337,11 @@ let g:airline_theme='night'
 
 set noshelltemp
 let g:js_context_colors_enabled = 1
+let g:js_context_colors_jsx = 1
 let g:javascript_enable_domhtmlcss = 1       
 let g:jsx_ext_required = 0
 
-let g:js_context_colors_debug = 1
+let g:js_context_colors_debug = 0
 let g:js_context_colors_usemaps = 0
 "let g:js_context_colors_enabled = 1
 "let g:js_context_colors_colorize_comments = 0
@@ -351,3 +350,7 @@ let g:js_context_colors_highlight_function_names = 1
 "let g:js_context_colors_show_error_message = 1
 "let g:js_context_colors_no_highlight_on_syntax_error = 0
 let g:js_context_colors_block_scope_with_let = 1
+let g:js_context_colors_theme = 'js_context_colors_bright'
+ 
+let g:nv_eslint_disabled = 0
+

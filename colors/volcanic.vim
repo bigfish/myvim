@@ -161,7 +161,7 @@ if &t_Co > 255
    hi Function        ctermfg=81
    hi Identifier      ctermfg=162               cterm=none
    hi Ignore          ctermfg=244 ctermbg=232
-   hi IncSearch       ctermfg=193 ctermbg=16
+   hi IncSearch       ctermfg=11 ctermbg=232
 
    hi Keyword         ctermfg=12              cterm=bold
    hi Label           ctermfg=252               cterm=none
@@ -183,7 +183,8 @@ if &t_Co > 255
    hi PreProc         ctermfg=118
    hi Question        ctermfg=81
    hi Repeat          ctermfg=141               cterm=bold
-   hi Search          ctermfg=232 ctermbg=39
+
+   hi Search           ctermfg=232           ctermbg=33
 
    " marks column
    hi SignColumn      ctermfg=118 ctermbg=235
@@ -209,7 +210,8 @@ if &t_Co > 255
    hi VertSplit       ctermfg=207 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=238
    "hi Visual                      ctermbg=4
-   hi Visual           ctermfg=195           ctermbg=125
+   hi Visual           ctermfg=7           ctermbg=4
+
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 

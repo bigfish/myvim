@@ -196,7 +196,10 @@ export PATH=$PHANTOMJS/bin:$PATH
 #export PATH=$PATH:/opt/less/bin
 #export NODE_PATH=$NODE_PATH:/opt/less/lib
 
-#. ~/nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+#use latest node by default
+nvm use 5.1.1 &> /dev/null
 
 set -o emacs
 
