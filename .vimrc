@@ -20,9 +20,12 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
-"set rtp+=~/.vim/bundle/neovim-eslint
 
 call vundle#begin()
+
+if has('nvim')
+Plugin 'neovim/node-host'
+endif
 
 Plugin 'mileszs/ack.vim.git'
 Plugin 'bling/vim-airline'
@@ -44,7 +47,7 @@ Plugin 'bigfish/vim-js-beautify.git'
 Plugin 'pangloss/vim-javascript'
 Plugin 'bigfish/vim-js-context-coloring.git'
 
-Plugin 'bigfish/vim-jshint.git'
+Plugin 'bigfish/vim-eslint.git'
 "Plugin 'groenewege/vim-less.git'
 "Plugin 'mustache/vim-mustache-handlebars.git'
 Plugin 'bigfish/vim-ragtag.git'
@@ -61,15 +64,11 @@ Plugin 'mxw/vim-jsx'
 "Plugin 'bigfish/vim-react.git'
 "Plugin 'bigfish/vim-react-snippets'
 "Plugin 'bigfish/vim-fireplace'
-Plugin 'bigfish/vim-msc.git'
 Plugin 'cakebaker/scss-syntax.vim.git'
 
-if has('nvim')
-Plugin 'neovim/node-host'
-endif
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -320,18 +319,6 @@ inoremap ( ()<left>
 inoremap [ []<left>
 
 let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-" old vim-powerline symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
-
 let g:airline_theme='night'
 
 set noshelltemp
@@ -341,7 +328,7 @@ let g:javascript_enable_domhtmlcss = 1
 let g:jsx_ext_required = 0
 
 let g:js_context_colors_debug = 0
-let g:js_context_colors_usemaps = 0
+let g:js_context_colors_usemaps = 1
 "let g:js_context_colors_enabled = 1
 "let g:js_context_colors_colorize_comments = 0
 let g:js_context_colors_highlight_function_names = 1
@@ -349,7 +336,14 @@ let g:js_context_colors_highlight_function_names = 1
 "let g:js_context_colors_show_error_message = 1
 "let g:js_context_colors_no_highlight_on_syntax_error = 0
 let g:js_context_colors_block_scope_with_let = 1
-let g:js_context_colors_theme = 'js_context_colors_bright'
+"let g:js_context_colors_theme = 'js_context_colors_bright'
  
-let g:nv_eslint_disabled = 0
+let g:eslint_autofix = 1
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+let NERDTreeShowHidden = 1
+let NERDTreeSortHiddenFirst = 1
 

@@ -47,6 +47,12 @@ augroup blanket
 augroup END
 
 au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
+
+"set to 2 spaces in dev dir
+au BufNewFile,BufRead ~/dev/**/*.js :set expandtab sw=2 sts=2
+
+au BufNewFile,BufRead ~/javascript/**/*.js :set expandtab sw=2 sts=2
+
 au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
@@ -121,3 +127,5 @@ aug QFClose
   au!
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
