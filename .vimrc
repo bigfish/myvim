@@ -1,6 +1,5 @@
 "
 " Maintainer:  David Wilhelm
-" Last change: May 14 2013
 "
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -12,14 +11,11 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-"call pathogen#infect()
-
 " Enable file type detection.
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-
 
 call vundle#begin()
 
@@ -29,7 +25,6 @@ endif
 
 Plugin 'mileszs/ack.vim.git'
 Plugin 'bling/vim-airline'
-"Plugin 'bigfish/angular-vim-snippets.git'
 Plugin 'kien/ctrlp.vim.git'
 "Plugin 'mattn/gist-vim.git'
 "Plugin 'bigfish/js-taglist.git'
@@ -62,10 +57,9 @@ Plugin 'mattn/emmet-vim.git'
 Plugin 'mxw/vim-jsx'
 "Plugin 'STRML/JSXHint'
 "Plugin 'bigfish/vim-react.git'
-"Plugin 'bigfish/vim-react-snippets'
+Plugin 'bentayloruk/vim-react-es6-snippets'
 "Plugin 'bigfish/vim-fireplace'
 Plugin 'cakebaker/scss-syntax.vim.git'
-
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -89,8 +83,6 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 colorscheme volcanic
-
-
 
 " ************************ OPTIONS ********************************
 
@@ -346,4 +338,8 @@ endif
 
 let NERDTreeShowHidden = 1
 let NERDTreeSortHiddenFirst = 1
+let g:js_context_colors_theme = 'js_context_colors'
+ 
+let g:nv_eslint_disabled = 0
+let g:nv_eslint_auto_open_location_list = 0
 
