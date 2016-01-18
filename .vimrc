@@ -339,7 +339,4 @@ endif
 let NERDTreeShowHidden = 1
 let NERDTreeSortHiddenFirst = 1
 let g:js_context_colors_theme = 'js_context_colors'
- 
-let g:nv_eslint_disabled = 0
-let g:nv_eslint_auto_open_location_list = 0
 
