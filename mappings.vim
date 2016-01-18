@@ -1,9 +1,4 @@
 
-"Tab is Escape
-inoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>
-snoremap <Tab> <Esc>
-
 "in normal mode tab jumps to previous window
 nnoremap <Tab> <C-W>p
 
