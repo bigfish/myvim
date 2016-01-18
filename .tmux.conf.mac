@@ -1,5 +1,5 @@
-unbind C-b
-set-option -g prefix C-a
+unbind C-o
+set-option -g prefix C-o
 set -sg escape-time 1
 set -g base-index 1
 set -g pane-base-index 1
