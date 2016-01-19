@@ -152,6 +152,8 @@ alias my="mysql -uroot -pexinda -hlocalhost"
 alias phpi="sudo vim /etc/php5/apache2/php.ini"
 alias alog="tail -f /var/log/apache2/error.log"
 alias hosts="sudo vim /etc/hosts"
+alias wp="webpack"
+alias wd="webpack-dev-server"
 #LESS COLORS
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 #CONFIGURE PATH
