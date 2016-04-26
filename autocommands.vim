@@ -46,14 +46,7 @@ augroup blanket
         autocmd BufWritePost ~/work/msc/SecurityCenter/src/ScriptUI/McMain/js/*.js :call Blanket()
 augroup END
 
-au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
-
-"set to 2 spaces in dev dir
-au BufNewFile,BufRead ~/dev/**/*.js :set expandtab sw=2 sts=2
-
-au BufNewFile,BufRead ~/javascript/**/*.js :set expandtab sw=2 sts=2
-
-au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
+"au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 
@@ -75,7 +68,7 @@ au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 "augroup CurrentLineHighlight
     "au!
     "au InsertEnter,BufLeave * set nocul
-    
+
     ""don't use cul on js files as it looks ugly with context coloring
     "au InsertLeave,BufEnter *.js set nocul
 "augroup END
@@ -91,9 +84,10 @@ augroup templates
     "autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
+    autocmd BufNewFile .editorconfig :0r $HOME/.vim/templates/.editorconfig
 
 
-":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
+":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
 augroup end
 
 " autocmd that will set up the w:created variable
@@ -129,3 +123,8 @@ aug QFClose
 aug END
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" make .template files php filetype
+au! BufRead *.template :set ft=php
+
+au! BufWritePre * :silent! %s/\s\+$//g

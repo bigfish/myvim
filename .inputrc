@@ -68,6 +68,7 @@ $endif
 "\C-k": "exit\C-m"
 "\C-u": "cd ..\C-m"
 
-
-$endif
+set completion-map-case on
+set completion-ignore-case on
+set show-all-if-ambiguous on
 

@@ -13,9 +13,13 @@ set nocompatible
 
 " Enable file type detection.
 filetype off                  " required
+"let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
+"let g:python_host_prog = "/usr/local/bin/python"
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
+set rtp+=~/.vim/bundle/vim-css-lint
 
 call vundle#begin()
 
@@ -26,14 +30,16 @@ endif
 Plugin 'mileszs/ack.vim.git'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim.git'
+Plugin 'bolasblack/csslint.vim'
 "Plugin 'mattn/gist-vim.git'
 "Plugin 'bigfish/js-taglist.git'
 "Plugin 'Valloric/ListToggle.git'
 Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree.git'
 "Plugin 'tyru/open-browser.vim.git'
 Plugin 'bigfish/snipmate.vim.git'
-"Plugin 'joonty/vdebug.git'
+Plugin 'joonty/vdebug.git'
 "Plugin 'bigfish/vim4js.git'
 "Plugin 'tpope/vim-cucumber.git'
 Plugin 'tpope/vim-fugitive.git'
@@ -57,9 +63,10 @@ Plugin 'mattn/emmet-vim.git'
 Plugin 'mxw/vim-jsx'
 "Plugin 'STRML/JSXHint'
 "Plugin 'bigfish/vim-react.git'
-Plugin 'bentayloruk/vim-react-es6-snippets'
+Plugin 'bigfish/vim-react-es6-snippets'
 "Plugin 'bigfish/vim-fireplace'
 Plugin 'cakebaker/scss-syntax.vim.git'
+Plugin 'lambdatoast/elm.vim'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -91,7 +98,6 @@ set backspace=indent,eol,start
 
 "don't clutter up workspace with backup & swap file
 set backupdir=~/tmp
-set expandtab
 set history=100
 set incsearch    " do incremental searching
 set noswapfile
@@ -116,6 +122,14 @@ set eadirection=both
 set shm=IsAat
 
 set viminfo='1000,f1,<500,s100,h,:500,@500,/500,!
+
+" TAB SETTINGS
+set noexpandtab
+set copyindent
+set preserveindent
+set softtabstop=0
+set shiftwidth=4
+set tabstop=4
 
 "no wrap by default
 set nowrap
@@ -158,6 +172,7 @@ let maplocalleader = "."
 :set switchbuf=useopen
 
 so $HOME/.vim/functions.vim
+so $HOME/.vim/commands.vim
 so $HOME/.vim/mappings.vim
 so $HOME/.vim/autocommands.vim
 so $HOME/.vim/macros.vim
@@ -202,7 +217,7 @@ let g:gist_detect_filetype = 1
 "use system clipboard
 "set clipboard+=unnamedplus
 
-let g:startify_bookmarks = [ '~/.vimrc', '~/.mappings.vim', '~/.bashrc.vim' ]
+let g:startify_bookmarks = [ '$HOME/.vimrc', '$HOME/.mappings.vim', '$HOME/.bashrc.vim' ]
 
 "hide foldcolumn
 set foldcolumn=0
@@ -257,6 +272,8 @@ let g:Powerline_symbols = 'fancy'
 let g:jshint_onwrite = 1
 let g:jshint_goto_error = 0
 
+let g:csslint_onwrite = 1
+let g:csslint_goto_error = 0
 "let g:netrw_liststyle=3 " Use tree-mode as default view
 "let g:netrw_browse_split=4 " Open file in previous buffer
 "let g:netrw_preview=1 " preview window shown in a vertically split
@@ -268,7 +285,6 @@ let g:netrw_browsex_viewer= "gnome-open"
 "this prevents messages from blocking
 set cmdheight=2
 
-set encoding=utf-8
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 "let getClientCoverage = "call Blanket('grunt --no-color mocha:json','COVERAGE_START', 'COVERAGE_END')"
@@ -287,6 +303,7 @@ let g:mustache_abbreviations = 1
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:~"
 set nolist
+set scrolloff=5
 
 if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j " Delete comment character when joining commented lines
@@ -316,10 +333,10 @@ let g:airline_theme='night'
 set noshelltemp
 let g:js_context_colors_enabled = 1
 let g:js_context_colors_jsx = 1
-let g:javascript_enable_domhtmlcss = 1       
+let g:javascript_enable_domhtmlcss = 1
 let g:jsx_ext_required = 0
 
-let g:js_context_colors_debug = 0
+let g:js_context_colors_debug = 1
 let g:js_context_colors_usemaps = 1
 "let g:js_context_colors_enabled = 1
 "let g:js_context_colors_colorize_comments = 0
@@ -329,7 +346,7 @@ let g:js_context_colors_highlight_function_names = 1
 "let g:js_context_colors_no_highlight_on_syntax_error = 0
 let g:js_context_colors_block_scope_with_let = 1
 "let g:js_context_colors_theme = 'js_context_colors_bright'
- 
+
 let g:eslint_autofix = 1
 
 if executable('ag')
@@ -340,3 +357,32 @@ let NERDTreeShowHidden = 1
 let NERDTreeSortHiddenFirst = 1
 let g:js_context_colors_theme = 'js_context_colors'
 
+let g:vdebug_options= {
+\    "port" : 9000,
+\    "server" : '',
+\    "timeout" : 20,
+\    "on_close" : 'detach',
+\    "break_on_open" : 1,
+\    "ide_key" : '',
+\    "path_maps" : {},
+\    "debug_window_level" : 0,
+\    "debug_file_level" : 0,
+\    "debug_file" : "",
+\    "watch_window_style" : 'expanded',
+\    "marker_default" : '⬦',
+\    "marker_closed_tree" : '▸',
+\    "marker_open_tree" : '▾'
+\}
+
+let g:vdebug_options['path_maps'] = {"/media/sf_soc-dashboard/src/dashboard": "/Volumes/devhd/dev/soc-dashboard/src/dashboard",
+                        \"/media/sf_soc-alerting-gui/src/AlertingGUI": "/Volumes/devhd/dev/soc-alerting-gui/src/AlertingGUI",
+                        \"/media/sf_tuning-dashboard": "/Volumes/devhd/dev/soc-tuning-dashboard/src"}
+
+set wildmode=longest:list
+if exists("&wildignorecase")
+        set wildignorecase
+endif
+
+let php_sql_query=1
+let php_htmlInStrings=1
+let g:CSSLint_FileTypeList = ['css', 'less', 'sass']

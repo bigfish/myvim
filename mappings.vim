@@ -165,7 +165,7 @@ nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
 "(g)o to tag
-nnoremap gt <C-]>
+nnoremap <leader>t <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -218,3 +218,10 @@ endfunction
 au FileType nerdtree :call NERDTreeMaps()
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+nnoremap C-<Tab> :tabN
+"get rid of annoying repeat inserted text feature triggerd by Ctrl-Space
+imap <Nul> <Space>
+map <Nul> <Nop>
+nmap <Nul> <Nop>
+cmap <Nul> <Nop>
+vmap <Nul> <Nop>

@@ -157,12 +157,12 @@ function! GoToSpec2()
 
 endfunction
 
-function Only()
+function! Only()
    :silent! s/describe(/describe.only(/
    :silent! s/it(/it.only(/
 endfunction
 
 "remove .only() from a spec
-function NotOnly()
+function! NotOnly()
    :silent! s/\.only//g
 endfunction
