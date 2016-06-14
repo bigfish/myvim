@@ -121,7 +121,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-e> :BufExplorer<CR>
 
 "TagList toggle
-nnoremap -t :TlistToggle<CR>
+nnoremap -t :TagbarToggle<CR>
 
 " MARKDOWN
 
@@ -140,6 +140,7 @@ com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
 
 nnoremap <localleader>v :sp $HOME/.vimrc<CR>
 nnoremap <localleader>m :sp $HOME/.vim/mappings.vim<CR>
+nnoremap <leader>m :Merginal<CR>
 
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
@@ -170,7 +171,7 @@ nnoremap <BS> <C-T>
 
 "insert filename
 imap \fn <C-R>=expand("%:t:r")<CR>
-                
+
 "remove trailing whitespace
 nnoremap <localleader>s :%s/\s\+$//g<cr>
 
@@ -225,3 +226,7 @@ map <Nul> <Nop>
 nmap <Nul> <Nop>
 cmap <Nul> <Nop>
 vmap <Nul> <Nop>
+
+nnoremap <C-i> :call AddImport()<CR>
+nnoremap <leader>f :call EditFile()<CR>
+

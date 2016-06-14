@@ -14,8 +14,18 @@ snippet af
 snippet afo
 	function (${1}) { ${2} }
 
+#arrow function
+snippet ar
+	(${1}) => {
+		${2}
+	}
+
+#arrow function oneline
+snippet aro
+	(${1}) => ${2}
+
 snippet clos
-	(function () { 
+	(function () {
 		${1}
 	}());
 
@@ -28,6 +38,9 @@ snippet define
 	});
 
 snippet req
+	require('${1}');
+
+snippet req-amd
 	require([${1}], function (${2}) {
 		${3}
 	});
@@ -39,7 +52,7 @@ snippet mod
 		"hbs!template/${1}"
 	], function ($, Backbone, template) {
 		"use strict";
-	
+
 	});
 
 snippet view
@@ -67,14 +80,14 @@ snippet helper
 
 		function (Handlebars) {
 				"use strict";
-		
+
 				function $1 (${2:object}) {
 				    ${3}
 				    return ${4};
 				}
-		
+
 				Handlebars.registerHelper( '$1', $1 );
-		
+
 				return $1;
 		});
 snippet us
@@ -86,3 +99,5 @@ snippet ctor
 	  ${1}
 	}
 
+snippet imp
+	import ${1} from '${2}';

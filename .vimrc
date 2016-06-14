@@ -43,10 +43,13 @@ Plugin 'joonty/vdebug.git'
 "Plugin 'bigfish/vim4js.git'
 "Plugin 'tpope/vim-cucumber.git'
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'idanarye/vim-merginal'
 Plugin 'bigfish/vim-js-beautify.git'
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'bigfish/vim-js-context-coloring.git'
+Plugin 'majutsushi/tagbar'
+Plugin 'craigemery/vim-autotag'
 
 Plugin 'bigfish/vim-eslint.git'
 "Plugin 'groenewege/vim-less.git'

@@ -72,8 +72,8 @@ function! Fix_netrw_maps_for_dvorak()
     nnoremap <buffer> t j
     nnoremap <buffer> n k
     "use s for netrw sorting -- can use l for moving right
-    "use S to move to right window -- overrides edit sort order of netrw 
-    nnoremap <buffer> S <c-w>l         
+    "use S to move to right window -- overrides edit sort order of netrw
+    nnoremap <buffer> S <c-w>l
 endfunction
 
 "let g:funcjs_colors = []
@@ -125,7 +125,7 @@ endfunction
 function! GoToSpec2()
 
     let srcdir = "src"
-    let specdir = "ui_test/spec"
+    let specdir = "spec"
 
     "get current file name and path
     let curpath = expand("%:p")
@@ -166,3 +166,89 @@ endfunction
 function! NotOnly()
    :silent! s/\.only//g
 endfunction
+
+
+"Adds ES6 module import for symbol under cursor
+function! AddImport()
+    let l:winview = winsaveview()
+    "remember current pos
+    let ident = expand("<cword>")
+    if len(ident)
+        normal gg
+        let lnum = 1
+        let curline = getline(".")
+        while match(curline, '^\s*import') != -1
+            "get name of import
+            let matches = matchlist(curline, '^\s*import\s*\([$_0-9a-zA-Z]*\)')
+            if len(matches)
+                "echom matches[0]
+            endif
+            "bail if we already have import
+            if index(matches, ident) > -1
+                echo ident . " already imported!"
+                call winrestview(l:winview)
+                return
+            endif
+            "goto next line
+            let lnum = lnum + 1
+            call setpos(".", [0, lnum, 1])
+            let curline = getline(".")
+        endwhile
+        "now we must be on first line, or first line after last contiguous import statement
+        "create new empty line if current line is not empty
+        if match(curline, '^\s*$') == -1
+            normal O<Esc>
+        endif
+        call append(".", "")
+        call setline(".", "import " . ident . " from '';")
+        normal f'l
+        startinsert
+    endif
+endfunction
+
+"create a file from path under cursor  and edit it
+function! EditFile()
+    let curpath = expand("%:p:h") . "/"
+    "assume filename is in quotes
+    "let curfile = expand("<cWORD>")
+    "get the bit in quotes..
+    normal yi"
+    let curfile = @"
+    "echo "curfile = " . curfile
+    if curfile == ""
+        normal yi'
+        let curfile = @"
+    endif
+    if curfile == ""
+        echom "unable to parse filename in quotes"
+        return
+    endif
+
+    "strip of quotes
+    "let curfile = substitute(curfile, "[^0-9_a-zA-Z/.\-]", "", "g")
+    "if file doesn't have extension, use same as current
+    "typically this is when importing es6 module
+    "let curfile = substitute(curfile, "\\./", "", "g")
+    let ext = expand("%:e")
+
+    if stridx(curfile, "/") == -1
+        if stridx(curfile, ".") == -1
+            let curfile = curfile . "." . ext
+        endif
+    else
+        let parts = split(curfile, "/")
+        let endpart = parts[len(parts) - 1]
+        if stridx(endpart, ".") == -1
+            let curfile = curfile . "." . ext
+        endif
+    endif
+
+    echom curfile
+
+    let newfile = curpath . curfile
+    if !filereadable(newfile)
+        echo "creating " . newfile
+    endif
+    exe ":e" newfile
+endfunction
+

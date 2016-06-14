@@ -98,9 +98,9 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    #. /etc/bash_completion
+#fi
 
 ############################################# PERSONAL #########################################
 source /usr/local/etc/autojump.sh
@@ -186,7 +186,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 if [ -f $(brew --prefix nvm)/nvm.sh ];then
-        source $(brew --prefix nvm)/nvm.sh
+		source $(brew --prefix nvm)/nvm.sh
 fi
 
 nvm use --delete-prefix v5.4.1 > /dev/null
@@ -217,3 +217,4 @@ export NEOVIM_JS_DEBUG=$HOME/.nvjslog
 export PATH=$PATH:/Users/dwilhelm/Library/Python/2.7/lib/python/site-packages/django/bin
 export ALERTING_GUI=$HOME/dev/soc-alerting-gui/src/AlertingGUI
 alias dm=docker-machine
+#alias eval="node -p -e "
