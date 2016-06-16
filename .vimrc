@@ -208,6 +208,8 @@ imap <C-l> <C-x><C-f>
 
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 
+cscope add $SOCDASH_HOME/src/cscope.out
+
 "Plugin settings
 let Tlist_Use_Right_Window=1
 

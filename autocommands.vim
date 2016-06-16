@@ -85,6 +85,7 @@ augroup templates
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
     autocmd BufNewFile .editorconfig :0r $HOME/.vim/templates/.editorconfig
+    autocmd BufNewFile *.php :0r $HOME/.vim/templates/default.php
 
 
 ":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
