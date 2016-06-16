@@ -391,3 +391,4 @@ endif
 let php_sql_query=1
 let php_htmlInStrings=1
 let g:CSSLint_FileTypeList = ['css', 'less', 'sass']
+let g:manpageview_winopen = "tab"

@@ -111,6 +111,9 @@ nnoremap <C-w> <Esc>:wq!<CR>
 "Kill window
 nnoremap <C-k> :q!<CR>
 
+"remap K to use manpageview
+nnoremap K :exe ':TMan ' . expand('<cword>')<CR>
+
 
 " ********************* PLUGIN MAPPINGS ***************
 "
