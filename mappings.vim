@@ -112,7 +112,7 @@ nnoremap <C-w> <Esc>:wq!<CR>
 nnoremap <C-k> :q!<CR>
 
 "remap K to use manpageview
-nnoremap K :exe ':TMan ' . expand('<cword>')<CR>
+"nnoremap K :exe ':TMan ' . expand('<cword>')<CR>
 
 
 " ********************* PLUGIN MAPPINGS ***************
@@ -192,6 +192,8 @@ nnoremap -c :set ignorecase!<cr>
 "Go To Spec (mocha)
 "
 nnoremap gs :call GoToSpec2()<cr>
+"c(ss)"
+nnoremap gc :call GoToCSS()<cr>
 
 "TEMPLATE - Jump to placeholder
 nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>
@@ -232,4 +234,5 @@ vmap <Nul> <Nop>
 
 nnoremap <C-i> :call AddImport()<CR>
 nnoremap <leader>f :call EditFile()<CR>
+nnoremap <localleader>f :call EditFile()<CR>
 

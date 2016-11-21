@@ -124,7 +124,7 @@ endfunction
 "simpler version of above -- no hierarchy
 function! GoToSpec2()
 
-    let srcdir = "src"
+    let srcdirs = ["src", "js"]
     let specdir = "spec"
 
     "get current file name and path
@@ -145,7 +145,7 @@ function! GoToSpec2()
         let dir = remove(basepath_arr, -1)
         "if we reach the src dir, do not add to relpath, but construct the
         "specpath
-        if dir == srcdir
+        if index(srcdirs, dir) != -1
             let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . specname
             break
         else
@@ -154,6 +154,42 @@ function! GoToSpec2()
     endwhile
 
     exe 'vsplit' . specpath
+
+endfunction
+
+"go to Sass file for component, looks for styles dir in hierarchy
+function! GoToCSS()
+
+    let srcdir = "src"
+    let sassdir = "styles"
+
+    "get current file name and path
+    let curpath = expand("%:p")
+    let basepath_arr = split(curpath, '/')
+    "remove the filename from the path array
+    call remove(basepath_arr, -1)
+    "get the root of the filename (no extension)
+    let curfile = expand("%:t:r")
+    "derive the name of the sass file
+    let sassfile = curfile . '.scss'
+
+    "split the path on 'src' dir
+    let relpath_arr = []
+    let sasspath = ""
+    while (len(basepath_arr) > 0)
+        "remove the last dir from the basepath and prepend into relpath
+        let dir = remove(basepath_arr, -1)
+        "if we reach the src dir, do not add to relpath, but construct the
+        "sasspath
+        if dir == srcdir
+            let sasspath = '/' . join(basepath_arr, '/') . '/' . srcdir . '/' . sassdir . '/' . sassfile
+            break
+        else
+            call insert(relpath_arr, dir)
+        endif
+    endwhile
+
+    exe 'vsplit' . sasspath
 
 endfunction
 
@@ -212,9 +248,12 @@ function! EditFile()
     "assume filename is in quotes
     "let curfile = expand("<cWORD>")
     "get the bit in quotes..
+    "clear yank register
+    let @" = ""
     normal yi"
+    "check if we got anything
     let curfile = @"
-    "echo "curfile = " . curfile
+    "if we didn't try single quotes
     if curfile == ""
         normal yi'
         let curfile = @"

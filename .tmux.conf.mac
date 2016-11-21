@@ -1,5 +1,6 @@
 unbind C-b
 set-option -g prefix C-h
+set-option -g history-limit 5000
 bind C-h send-prefix
 
 set -sg escape-time 1

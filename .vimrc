@@ -13,8 +13,6 @@ set nocompatible
 
 " Enable file type detection.
 filetype off                  " required
-"let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
-"let g:python_host_prog = "/usr/local/bin/python"
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -27,6 +25,7 @@ if has('nvim')
 Plugin 'neovim/node-host'
 endif
 
+Plugin 'nishigori/vim-php-dictionary'
 Plugin 'mileszs/ack.vim.git'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim.git'
@@ -44,7 +43,8 @@ Plugin 'joonty/vdebug.git'
 "Plugin 'tpope/vim-cucumber.git'
 Plugin 'tpope/vim-fugitive.git'
 Plugin 'idanarye/vim-merginal'
-Plugin 'bigfish/vim-js-beautify.git'
+"Plugin 'bigfish/vim-js-beautify.git'
+Plugin 'maksimr/vim-jsbeautify.git'
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'bigfish/vim-js-context-coloring.git'
@@ -208,6 +208,7 @@ imap <C-l> <C-x><C-f>
 
 highlight SignColumn term=standout ctermfg=14 ctermbg=NONE guifg=Cyan guibg=black
 
+set nocscopeverbose
 cscope add $SOCDASH_HOME/src/cscope.out
 
 "Plugin settings
@@ -341,11 +342,11 @@ let g:js_context_colors_jsx = 1
 let g:javascript_enable_domhtmlcss = 1
 let g:jsx_ext_required = 0
 
-let g:js_context_colors_debug = 1
+let g:js_context_colors_debug = 0
 let g:js_context_colors_usemaps = 1
 "let g:js_context_colors_enabled = 1
 "let g:js_context_colors_colorize_comments = 0
-let g:js_context_colors_highlight_function_names = 1
+let g:js_context_colors_highlight_function_names = 0
 "let g:js_context_colors_foldlevel = 2
 "let g:js_context_colors_show_error_message = 1
 "let g:js_context_colors_no_highlight_on_syntax_error = 0
@@ -381,6 +382,7 @@ let g:vdebug_options= {
 
 let g:vdebug_options['path_maps'] = {"/media/sf_soc-dashboard/src/dashboard": "/Volumes/devhd/dev/soc-dashboard/src/dashboard",
                         \"/media/sf_soc-alerting-gui/src/AlertingGUI": "/Volumes/devhd/dev/soc-alerting-gui/src/AlertingGUI",
+                        \"/media/sf_soc-csdb": "/Volumes/devhd/dev/soc-csdb",
                         \"/media/sf_tuning-dashboard": "/Volumes/devhd/dev/soc-tuning-dashboard/src"}
 
 set wildmode=longest:list
@@ -392,3 +394,4 @@ let php_sql_query=1
 let php_htmlInStrings=1
 let g:CSSLint_FileTypeList = ['css', 'less', 'sass']
 let g:manpageview_winopen = "tab"
+let g:python_host_prog = '/usr/bin/python'

@@ -172,6 +172,7 @@ parse_git_branch() {
 #export PS1="\\[$(tput setaf 7)\\]\[\e[0;31m\]\\h\[\e[0;31m\]\[\e[m\] \[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\] \[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\n\[\e[1;32m\]>: \[\e[1;32m\]\\[$(tput sgr0)\\]"
 export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
 
+export NODE_PATH=$NODE_PATH:/usr/local/Cellar/nvm/0.30.1/versions/node/v5.12.0/lib/node_modules
 #PHANTOMJS=$HOME/phantomjs
 #export PATH=$PHANTOMJS/bin:$PATH
 
@@ -189,7 +190,7 @@ if [ -f $(brew --prefix nvm)/nvm.sh ];then
 		source $(brew --prefix nvm)/nvm.sh
 fi
 
-nvm use --delete-prefix v5.4.1 > /dev/null
+nvm use --delete-prefix v5.12.0 > /dev/null
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 set -o emacs
