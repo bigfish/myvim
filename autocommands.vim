@@ -46,14 +46,7 @@ augroup blanket
         autocmd BufWritePost ~/work/msc/SecurityCenter/src/ScriptUI/McMain/js/*.js :call Blanket()
 augroup END
 
-au BufNewFile,BufRead *.js :set expandtab sw=4 sts=4
-
-"set to 2 spaces in dev dir
-au BufNewFile,BufRead ~/dev/**/*.js :set expandtab sw=2 sts=2
-
-au BufNewFile,BufRead ~/javascript/**/*.js :set expandtab sw=2 sts=2
-
-au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
+"au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
 au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 
@@ -75,7 +68,7 @@ au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 "augroup CurrentLineHighlight
     "au!
     "au InsertEnter,BufLeave * set nocul
-    
+
     ""don't use cul on js files as it looks ugly with context coloring
     "au InsertLeave,BufEnter *.js set nocul
 "augroup END
@@ -91,9 +84,11 @@ augroup templates
     "autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
+    autocmd BufNewFile .editorconfig :0r $HOME/.vim/templates/.editorconfig
+    autocmd BufNewFile *.php :0r $HOME/.vim/templates/default.php
 
 
-":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl   
+":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
 augroup end
 
 " autocmd that will set up the w:created variable
@@ -109,8 +104,9 @@ autocmd VimEnter * autocmd WinEnter * let w:created=1
 "
 autocmd FileType less set sw=4
 
-au! FileType html setlocal complete=k~/.vim/dict/directives.txt,.,w,b,u,t,i,
-au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
+"au! FileType html setlocal complete=k~/.vim/dict/directives.txt,.,w,b,u,t,i,
+"au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
+"au! FileType php setlocal complete=k~/.vim/bundle/vim-php-dictionary/dict/PHP.dict,.,w,b,u,t,i,
 
 " use dos format for work stuff
 au! BufNewFile /home/david/work/**/*.* :set ff=dos
@@ -129,3 +125,29 @@ aug QFClose
 aug END
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" make .template files php filetype
+au! BufRead *.template :set ft=php
+autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+
+" eliminate trailing whitespace
+au! BufWritePre * :silent! %s/\s\+$//g
+
+" format sass, css
+"au! BufWritePre *.scss normal gg=G
+
+autocmd FileType javascript noremap <buffer>  <localleader>f :call JsBeautify()<cr>
+" for json
+autocmd FileType json noremap <buffer> <localleader>f :call JsonBeautify()<cr>
+" for jsx
+autocmd FileType jsx noremap <buffer> <localleader>f :call JsxBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <localleader>f :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css,scss noremap <buffer> <localleader>f :call CSSBeautify()<cr>
+autocmd FileType javascript vnoremap <buffer>  <localleader>f :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <localleader>f :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <localleader>f :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <localleader>f :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <localleader>f :call RangeCSSBeautify()<cr>
+

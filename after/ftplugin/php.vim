@@ -7,3 +7,7 @@ function! OpenPHPFunctionDoc(fn)
 endfunction
 
 nnoremap <localleader>f :call OpenPHPFunctionDoc(expand("<cword>"))<CR>:redraw!<CR>
+
+set noexpandtab
+set ts=4
+set sw=4

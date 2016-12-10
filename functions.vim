@@ -72,8 +72,8 @@ function! Fix_netrw_maps_for_dvorak()
     nnoremap <buffer> t j
     nnoremap <buffer> n k
     "use s for netrw sorting -- can use l for moving right
-    "use S to move to right window -- overrides edit sort order of netrw 
-    nnoremap <buffer> S <c-w>l         
+    "use S to move to right window -- overrides edit sort order of netrw
+    nnoremap <buffer> S <c-w>l
 endfunction
 
 "let g:funcjs_colors = []
@@ -124,8 +124,8 @@ endfunction
 "simpler version of above -- no hierarchy
 function! GoToSpec2()
 
-    let srcdir = "src"
-    let specdir = "ui_test/spec"
+    let srcdirs = ["src", "js"]
+    let specdir = "spec"
 
     "get current file name and path
     let curpath = expand("%:p")
@@ -145,7 +145,7 @@ function! GoToSpec2()
         let dir = remove(basepath_arr, -1)
         "if we reach the src dir, do not add to relpath, but construct the
         "specpath
-        if dir == srcdir
+        if index(srcdirs, dir) != -1
             let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . specname
             break
         else
@@ -157,12 +157,137 @@ function! GoToSpec2()
 
 endfunction
 
-function Only()
+"go to Sass file for component, looks for styles dir in hierarchy
+function! GoToCSS()
+
+    let srcdir = "src"
+    let sassdir = "styles"
+
+    "get current file name and path
+    let curpath = expand("%:p")
+    let basepath_arr = split(curpath, '/')
+    "remove the filename from the path array
+    call remove(basepath_arr, -1)
+    "get the root of the filename (no extension)
+    let curfile = expand("%:t:r")
+    "derive the name of the sass file
+    let sassfile = curfile . '.scss'
+
+    "split the path on 'src' dir
+    let relpath_arr = []
+    let sasspath = ""
+    while (len(basepath_arr) > 0)
+        "remove the last dir from the basepath and prepend into relpath
+        let dir = remove(basepath_arr, -1)
+        "if we reach the src dir, do not add to relpath, but construct the
+        "sasspath
+        if dir == srcdir
+            let sasspath = '/' . join(basepath_arr, '/') . '/' . srcdir . '/' . sassdir . '/' . sassfile
+            break
+        else
+            call insert(relpath_arr, dir)
+        endif
+    endwhile
+
+    exe 'vsplit' . sasspath
+
+endfunction
+
+function! Only()
    :silent! s/describe(/describe.only(/
    :silent! s/it(/it.only(/
 endfunction
 
 "remove .only() from a spec
-function NotOnly()
+function! NotOnly()
    :silent! s/\.only//g
 endfunction
+
+
+"Adds ES6 module import for symbol under cursor
+function! AddImport()
+    let l:winview = winsaveview()
+    "remember current pos
+    let ident = expand("<cword>")
+    if len(ident)
+        normal gg
+        let lnum = 1
+        let curline = getline(".")
+        while match(curline, '^\s*import') != -1
+            "get name of import
+            let matches = matchlist(curline, '^\s*import\s*\([$_0-9a-zA-Z]*\)')
+            if len(matches)
+                "echom matches[0]
+            endif
+            "bail if we already have import
+            if index(matches, ident) > -1
+                echo ident . " already imported!"
+                call winrestview(l:winview)
+                return
+            endif
+            "goto next line
+            let lnum = lnum + 1
+            call setpos(".", [0, lnum, 1])
+            let curline = getline(".")
+        endwhile
+        "now we must be on first line, or first line after last contiguous import statement
+        "create new empty line if current line is not empty
+        if match(curline, '^\s*$') == -1
+            normal O<Esc>
+        endif
+        call append(".", "")
+        call setline(".", "import " . ident . " from '';")
+        normal f'l
+        startinsert
+    endif
+endfunction
+
+"create a file from path under cursor  and edit it
+function! EditFile()
+    let curpath = expand("%:p:h") . "/"
+    "assume filename is in quotes
+    "let curfile = expand("<cWORD>")
+    "get the bit in quotes..
+    "clear yank register
+    let @" = ""
+    normal yi"
+    "check if we got anything
+    let curfile = @"
+    "if we didn't try single quotes
+    if curfile == ""
+        normal yi'
+        let curfile = @"
+    endif
+    if curfile == ""
+        echom "unable to parse filename in quotes"
+        return
+    endif
+
+    "strip of quotes
+    "let curfile = substitute(curfile, "[^0-9_a-zA-Z/.\-]", "", "g")
+    "if file doesn't have extension, use same as current
+    "typically this is when importing es6 module
+    "let curfile = substitute(curfile, "\\./", "", "g")
+    let ext = expand("%:e")
+
+    if stridx(curfile, "/") == -1
+        if stridx(curfile, ".") == -1
+            let curfile = curfile . "." . ext
+        endif
+    else
+        let parts = split(curfile, "/")
+        let endpart = parts[len(parts) - 1]
+        if stridx(endpart, ".") == -1
+            let curfile = curfile . "." . ext
+        endif
+    endif
+
+    echom curfile
+
+    let newfile = curpath . curfile
+    if !filereadable(newfile)
+        echo "creating " . newfile
+    endif
+    exe ":e" newfile
+endfunction
+

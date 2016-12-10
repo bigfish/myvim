@@ -111,6 +111,9 @@ nnoremap <C-w> <Esc>:wq!<CR>
 "Kill window
 nnoremap <C-k> :q!<CR>
 
+"remap K to use manpageview
+"nnoremap K :exe ':TMan ' . expand('<cword>')<CR>
+
 
 " ********************* PLUGIN MAPPINGS ***************
 "
@@ -121,7 +124,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-e> :BufExplorer<CR>
 
 "TagList toggle
-nnoremap -t :TlistToggle<CR>
+nnoremap -t :TagbarToggle<CR>
 
 " MARKDOWN
 
@@ -140,6 +143,7 @@ com! -range=% -nargs=0 Markup :<line1>,<line2>!Markdown
 
 nnoremap <localleader>v :sp $HOME/.vimrc<CR>
 nnoremap <localleader>m :sp $HOME/.vim/mappings.vim<CR>
+nnoremap <leader>m :Merginal<CR>
 
 nnoremap <leader>r :source $HOME/.vimrc<CR>
 
@@ -165,12 +169,12 @@ nnoremap <leader>p "+p
 
 "pop tag sTack with Backspace
 "(g)o to tag
-nnoremap gt <C-]>
+nnoremap <leader>t <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
 imap \fn <C-R>=expand("%:t:r")<CR>
-                
+
 "remove trailing whitespace
 nnoremap <localleader>s :%s/\s\+$//g<cr>
 
@@ -188,6 +192,8 @@ nnoremap -c :set ignorecase!<cr>
 "Go To Spec (mocha)
 "
 nnoremap gs :call GoToSpec2()<cr>
+"c(ss)"
+nnoremap gc :call GoToCSS()<cr>
 
 "TEMPLATE - Jump to placeholder
 nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>
@@ -217,4 +223,16 @@ endfunction
 
 au FileType nerdtree :call NERDTreeMaps()
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+nnoremap C-<Tab> :tabN
+"get rid of annoying repeat inserted text feature triggerd by Ctrl-Space
+imap <Nul> <Space>
+map <Nul> <Nop>
+nmap <Nul> <Nop>
+cmap <Nul> <Nop>
+vmap <Nul> <Nop>
+
+nnoremap <C-i> :call AddImport()<CR>
+nnoremap <leader>f :call EditFile()<CR>
+nnoremap <localleader>f :call EditFile()<CR>
 

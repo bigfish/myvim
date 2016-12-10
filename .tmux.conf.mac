@@ -1,5 +1,8 @@
-unbind C-o
-set-option -g prefix C-o
+unbind C-b
+set-option -g prefix C-h
+set-option -g history-limit 5000
+bind C-h send-prefix
+
 set -sg escape-time 1
 set -g base-index 1
 set -g pane-base-index 1
