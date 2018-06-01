@@ -1,7 +1,26 @@
-map <localleader>b :JSBeautify<CR>
+"map <localleader>b :JsBeautify<CR>
 set expandtab
 set sw=2
 set ts=2
+
+function! g:SortPropTypes()
+  "remember currentpos
+  let save_pos = getpos(".")
+
+  let propTypesStartLine = search('^\w\+.propTypes\s=\s{', 'cw')
+  echom propTypesStartLine
+
+  if propTypesStartLine > 0
+    let propTypesEndLine = search('^};')
+    let range = string(propTypesStartLine + 1) . "," . string(propTypesEndLine - 1)
+    let ex = ":" . range . " sort i"
+    exec ex
+  endif
+
+  call setpos('.', save_pos)
+endf
+
+autocmd! BufWrite <buffer> :call SortPropTypes()
 
 " Code coverage stuff-- should be moved to separate plugin
 " Code coverage sign config
@@ -22,7 +41,7 @@ set ts=2
             "exe cmd
         "endif
         "let cnt += 1
-    "endfor	
+    "endfor
 "endfunction
 
 "function! ParseFileName(filename)
@@ -86,9 +105,9 @@ set ts=2
             "call add(cvg, -1)
 
             "for [lineNo, lineCvg] in items(fileCvg.source)
-                "if lineCvg.coverage == "" 
+                "if lineCvg.coverage == ""
                     "call add(cvg, -1)
-                "else 
+                "else
                     "call add(cvg, lineCvg.coverage)
                 "end
             "endfor
@@ -108,7 +127,7 @@ set ts=2
         "else
             "let filepath = jsfile
         "endif
-        
+
         "if bufloaded(filepath)
             "call AddCoverageSigns(filepath, cvg)
         "end

@@ -48,6 +48,7 @@ augroup END
 
 "au BufNewFile,BufRead *.jsx :set expandtab sw=4 sts=4
 au BufNewFile,BufRead *.sh :set smarttab sw=4 sts=4
+au BufNewFile,BufRead *.svg :set filetype=xml
 au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 
 " coffeescript -- move to after/ftplugin
@@ -80,13 +81,22 @@ au BufNewFile,BufRead *.css :set smarttab sts=4 sw=4
 augroup templates
     autocmd BufNewFile *.html :0r $HOME/.vim/templates/html5.html
     autocmd BufNewFile *.sh :0r $HOME/.vim/templates/bash.sh
+    autocmd BufNewFile *.svg :0r $HOME/.vim/templates/svg.svg
+    autocmd BufNewFile *.xml :0r $HOME/.vim/templates/xml.xml
     "autocmd BufNewFile /home/david/**/*_spec.js :0r /home/david/.vim/templates/mocha_spec.js
     "autocmd BufNewFile /home/david/work/msc/**/*_spec.js :0r /home/david/.vim/templates/mocha_module_spec.js
     autocmd BufNewFile Gruntfile.js :0r /home/david/.vim/templates/Gruntfile.js
     autocmd BufNewFile /home/david/books/angular/*.html :%d | 0r $HOME/.vim/templates/angular.html
     autocmd BufNewFile .editorconfig :0r $HOME/.vim/templates/.editorconfig
     autocmd BufNewFile *.php :0r $HOME/.vim/templates/default.php
-
+    autocmd BufNewFile /Volumes/devhd/dev/securityportal/sp-core/client/spec/components/**/*_spec.js
+                \ :0r $HOME/.vim/templates/mocha_component_spec.js
+    autocmd BufNewFile /Volumes/devhd/dev/securityportal/sp-core/client/spec/components/**/*Container_spec.js
+                \ :0r $HOME/.vim/templates/mocha_container_spec.js
+    autocmd BufNewFile /Volumes/devhd/dev/securityportal/sp-core/client/spec/reducers/*_spec.js
+                \ :0r $HOME/.vim/templates/mocha_basic_spec.js
+    autocmd BufNewFile /Volumes/devhd/dev/securityportal/analytics-couchdb/spec/**/*_spec.js
+                \ :0r /Users/dwilhelm/.vim/templates/couchdb_view_spec.js
 
 ":autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
 augroup end
@@ -107,9 +117,6 @@ autocmd FileType less set sw=4
 "au! FileType html setlocal complete=k~/.vim/dict/directives.txt,.,w,b,u,t,i,
 "au! FileType javascript setlocal complete=k~/.vim/dict/services.txt,.,w,b,u,t,i,
 "au! FileType php setlocal complete=k~/.vim/bundle/vim-php-dictionary/dict/PHP.dict,.,w,b,u,t,i,
-
-" use dos format for work stuff
-au! BufNewFile /home/david/work/**/*.* :set ff=dos
 
 " mocha specs
 " [m]ocha [o]nly
@@ -136,18 +143,35 @@ au! BufWritePre * :silent! %s/\s\+$//g
 " format sass, css
 "au! BufWritePre *.scss normal gg=G
 
-autocmd FileType javascript noremap <buffer>  <localleader>f :call JsBeautify()<cr>
+"autocmd FileType javascript noremap <buffer>  <localleader>f :call JsBeautify()<cr>
+
+"now using esformatter for javascript/jsx
+au FileType javascript nnoremap <silent> <C-f> :Esformatter<CR>
+au FileType javascript vnoremap <silent> <C-f> :EsformatterVisual<CR>
+
+"use stylefmt for css/scss
+au FileType css nnoremap <silent> <C-f> :Stylefmt<CR>
+au FileType css vnoremap <silent> <C-f> :StylefmtVisual<CR>
+au FileType scss nnoremap <silent> <C-f> :Stylefmt<CR>
+au FileType scss vnoremap <silent> <C-f> :StylefmtVisual<CR>
+
 " for json
-autocmd FileType json noremap <buffer> <localleader>f :call JsonBeautify()<cr>
+autocmd FileType json noremap <buffer> <C-f> :call JsonBeautify()<cr>
+
 " for jsx
-autocmd FileType jsx noremap <buffer> <localleader>f :call JsxBeautify()<cr>
+"autocmd FileType jsx noremap <buffer> <localleader>f :call JsxBeautify()<cr>
 " for html
 autocmd FileType html noremap <buffer> <localleader>f :call HtmlBeautify()<cr>
 " for css or scss
-autocmd FileType css,scss noremap <buffer> <localleader>f :call CSSBeautify()<cr>
-autocmd FileType javascript vnoremap <buffer>  <localleader>f :call RangeJsBeautify()<cr>
-autocmd FileType json vnoremap <buffer> <localleader>f :call RangeJsonBeautify()<cr>
-autocmd FileType jsx vnoremap <buffer> <localleader>f :call RangeJsxBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <localleader>f :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <localleader>f :call RangeCSSBeautify()<cr>
+"autocmd FileType css,scss noremap <buffer> <localleader>f :call CSSBeautify()<cr>
 
+"autocmd FileType javascript vnoremap <buffer>  <localleader>f :call RangeJsBeautify()<cr>
+"autocmd FileType json vnoremap <buffer> <localleader>f :call RangeJsonBeautify()<cr>
+"autocmd FileType jsx vnoremap <buffer> <localleader>f :call RangeJsxBeautify()<cr>
+"autocmd FileType html vnoremap <buffer> <localleader>f :call RangeHtmlBeautify()<cr>
+"autocmd FileType css vnoremap <buffer> <localleader>f :call RangeCSSBeautify()<cr>
+
+"au BufNewFile * startinsert
+
+autocmd BufRead .stylelintrc :set ft=json
+autocmd BufRead .eslintrc :set ft=json

@@ -1,5 +1,4 @@
-
-"in normal mode tab jumps to previous window
+"hdkjjddkjbgjufin normal mode tab jumps to previous window
 nnoremap <Tab> <C-W>p
 
 "****************** MOVEMENT MAPPINGS ***********************""{{{
@@ -191,7 +190,8 @@ nnoremap -c :set ignorecase!<cr>
 
 "Go To Spec (mocha)
 "
-nnoremap gs :call GoToSpec2()<cr>
+nnoremap gs :call GoToSpec()<cr>
+
 "c(ss)"
 nnoremap gc :call GoToCSS()<cr>
 
@@ -234,5 +234,5 @@ vmap <Nul> <Nop>
 
 nnoremap <C-i> :call AddImport()<CR>
 nnoremap <leader>f :call EditFile()<CR>
-nnoremap <localleader>f :call EditFile()<CR>
+"nnoremap <localleader>f :call EditFile()<CR>
 

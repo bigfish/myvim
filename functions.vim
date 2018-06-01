@@ -90,7 +90,7 @@ function! GoToSpec()
 
     "define the src and spec dirs relative to common parent
     let srcdir = "src"
-    let specdir = "test/specs"
+    let specdir = "spec"
 
     "get current file name and path
     let curpath = expand("%:p")
@@ -104,20 +104,41 @@ function! GoToSpec()
     "split the path on 'src' dir
     let relpath_arr = []
     let specpath = ""
+    let relative_path_of_src_from_spec = "src"
     while (len(basepath_arr) > 0)
+        let relative_path_of_src_from_spec = '../' .  relative_path_of_src_from_spec
         "remove the last dir from the basepath and prepend into relpath
         let dir = remove(basepath_arr, -1)
         "if we reach the src dir, do not add to relpath, but construct the
         "specpath
         if (dir == srcdir)
-            let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . join(relpath_arr, '/') . '/' . specname
+            let specpath = '/' . join(basepath_arr, '/') . '/' . specdir . '/' . join(relpath_arr, '/')
+            let specfile = specpath . '/' . specname
+            let relative_path_of_src_from_spec = relative_path_of_src_from_spec . '/' . join(relpath_arr, '/')
             break
         else
             call insert(relpath_arr, dir)
         endif
     endwhile
 
-    exe 'vsplit' . specpath
+    "create dir
+    if !isdirectory(specpath)
+        exe 'silent !mkdir -p ' . specpath
+    endif
+    exe 'vsplit' . specfile
+
+    "replace tokens
+    exe 'silent! %s/SRC_MODULE_REL_PATH/' . escape(relative_path_of_src_from_spec, '/') . '/g'
+
+    if stridx(curfile, 'Container') != -1
+        exe 'silent! %s/CONTAINER/' . curfile . '/g'
+        exe 'silent! %s/CONTAINED_COMPONENT/' . substitute(curfile, 'Container', '', '') . '/g'
+    else
+        exe 'silent! %s/SRC_MODULE_NAME/' . curfile . '/g'
+        exe 'silent! %s/COMPONENT/' . curfile . '/g'
+    endif
+    "ensure plugins kick in
+    exe 'set ft=javascript'
 
 endfunction
 
