@@ -18,23 +18,23 @@
 "cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 "green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
-"hi JSCC_Level_0 ctermfg=136
-"hi JSCC_Level_1 ctermfg=166
-"hi JSCC_Level_2 ctermfg=160
-"hi JSCC_Level_3 ctermfg=125
-"hi JSCC_Level_4 ctermfg=61
-"hi JSCC_Level_5 ctermfg=33
-"hi JSCC_Level_6 ctermfg=37
-"hi JSCC_Level_7 ctermfg=64
+hi JSCC_Level_0 ctermfg=136
+hi JSCC_Level_1 ctermfg=166
+hi JSCC_Level_2 ctermfg=160
+hi JSCC_Level_3 ctermfg=125
+hi JSCC_Level_4 ctermfg=61
+hi JSCC_Level_5 ctermfg=33
+hi JSCC_Level_6 ctermfg=37
+hi JSCC_Level_7 ctermfg=64
 
-hi JSCC_Level_0 ctermfg=64
-hi JSCC_Level_1 ctermfg=37
-hi JSCC_Level_2 ctermfg=33
-hi JSCC_Level_3 ctermfg=61
-hi JSCC_Level_4 ctermfg=125
-hi JSCC_Level_5 ctermfg=160
-hi JSCC_Level_6 ctermfg=166
-hi JSCC_Level_7 ctermfg=136
+"hi JSCC_Level_0 ctermfg=64
+"hi JSCC_Level_1 ctermfg=37
+"hi JSCC_Level_2 ctermfg=33
+"hi JSCC_Level_3 ctermfg=61
+"hi JSCC_Level_4 ctermfg=125
+"hi JSCC_Level_5 ctermfg=160
+"hi JSCC_Level_6 ctermfg=166
+"hi JSCC_Level_7 ctermfg=136
 
 hi Comment ctermfg=243
 hi Todo ctermfg=black ctermbg=220
