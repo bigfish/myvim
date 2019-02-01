@@ -129,7 +129,8 @@ alias ff="firefox &>/dev/null &"
 export EDITOR=vim
 export PAGER=less
 #enable 256 colors in vim
-[ -z "$TMUX" ] && export TERM=xterm-256color
+#[ -z "$TMUX" ] &&
+export TERM=xterm-256color
 
 #prevent flow control
 stty -ixon
@@ -182,6 +183,7 @@ export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]
 PHANTOMJS=$HOME/phantomjs
 export PATH=$PHANTOMJS/bin:$PATH
 
+export PATH=~/.npm-global/bin:$PATH
 #export PATH=$PATH:/opt/less/bin
 #export NODE_PATH=$NODE_PATH:/opt/less/lib
 
@@ -202,3 +204,5 @@ alias nf="noflo"
 #export PATH="/usr/local/heroku/bin:$PATH"
 #xmodmap ~/.Xmodmap
 #export NODE_ENV=local
+export GTAGSCONF=/usr/local/share/gtags/gtags.conf
+export GTAGSLABEL=new-ctags
