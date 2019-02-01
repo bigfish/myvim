@@ -36,12 +36,12 @@ bind Tab copy-mode
 unbind p
 bind p paste-buffer
 
-bind-key -t vi-copy      h cursor-left
-bind-key -t vi-copy      t cursor-down
-bind-key -t vi-copy      n cursor-up
-bind-key -t vi-copy      s cursor-right
-bind-key -t vi-copy      U scroll-up
-bind-key -t vi-copy      K scroll-down
+bind-key -T copy-mode-vi      h send-keys -X cursor-left
+bind-key -T copy-mode-vi      t send-keys -X cursor-down
+bind-key -T copy-mode-vi      n send-keys -X cursor-up
+bind-key -T copy-mode-vi      s send-keys -X cursor-right
+bind-key -T copy-mode-vi      U send-keys -X scroll-up
+bind-key -T copy-mode-vi      K send-keys -X scroll-down
 
 set -g status-fg white
 set -g status-bg default
@@ -75,11 +75,11 @@ set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 setw -g mode-keys vi
 # Setup 'v' to begin selection as in Vim
-bind -t vi-copy 'v' begin-selection
-#bind -t vi-copy 'y' copy-selection
-bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+#bind -t copy-mode-vi 'y' send-keys -X copy-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe "reattach-to-user-namespace pbcopy"
+set-option -g default-shell "/bin/bash"
 
 # Update default binding of `Enter` to also use copy-pipe
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
-
+unbind-key -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe "reattach-to-user-namespace pbcopy"

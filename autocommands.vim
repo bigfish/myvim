@@ -146,14 +146,14 @@ au! BufWritePre * :silent! %s/\s\+$//g
 "autocmd FileType javascript noremap <buffer>  <localleader>f :call JsBeautify()<cr>
 
 "now using esformatter for javascript/jsx
-au FileType javascript nnoremap <silent> <C-f> :Esformatter<CR>
-au FileType javascript vnoremap <silent> <C-f> :EsformatterVisual<CR>
+"au FileType javascript nnoremap <silent> <C-f> :Esformatter<CR>
+"au FileType javascript vnoremap <silent> <C-f> :EsformatterVisual<CR>
 
 "use stylefmt for css/scss
-au FileType css nnoremap <silent> <C-f> :Stylefmt<CR>
-au FileType css vnoremap <silent> <C-f> :StylefmtVisual<CR>
-au FileType scss nnoremap <silent> <C-f> :Stylefmt<CR>
-au FileType scss vnoremap <silent> <C-f> :StylefmtVisual<CR>
+"au FileType css nnoremap <silent> <C-f> :Stylefmt<CR>
+"au FileType css vnoremap <silent> <C-f> :StylefmtVisual<CR>
+"au FileType scss nnoremap <silent> <C-f> :Stylefmt<CR>
+"au FileType scss vnoremap <silent> <C-f> :StylefmtVisual<CR>
 
 " for json
 autocmd FileType json noremap <buffer> <C-f> :call JsonBeautify()<cr>
@@ -175,3 +175,9 @@ autocmd FileType html noremap <buffer> <localleader>f :call HtmlBeautify()<cr>
 
 autocmd BufRead .stylelintrc :set ft=json
 autocmd BufRead .eslintrc :set ft=json
+
+"autocmd InsertEnter *.js :JSContextColorToggle
+"autocmd InsertLeave *.js :JSContextColorToggle
+
+"autocmd InsertEnter *.js :call JSCC_Disable()
+"autocmd InsertLeave *.js :call JSCC_Enable()

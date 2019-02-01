@@ -30,7 +30,13 @@ snippet clos
 	}());
 
 snippet clog
-	console.log(${1})
+	console.log('${1}');
+
+snippet cl
+	console.log('${1}');
+
+snippet cv
+	console.log('$1', ${1:});
 
 snippet define
 	define([${1}], function (${2}) {
