@@ -25,7 +25,11 @@ inoremap <C-f> <RIGHT>
 inoremap <C-b> <LEFT>
 inoremap <C-p> <UP>
 inoremap <C-n> <DOWN>
-
+"invoke FZF commands
+nnoremap <C-p> :Files<C-m>
+nnoremap <C-f> :Ag<C-m>
+nnoremap <C-g> :Tags<C-m>
+nnoremap <C-b> :Buffers<C-m>
 "inoremap <C-a> <Esc>^i
 "inoremap <C-e> <Esc>$a
 
@@ -120,9 +124,12 @@ nnoremap <C-k> :q!<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 
 "Buf (E)xplorer
-nnoremap <C-e> :BufExplorer<CR>
+"nnoremap <C-e> :BufExplorer<CR>
+"nnoremap <C-e> :BufExplorer<CR>
+"remapping to FZF Buffers
+nnoremap <m-space> <C-b>
 
-"TagList toggle
+"TagList open (will close on selection or q closes)
 nnoremap -t :TagbarToggle<CR>
 
 " MARKDOWN
@@ -169,6 +176,7 @@ nnoremap <leader>p "+p
 "pop tag sTack with Backspace
 "(g)o to tag
 nnoremap <leader>t <C-]>
+"nnoremap <CR> <C-]>
 nnoremap <BS> <C-T>
 
 "insert filename
@@ -188,9 +196,12 @@ nnoremap -l :set list!<cr>
 nnoremap -c :set ignorecase!<cr>
 " Other mappings are provided by Unimpaired.vim --use ,. instead of []
 
+nnoremap <space> <c-f>
+nnoremap <c-space> <c-b>
+
 "Go To Spec (mocha)
 "
-nnoremap gs :call GoToSpec()<cr>
+nnoremap gs :call GoToSpec3()<cr>
 
 "c(ss)"
 nnoremap gc :call GoToCSS()<cr>
@@ -199,7 +210,7 @@ nnoremap gc :call GoToCSS()<cr>
 nnoremap <c-j> /<+.\{-1,}+><cr>c/+>/e<cr>
 inoremap <c-j> <ESC>/<+.\{-1,}+><cr>c/+>/e<cr>
 
-let g:user_emmet_expandabbr_key='<C-e>'
+"let g:user_emmet_expandabbr_key='<C-e>'
 
 "open file with associated app
 if has('macunix')
@@ -235,4 +246,8 @@ vmap <Nul> <Nop>
 nnoremap <C-i> :call AddImport()<CR>
 nnoremap <leader>f :call EditFile()<CR>
 "nnoremap <localleader>f :call EditFile()<CR>
+"
+let g:fzf_tags_command = '~/.git_template/hooks/post-checkout'
 
+
+nnoremap <leader>p :%s/\(\d\+\)px/px(\1)/g<CR>

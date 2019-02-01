@@ -63,12 +63,12 @@ $endif
 # "\e[H": beginning-of-line
 # "\e[F": end-of-line
 
-"\C-s": "ls\C-m"
-"\C-t": "ls -la\C-m"
-"\C-k": "exit\C-m"
-"\C-u": "cd ..\C-m"
+"\C-f": "vf\C-m"
+"\C-s": "ls -laGH\C-m"
+#"\C-u": "cd ..\C-m"
 
 set completion-map-case on
 set completion-ignore-case on
 set show-all-if-ambiguous on
+#TAB: menu-complete
 

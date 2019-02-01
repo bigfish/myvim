@@ -178,6 +178,30 @@ function! GoToSpec2()
 
 endfunction
 
+"open/create in foo.spec.js in same dir as module under test
+function! GoToSpec3()
+
+    "get current file name and path
+    let curpath = expand("%:p")
+
+    let basepath_arr = split(curpath, '/')
+
+    "remove the filename from the path array
+    call remove(basepath_arr, -1)
+
+    "get the root of the filename (no extension)
+    let curfile = expand("%:t:r")
+
+    "derive the name of the spec
+    let specname = curfile . '.' . 'test.js'
+
+    "set the spec path to current path + specname
+    let specpath = '/' . join(basepath_arr, '/') . '/' . specname
+
+    exe 'vsplit' . specpath
+
+endfunction
+
 "go to Sass file for component, looks for styles dir in hierarchy
 function! GoToCSS()
 

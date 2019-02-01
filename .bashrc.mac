@@ -49,21 +49,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+#if [ "$color_prompt" = yes ]; then
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#else
+    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
+#unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -79,7 +70,7 @@ fi
 
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
+alias la='ls -laGH'
 alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -95,6 +86,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+#.bash_profile
+#[ -d "/usr/local/opt/python@2/bin" ] && export PATH="/usr/local/opt/python@2/bin:$PATH"
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -102,15 +96,12 @@ fi
     #. /etc/bash_completion
 #fi
 
-############################################# PERSONAL #########################################
-#[[ -s /Users/dwilhelm/.autojump/etc/profile.d/autojump.sh ]] && source /Users/dwilhelm/.autojump/etc/profile.d/autojump.sh
-
-eval "$(fasd --init auto)"
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 ################## ALIASES ###########################
 alias ga='git add'
 alias gp='git push'
-alias gps='git push'
+alias gpf='git push'
 alias gl='git log'
 alias gs='git status'
 alias gd='git diff'
@@ -128,90 +119,71 @@ alias grs='git reset --hard HEAD'
 alias ks='ls -lhFGv'
 alias cls=clear
 alias ff="firefox &>/dev/null &"
-export NODE_PATH=/usr/local/lib/node_modules
-export EDITOR=vim
-export PAGER=less
+#moved to .bash_profile:
+#export NODE_PATH=/Users/david/.npm-packages
+#export EDITOR=vim
+#export PAGER=less
+
 #enable 256 colors in vim
-[ -z "$TMUX" ] && export TERM=xterm-256color
+#moved to .bash_profile
+#[ -z "$TMUX" ] && export TERM=xterm-256color
 
 #prevent flow control
 stty -ixon
 stty stop ''
 stty start ''
-#RVM (ruby version manager)
-#source ~/.rvm/scripts/rvm
-#tmuxinator
-#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 alias vi="/usr/bin/vim"
-alias chat="weechat-curses irc://exinda-mvnrepo.wat.exinda.com"
-alias apti="sudo apt-get install"
-alias repache='sudo apache2ctl restart'
-alias rebash=". ~/.bashrc"
 alias psa="ps aux | grep"
-alias dev="bundle exec guard"
 alias msyql="mysql"
-alias phpi="sudo vim /etc/php5/apache2/php.ini"
-alias alog="tail -f /var/log/apache2/error.log"
 alias hosts="sudo vim /etc/hosts"
 alias wd="webpack-dev-server"
 alias dc="docker-compose"
 alias di="docker images"
 alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --ignore-certificate-errors >&/dev/null &"
-alias kc="kubectl"
-alias mini="minikube"
-alias ksc="kubectl get -n security-portal services"
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+alias emc="emacsclient"
+#export LC_CTYPE=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 #LESS COLORS
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+#moved to .bash_profile...
+#export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 #CONFIGURE PATH
-export PATH=$HOME/bin:$PATH
-export LESS=' -R '
-export NPM_TOKEN="Y7scLoHKtOXhnDI0EeO5vSFEbIyM+96gs6t/lof0WjE="
+#export PATH=$NODE_PATH/bin:$HOME/bin:$PATH
+#export LESS=' -R '
 
-if [ `hostname` = es-mbp-dedavidw.local ];then
-        . ~/.esentire_rc.sh
-fi
+. ~/bin/git-completion.bash
 
 #parse_git_branch() {
     #git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 #}
+. ~/bin/git-prompt.sh
+#moved to .bash_profile...
+#export GIT_PS1_SHOWDIRTYSTATE=1
+#export PS1='\w$(__git_ps1 " (%s)") \[\e[0;32m\]>:\[\e[m\] '
 
 #export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
-export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$()\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
-. /Users/dwilhelm/bin/git-prompt/git-prompt
-
-export PROMPT_COMMAND=git_prompt
+#export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$()\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
+#PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+# changing PROMPT_COMMAND breaks autojump :/
+#export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+#PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+#PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+#moved to .bash_profile...
+#export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 
 set t_Co=256
 
-[ -d "/usr/local/opt/python@2/bin" ] && export PATH="/usr/local/opt/python@2/bin:$PATH"
 #. ~/nvm/nvm.sh
 
 #if [ -f $(brew --prefix)/etc/bash_completion ]; then
     #. $(brew --prefix)/etc/bash_completion
 #fi
 
-# this slows down startup by seconds!
-#if [ -f $(brew --prefix nvm)/nvm.sh ];then
-    #source $(brew --prefix nvm)/nvm.sh
-#fi
-
-#nvm use --delete-prefix v6.9.1 > /dev/null
-
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+#moved to .bash_profile...
+#export CLICOLOR=1
+#export LSCOLORS=GxFxCxDxBxegedabagaced
 set -o emacs
-
-export PATH=$PATH:$HOME/testcases/bin
-export NODE_ENV=development
-
-export NEOVIM_JS_DEBUG=$HOME/.nvjslog
-export PATH=$PATH:/Users/dwilhelm/Library/Python/2.7/lib/python/site-packages/django/bin
-export ALERTING_GUI=$HOME/dev/soc-alerting-gui/src/AlertingGUI
 alias dm=docker-machine
-export HOMEBREW_GITHUB_API_TOKEN=1defaa675aa87ea7d7e6c1033eb82fbc011ea17d
 
 find_npm_module() {
   module=$1
@@ -234,3 +206,10 @@ else
     cd "$1" && ls
 fi
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#moved to .bash_profile
+#export FZF_DEFAULT_COMMAND='fd --type f'
+#export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
+#export FZF_TMUX=1
+#export GTAGSLABEL=ctags
