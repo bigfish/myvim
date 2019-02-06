@@ -63,6 +63,7 @@ $endif
 # "\e[H": beginning-of-line
 # "\e[F": end-of-line
 
+"\C-n": "npf\C-m"
 "\C-f": "vf\C-m"
 "\C-s": "ls -laGH\C-m"
 #"\C-u": "cd ..\C-m"
