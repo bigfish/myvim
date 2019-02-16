@@ -36,7 +36,6 @@ values."
      html
      ;;(javascript :variables javascript-disable-tern-port-files nil)
      javascript
-
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -313,10 +312,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded.  you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
   (setq vc-follow-symlinks t)
   (setq js-indent-level 2)
-  (spacemacs/add-flycheck-hook 'rjsx-mode)
+  (setq css-indent-offset 2)
+  (setq srcery-transparent-background t)
+  (setq srcery-invert-region nil)
+  (set-face-attribute 'region nil :background "brown")
 )
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -326,11 +327,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-(require 'evil-dvorak)
-;; (global-evil-dvorak-mode 1)
-;;(my-evil-dvorak-customizations)
 (evilnc-default-hotkeys)
-
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -361,7 +359,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yapfify stickyfunc-enhance pyvenv pytest pyenv-mode py-isort pippel pipenv pip-requirements live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-cscope xcscope cython-mode counsel-gtags company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (company-php ac-php-core xcscope rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
