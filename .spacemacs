@@ -34,13 +34,13 @@ values."
      php
      python
      html
-     ;;(javascript :variables javascript-disable-tern-port-files nil)
-     javascript
+     (javascript :variables javascript-disable-tern-port-files t)
+     react
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
-     ;; ---------------------------------------------------------------- vascript :variables javascript-disable-tern-port-files nil)helm
+     ;; ----------------------------------------------------------------
      (auto-completion :variables auto-completion-enable-snippets-in-popup t)
      gtags
 
@@ -55,12 +55,16 @@ values."
      ;; spell-checking
      syntax-checking
      ;; version-control
+     templates
+     ;; (templates :variables templates-use-default-templates nil)
+     helm
+     ;; (templates :variables templates-private-directory "~/.emacs.d/private/templates")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(evil-dvorak srcery-theme groovy-mode rjsx-mode)
+   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -144,11 +148,11 @@ zonokai-blue
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
-                               :weight normal
-                               :width normal
-                               :powerline-scale 1.1)
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;;                             :size 13
+   ;;                             :weight normal
+   ;;                             :width normal
+   ;;                             :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -239,15 +243,15 @@ zonokai-blue
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 80
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-inactive-transparency 90
+   dotspacemacs-inactive-transparency 60
    ;; If non nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
    ;; If non nil show the color guide hint for transient state keys. (default t)
@@ -315,10 +319,18 @@ before packages are loaded.  you are unsure, you should try in setting them in
   (setq vc-follow-symlinks t)
   (setq js-indent-level 2)
   (setq css-indent-offset 2)
-  (setq srcery-transparent-background t)
-  (setq srcery-invert-region nil)
-  (set-face-attribute 'region nil :background "brown")
+  (setq-default srcery-transparent-background t)
+  (setq-default srcery-invert-region nil)
+  (setq-default line-spacing 2)
+  (desktop-save-mode nil)
+  (setq desktop-path (list "~/dev"))
+  (setq-default helm-ag-base-command "rg --no-heading")
 )
+
+(defun my/autoinsert-yas-expand()
+  "Replace text in yasnippet template."
+  (yas/expand-snippet (buffer-string) (point-min) (point-max)))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -326,11 +338,75 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
 (evilnc-default-hotkeys)
-(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+(add-hook 'rjsx-mode-hook 'evil-matchit-mode)
+(setq-default frame-title-format "%b")
+(set-face-background 'hl-line "#282828")
+(set-face-attribute 'lazy-highlight nil :background "#efcf17" :foreground "black")
+(set-face-attribute 'region nil :background  "#275396" :weight 'bold)
 )
 
+(defun xah-open-file-at-cursor ()
+  "Open the file path under cursor.
+If there is text selection, uses the text selection for path.
+If the path starts with “http://”, open the URL in browser.
+Input path can be {relative, full path, URL}.
+Path may have a trailing “:‹n›” that indicates line number. If so, jump to that line number.
+If path does not have a file extension, automatically try with “.el” for elisp files.
+This command is similar to `find-file-at-point' but without prompting for confirmation.
+
+URL `http://ergoemacs.org/emacs/emacs_open_file_path_fast.html'
+Version 2019-01-16"
+  (interactive)
+  (let* (($inputStr (if (use-region-p)
+                        (buffer-substring-no-properties (region-beginning) (region-end))
+                      (let ($p0 $p1 $p2
+                                ;; chars that are likely to be delimiters of file path or url, e.g. whitespace, comma. The colon is a problem. cuz it's in url, but not in file name. Don't want to use just space as delimiter because path or url are often in brackets or quotes as in markdown or html
+                                ($pathStops "^  \t\n\"`'‘’“”|[]{}「」<>〔〕〈〉《》【】〖〗«»‹›❮❯❬❭〘〙·。\\"))
+                        (setq $p0 (point))
+                        (skip-chars-backward $pathStops)
+                        (setq $p1 (point))
+                        (goto-char $p0)
+                        (skip-chars-forward $pathStops)
+                        (setq $p2 (point))
+                        (goto-char $p0)
+                        (buffer-substring-no-properties $p1 $p2))))
+         ($path
+          (replace-regexp-in-string
+           "^file:///" "/"
+           (replace-regexp-in-string
+            ":\\'" "" $inputStr))))
+    (if (string-match-p "\\`https?://" $path)
+        (if (fboundp 'xahsite-url-to-filepath)
+            (let (($x (xahsite-url-to-filepath $path)))
+              (if (string-match "^http" $x )
+                  (browse-url $x)
+                (find-file $x)))
+          (progn (browse-url $path)))
+      (if ; not starting “http://”
+          (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" $path)
+          (let (
+                ($fpath (match-string 1 $path))
+                ($line-num (string-to-number (match-string 2 $path))))
+            (if (file-exists-p $fpath)
+                (progn
+                  (find-file $fpath)
+                  (goto-char 1)
+                  (forward-line (1- $line-num)))
+              (when (y-or-n-p (format "file no exist: 「%s」. Create?" $fpath))
+                (find-file $fpath))))
+        (if (file-exists-p $path)
+            (progn ; open f.ts instead of f.js
+              (let (($ext (file-name-extension $path))
+                    ($fnamecore (file-name-sans-extension $path)))
+                (if (and (string-equal $ext "js")
+                         (file-exists-p (concat $fnamecore ".ts")))
+                    (find-file (concat $fnamecore ".ts"))
+                  (find-file $path))))
+          (if (file-exists-p (concat $path ".el"))
+              (find-file (concat $path ".el"))
+            (when (y-or-n-p (format "file no exist: 「%s」. Create?" $path))
+              (find-file $path ))))))))
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -341,12 +417,6 @@ you should place your code here."
  '(package-selected-packages
    (quote
     (rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -360,10 +430,4 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    (quote
     (company-php ac-php-core xcscope rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 )
