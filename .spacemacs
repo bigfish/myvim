@@ -30,11 +30,10 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     php
+   '(yaml
      python
      html
-     (javascript :variables javascript-disable-tern-port-files t)
+     (javascript :variables javascript-disable-tern-port-files t node-add-modules-path t)
      react
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -55,16 +54,17 @@ values."
      ;; spell-checking
      syntax-checking
      ;; version-control
-     templates
-     ;; (templates :variables templates-use-default-templates nil)
+     ;; templates
+     (templates :variables templates-use-default-templates nil)
      helm
      ;; (templates :variables templates-private-directory "~/.emacs.d/private/templates")
+     (treemacs :variables treemacs-use-follow-mode t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy)
+   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -275,7 +275,7 @@ zonokai-blue
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'absolute
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -325,6 +325,8 @@ before packages are loaded.  you are unsure, you should try in setting them in
   (desktop-save-mode nil)
   (setq desktop-path (list "~/dev"))
   (setq-default helm-ag-base-command "rg --no-heading")
+  (add-hook 'js-mode-hook #'smartparens-mode)
+  (setq-default global-visual-line-mode t)
 )
 
 (defun my/autoinsert-yas-expand()
@@ -344,6 +346,18 @@ you should place your code here."
 (set-face-background 'hl-line "#282828")
 (set-face-attribute 'lazy-highlight nil :background "#efcf17" :foreground "black")
 (set-face-attribute 'region nil :background  "#275396" :weight 'bold)
+(setq auto-insert-query nil)
+(smartp)
+(setq js2-mode-show-parse-errors nil js2-mode-show-strict-warnings nil)
+;;(eval-after-load 'js2-mode
+;;'(add-hook 'js2-mode-hook #'add-node-modules-path))
+(eval-after-load 'js-mode
+  '(add-hook 'js-mode-hook #'add-node-modules-path))
+(eval-after-load 'js2-mode
+  '(add-hook 'js-mode-hook #'add-node-modules-path))
+(eval-after-load 'rjsx-mode
+  '(add-hook 'js-mode-hook #'add-node-modules-path))
+
 )
 
 (defun xah-open-file-at-cursor ()
@@ -429,5 +443,11 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-php ac-php-core xcscope rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (yaml-mode rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 )
