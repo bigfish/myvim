@@ -64,7 +64,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path)
+   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path prettier-js)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -183,7 +183,7 @@ zonokai-blue
    dotspacemacs-retain-visual-state-on-shift t
    ;; If non-nil, J and K move lines up and down when in visual mode.
    ;; (default nil)
-   dotspacemacs-visual-line-move-text nil
+   dotspacemacs-visual-line-move-text t
    ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
    ;; (default nil)
    dotspacemacs-ex-substitute-global nil
@@ -213,7 +213,7 @@ zonokai-blue
    dotspacemacs-helm-no-header nil
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'bottom
+   dotspacemacs-helm-position 'top
    ;; Controls fuzzy matching in helm. If set to `always', force fuzzy matching
    ;; in all non-asynchronous sources. If set to `source', preserve individual
    ;; source settings. Else, disable fuzzy matching in all sources.
@@ -247,6 +247,10 @@ zonokai-blue
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+
+   
+   dotspacemacs-mode-line-theme 'spacemacs
+
    dotspacemacs-active-transparency 80
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
@@ -324,8 +328,10 @@ before packages are loaded.  you are unsure, you should try in setting them in
   (setq-default line-spacing 2)
   (desktop-save-mode nil)
   (setq desktop-path (list "~/dev"))
-  (setq-default helm-ag-base-command "rg --no-heading")
+  (setq-default helm-ag-base-command "rg --no-heading --color never")
   (add-hook 'js-mode-hook #'smartparens-mode)
+  (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
   (setq-default global-visual-line-mode t)
 )
 
@@ -357,7 +363,11 @@ you should place your code here."
   '(add-hook 'js-mode-hook #'add-node-modules-path))
 (eval-after-load 'rjsx-mode
   '(add-hook 'js-mode-hook #'add-node-modules-path))
-
+(setq prettier-js-args '("--quotes" "single"))
+(setq auto-revert-check-vc-info t)
+;(set-face-attribute 'helm-selection nil 
+;                    :background "#282828"
+;                    :foreground "orange")
 )
 
 (defun xah-open-file-at-cursor ()

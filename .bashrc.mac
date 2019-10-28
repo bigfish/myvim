@@ -147,9 +147,14 @@ alias emc="emacsclient"
 #LESS COLORS
 #moved to .bash_profile...
 #export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESS=" -R "
 #CONFIGURE PATH
 #export PATH=$NODE_PATH/bin:$HOME/bin:$PATH
 #export LESS=' -R '
+
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
 
 . ~/bin/git-completion.bash
 
