@@ -49,8 +49,7 @@ Plugin 'tpope/vim-fugitive.git'
 Plugin 'idanarye/vim-merginal'
 "Plugin 'bigfish/vim-js-beautify.git'
 "Plugin 'maksimr/vim-jsbeautify.git'
-Plugin 'altercation/vim-colors-solarized'
-
+Plugin 'srcery-colors/srcery-vim'
 "Plugin 'millermedeiros/vim-esformatter'
 
 "disabling to debug perf:
@@ -115,7 +114,8 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 "colorscheme volcanic
-colorscheme vividchalk
+"colorscheme vividchalk
+colorscheme srcery
 
 " ************************ OPTIONS ********************************
 
@@ -123,7 +123,7 @@ colorscheme vividchalk
 set backspace=indent,eol,start
 
 "don't clutter up workspace with backup & swap file
-set backupdir=~/tmp
+set backupdir=/tmp
 set history=100
 set incsearch    " do incremental searching
 set noswapfile

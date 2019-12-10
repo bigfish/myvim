@@ -15,7 +15,6 @@ brew "fzf"
 brew "git"
 brew "libtool"
 brew "nginx"
-brew "node", link: false
 brew "pkg-config"
 brew "reattach-to-user-namespace"
 brew "ripgrep"

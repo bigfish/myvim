@@ -353,7 +353,6 @@ you should place your code here."
 (set-face-attribute 'lazy-highlight nil :background "#efcf17" :foreground "black")
 (set-face-attribute 'region nil :background  "#275396" :weight 'bold)
 (setq auto-insert-query nil)
-(smartp)
 (setq js2-mode-show-parse-errors nil js2-mode-show-strict-warnings nil)
 ;;(eval-after-load 'js2-mode
 ;;'(add-hook 'js2-mode-hook #'add-node-modules-path))

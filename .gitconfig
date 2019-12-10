@@ -3,3 +3,6 @@
   ci = commit
   st = status
   br = branch
+[user]
+	name = David Wilhelm
+	email = david.wilhelm@perkinelmer.com

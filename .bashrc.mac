@@ -217,3 +217,13 @@ fi
 #export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
 #export FZF_TMUX=1
 #export GTAGSLABEL=ctags
+eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
+
+#eval $(gdircolors ~/.dircolors/dircolors.moonshine)
+# Aliases
+alias ls='gls --group-directories-first --color=auto'
+alias ll='ls -al'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
