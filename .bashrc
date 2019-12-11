@@ -1,6 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -34,7 +31,6 @@ case "$TERM" in
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
-
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
@@ -49,38 +45,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# if [ -x /usr/bin/dircolors ]; then
+#     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+#     alias ls='ls --color=auto'
+#     alias grep='grep --color=auto'
+#     alias fgrep='fgrep --color=auto'
+#     alias egrep='egrep --color=auto'
+# fi
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -91,118 +63,99 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.vim/.bash_aliases ]; then
+    . ~/.vim/.bash_aliases
 fi
+
+#.bash_profile
+#[ -d "/usr/local/opt/python@2/bin" ] && export PATH="/usr/local/opt/python@2/bin:$PATH"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    #. /etc/bash_completion
+#fi
 
-############################################# PERSONAL #########################################
-. /usr/share/autojump/autojump.sh
-################## ALIASES ###########################
-alias ga='git add'
-alias gp='git push'
-alias gps='git push'
-alias gl='git log'
-alias gs='git status'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gca='git commit -a'
-alias gcam='git commit -am'
-alias gb='git branch'
-alias gco='git checkout'
-alias gpl='git pull'
-alias gpr='git pull --rebase'
-alias gcl='git clone'
-alias grs='git reset --hard HEAD'
-alias ks='ls -lhFGv'
-alias cls=clear
-alias ff="firefox &>/dev/null &"
-#export NODE_PATH=/usr/local/lib/node_modules
-export EDITOR=vim
-export PAGER=less
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+#moved to .bash_profile:
+#export EDITOR=vim
+#export PAGER=less
+
 #enable 256 colors in vim
-#[ -z "$TMUX" ] &&
-export TERM=xterm-256color
+#moved to .bash_profile
+#[ -z "$TMUX" ] && export TERM=xterm-256color
 
 #prevent flow control
 stty -ixon
 stty stop ''
 stty start ''
-#RVM (ruby version manager)
-#source ~/.rvm/scripts/rvm
-#tmuxinator
-#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-alias vi=vim
-alias vs="vim --servername VIM"
-alias chat="weechat-curses irc://exinda-mvnrepo.wat.exinda.com"
-alias apti="sudo apt-get install"
-alias repache='sudo apache2ctl graceful'
-alias rebash=". ~/.bashrc"
-alias psa="ps aux | grep"
-alias dev="bundle exec guard"
-alias msyql="mysql"
-alias my="mysql -uroot -pexinda -hlocalhost"
-alias phpi="sudo vim /etc/php5/apache2/php.ini"
-alias alog="tail -f /var/log/apache2/error.log"
-alias hosts="sudo vim /etc/hosts"
-alias remap="xmodmap ~/.Xmodmap"
+#export LC_CTYPE=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 #LESS COLORS
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+#moved to .bash_profile...
+#export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESS=" -R "
 #CONFIGURE PATH
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/google_appengine:$PATH
-export LESS=' -R '
-export CUCUMBER_BROWSER=chrome
-export CLOJURESCRIPT_HOME=$HOME/git/clojurescript
-export PATH=$CLOJURESCRIPT_HOME/bin:$PATH
-export JSCC_HOME=$HOME/.vim/bundle/vim-js-context-coloring
-#alias emacs="emacs -nw"
-alias scheme="mit-scheme"
-alias edwin="mit-scheme --edit --heap 100000"
-export LTHOME=$HOME/LightTable
-export PATH=$PATH:$LTHOME
+#export PATH=$NODE_PATH/bin:$HOME/bin:$PATH
+#export LESS=' -R '
 
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
 
-#export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch) \[\033[00m\]$\[\033[00m\] "
+. ~/bin/git-completion.bash
 
-#export PS1="\\[$(tput setaf 7)\\]\[\e[0;31m\]\\h\[\e[0;31m\]\[\e[m\] \[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\] \[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\n\[\e[1;32m\]>: \[\e[1;32m\]\\[$(tput sgr0)\\]"
-export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
+#parse_git_branch() {
+    #git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+#}
+. ~/bin/git-prompt.sh
+set t_Co=256
 
-PHANTOMJS=$HOME/phantomjs
-export PATH=$PHANTOMJS/bin:$PATH
-
-export PATH=~/.npm-global/bin:$PATH
-#export PATH=$PATH:/opt/less/bin
-#export NODE_PATH=$NODE_PATH:/opt/less/lib
-
-#. ~/nvm/nvm.sh
+#if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    #. $(brew --prefix)/etc/bash_completion
+#fi
 
 set -o emacs
 
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+go()
+{
+if [ -f "$1" ]
+then
+    $EDITOR "$1"
+else
+    cd "$1" && ls
+fi
+}
 
-#export PATH=$PATH:/home/david/clojure/clojure-1.5.1
-#export RUBYDB_LIB=$HOME/KomodoIDE/INSTALLDIR/lib/support/dbgp/rubylib
-#export RUBYDB_OPTS="HOST=localhost PORT=9000"
-#alias ruby_debug="ruby -I$RUBYDB_LIB -r $RUBYDB_LIB/rdbgp.rb"
-alias dv="setxkbmap dvorak"
-alias us="setxkbmap us"
-alias nf="noflo"
-### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
-#xmodmap ~/.Xmodmap
-#export NODE_ENV=local
-export GTAGSCONF=/usr/local/share/gtags/gtags.conf
-export GTAGSLABEL=new-ctags
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export BASH_SILENCE_DEPRECATION_WARNING=0
+#export GIT_PS1_SHOWDIRTYSTATE=1
+#export PS1='\w$(__git_ps1 " (%s)") \[\e[0;32m\]>:\[\e[m\] '
+
+#export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$(parse_git_branch)\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
+#export PS1="\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]\$()\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"
+#PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+# changing PROMPT_COMMAND breaks autojump :/
+#export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+#PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+#moved to .bash_profile...
+#export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
+
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
+export FZF_TMUX=1
+export GTAGSLABEL=ctags

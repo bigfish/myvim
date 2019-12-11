@@ -1,3 +1,4 @@
+#!/usr/local/bin/bash
 ;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
@@ -30,7 +31,11 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '(
+    (shell :variables shell-default-term-shell "/usr/local/bin/bash")
+     typescript
+     osx
+     yaml
      python
      html
      (javascript :variables javascript-disable-tern-port-files t node-add-modules-path t)
@@ -40,7 +45,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :variables auto-completion-enable-snippets-in-popup t)
+     (auto-completion :variables auto-completion-enable-snippets-in-popup t treemacs-use-filewatch-mode t treemacs-use-git-mode 'simple)
      gtags
 
      ;; better-defaults
@@ -64,7 +69,8 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path prettier-js)
+   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path prettier-js gnutls deadgrep npm-mode)
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -93,9 +99,9 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 20
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -248,7 +254,7 @@ zonokai-blue
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
 
-   
+
    dotspacemacs-mode-line-theme 'spacemacs
 
    dotspacemacs-active-transparency 80
@@ -333,6 +339,9 @@ before packages are loaded.  you are unsure, you should try in setting them in
   (add-hook 'js-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (setq-default global-visual-line-mode t)
+  (global-set-key (kbd "H-f") #'deadgrep)
+  (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag)
+  (spacemacs/loadenv)
 )
 
 (defun my/autoinsert-yas-expand()
@@ -364,7 +373,7 @@ you should place your code here."
   '(add-hook 'js-mode-hook #'add-node-modules-path))
 (setq prettier-js-args '("--quotes" "single"))
 (setq auto-revert-check-vc-info t)
-;(set-face-attribute 'helm-selection nil 
+;(set-face-attribute 'helm-selection nil
 ;                    :background "#282828"
 ;                    :foreground "orange")
 )
@@ -450,9 +459,28 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(hl-todo-keyword-faces
+   (quote
+    (("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f"))))
  '(package-selected-packages
    (quote
-    (yaml-mode rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (tide typescript-mode import-js grizzl rjsx-mode groovy-mode impatient-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yapfify web-mode tagedit slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements live-py-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode cython-mode company-web web-completion-data company-anaconda anaconda-mode pythonic helm-gtags ggtags flycheck-pos-tip evil-magit smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md pos-tip flycheck magit-popup git-commit with-editor helm-company helm-c-yasnippet fuzzy company-tern dash-functional tern company-statistics company auto-yasnippet ac-ispell auto-complete evil-dvorak web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#292b2e"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
