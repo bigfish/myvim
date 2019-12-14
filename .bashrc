@@ -163,3 +163,5 @@ export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=new-ctags
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PATH=/usr/local/bin:$PATH

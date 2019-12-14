@@ -68,7 +68,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path prettier-js gnutls deadgrep npm-mode)
+   dotspacemacs-additional-packages '(exec-path-from-shell srcery-theme groovy-mode rjsx-mode pbcopy indium add-node-modules-path prettier-js gnutls deadgrep npm-mode tide)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -158,6 +158,11 @@ zonokai-blue
    ;;                             :weight normal
    ;;                             :width normal
    ;;                             :powerline-scale 1.1)
+   dotspacemacs-default-font '("Meslo LG M DZ for Powerline"
+                               :size 13
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -337,31 +342,7 @@ before packages are loaded.  you are unsure, you should try in setting them in
   (add-hook 'js-mode-hook #'smartparens-mode)
   (add-hook 'js-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
-  (setq-default global-visual-line-mode t)
-  (global-set-key (kbd "H-f") #'deadgrep)
-  (evil-leader/set-key "/" 'spacemacs/helm-project-do-ag)
-  (spacemacs/loadenv)
-)
-
-(defun my/autoinsert-yas-expand()
-  "Replace text in yasnippet template."
-  (yas/expand-snippet (buffer-string) (point-min) (point-max)))
-
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
-(evilnc-default-hotkeys)
-(add-hook 'rjsx-mode-hook 'evil-matchit-mode)
-(setq-default frame-title-format "%b")
-(set-face-background 'hl-line "#282828")
-(set-face-attribute 'lazy-highlight nil :background "#efcf17" :foreground "black")
-(set-face-attribute 'region nil :background  "#275396" :weight 'bold)
-(setq auto-insert-query nil)
-(setq js2-mode-show-parse-errors nil js2-mode-show-strict-warnings nil)
+  (setq-default global-visual-line- nil js2-mode-show-strict-warnings nil)
 ;;(eval-after-load 'js2-mode
 ;;'(add-hook 'js2-mode-hook #'add-node-modules-path))
 (eval-after-load 'js-mode
