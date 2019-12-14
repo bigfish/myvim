@@ -6,7 +6,7 @@ if v:progname =~? "evim"
   finish
 endif
 
-
+set shell=bash
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -18,6 +18,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 set rtp+=~/.vim/bundle/vim-css-lint
+set rtp+=/usr/local/opt/fzf
 
 call vundle#begin()
 
@@ -26,14 +27,15 @@ Plugin 'neovim/node-host'
 endif
 
 "Plugin 'nishigori/vim-php-dictionary'
-"Plugin 'mileszs/ack.vim.git'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mileszs/ack.vim.git'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 "Plugin 'kien/ctrlp.vim.git'
 "Plugin 'bolasblack/csslint.vim'
-
+Plugin 'junegunn/fzf.vim'
 "Plugin 'mattn/gist-vim.git'
 "Plugin 'bigfish/js-taglist.git'
+Plugin 'majutsushi/tagbar'
 "Plugin 'Valloric/ListToggle.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'editorconfig/editorconfig-vim'
@@ -47,15 +49,16 @@ Plugin 'tpope/vim-fugitive.git'
 Plugin 'idanarye/vim-merginal'
 "Plugin 'bigfish/vim-js-beautify.git'
 "Plugin 'maksimr/vim-jsbeautify.git'
-
+Plugin 'srcery-colors/srcery-vim'
 "Plugin 'millermedeiros/vim-esformatter'
+Plugin 'dag/vim-fish'
 
 "disabling to debug perf:
 "Plugin 'pangloss/vim-javascript'
 
 "disabling to debug perf:
 Plugin 'bigfish/vim-js-context-coloring.git'
-
+Plugin 'airblade/vim-rooter'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'craigemery/vim-autotag'
 
@@ -108,10 +111,12 @@ set mouse=a
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  "syntax on
+  syntax on
 endif
 
 "colorscheme volcanic
+"colorscheme vividchalk
+colorscheme srcery
 
 " ************************ OPTIONS ********************************
 
@@ -119,7 +124,7 @@ endif
 set backspace=indent,eol,start
 
 "don't clutter up workspace with backup & swap file
-set backupdir=~/tmp
+set backupdir=/tmp
 set history=100
 set incsearch    " do incremental searching
 set noswapfile
@@ -156,7 +161,7 @@ set tabstop=4
 "no wrap by default
 set nowrap
 
-set background=light
+set background=dark
 
 "
 " always use hlsearch
@@ -279,6 +284,7 @@ set clipboard=unnamed
 
 "gitv conf
 let g:Gitv_DoNotMapCtrlKey = 1
+
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_by_filename = 1
@@ -366,7 +372,7 @@ let g:airline_theme='dark'
   "let g:airline_symbols.linenr = ''
 
 set noshelltemp
-let g:js_context_colors_enabled = 1
+let g:js_context_colors_enabled = 0
 let g:js_context_colors_jsx = 1
 let g:js_context_colors_babel = 1
 let g:javascript_enable_domhtmlcss = 1
@@ -377,7 +383,6 @@ let g:jsx_ext_required = 0
 let g:js_context_colors_debug = 0
 let g:js_context_colors_allow_jsx_syntax = 0
 let g:js_context_colors_usemaps = 1
-let g:js_context_colors_enabled = 0
 "let g:js_context_colors_colorize_comments = 0
 let g:js_context_colors_highlight_function_names = 1
 "let g:js_context_colors_foldlevel = 2
@@ -424,6 +429,8 @@ if exists("&wildignorecase")
         set wildignorecase
 endif
 
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*        " Linux/MacOSX
+
 let php_sql_query=1
 let php_htmlInStrings=1
 let g:CSSLint_FileTypeList = ['css', 'less', 'sass']
@@ -434,3 +441,20 @@ let g:stylelint_autofix = 0
 
 "highlight long lines
 match ErrorMsg '\%>100v.\+'
+
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_show_visibility = 1
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_foldlevel = 2
+let g:tagbar_autoshowtag = 1
+"'let g:tagbar_autopreview = 1
+
+nmap <C-e> <C-b>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+let g:fzf_layout = { 'up': '~40%' }
