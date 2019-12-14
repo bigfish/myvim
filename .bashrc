@@ -159,3 +159,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
 export FZF_TMUX=1
 export GTAGSLABEL=ctags
+export GTAGSCONF=/usr/local/share/gtags/gtags.conf
+export GTAGSLABEL=new-ctags
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
