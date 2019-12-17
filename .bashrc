@@ -138,7 +138,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export BASH_SILENCE_DEPRECATION_WARNING=0
+export BASH_SILENCE_DEPRECATION_WARNING=1
 #export GIT_PS1_SHOWDIRTYSTATE=1
 #export PS1='\w$(__git_ps1 " (%s)") \[\e[0;32m\]>:\[\e[m\] '
 

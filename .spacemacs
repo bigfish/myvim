@@ -46,8 +46,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;; auto-completion
      (auto-completion :variables auto-completion-enable-snippets-in-popup t
-                      treemacs-use-filewatch-mode t
-                      treemacs-use-git-mode 'simple)
+                      )
      ;; better-defaults
      emacs-lisp
      git
@@ -64,7 +63,8 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     (treemacs :variables treemacs-use-follow-mode t)
+     (treemacs :variables treemacs-use-follow-mode t
+               treemacs-use-git-mode 'simple)
      (templates :variables templates-use-default-templates nil)
      ;; version-control
      )
@@ -76,7 +76,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(srcery-theme npm-mode)
+   dotspacemacs-additional-packages '(srcery-theme npm-mode emmet-mode company-tern)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -473,13 +473,13 @@ This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
   )
-
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq yas-snippet-dirs (append yas-snippet-dirs '("~/snippets")))
   (evilnc-default-hotkeys)
   (setq dired-use-ls-dired nil)
   (setq vc-follow-symlinks t)
@@ -488,6 +488,20 @@ before packages are loaded."
   (set-face-background 'hl-line "#282828")
   (set-face-attribute 'lazy-highlight nil :background "#efcf17" :foreground "black")
   (set-face-attribute 'region nil :background  "#275396" :weight 'bold)
+
+  (add-hook 'web-mode-hook (lambda ()
+                             (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet))
+                             (emmet-mode t)
+                             (company-mode +1)))
+  (add-hook 'js2-mode-hook (lambda ()
+                             (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-tern))
+                             (emmet-mode t)
+                             (tern-mode)
+                             (company-mode +1)))
+  (add-hook 'tide-mode-hook (lambda ()
+                             (set (make-local-variable 'company-backends) '(company-yasnippet))
+                             (company-mode +1)))
+  ;;(global-company-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

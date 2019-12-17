@@ -8,3 +8,11 @@ set SPACEFISH_GIT_PREFIX
 set SPACEFISH_PACKAGE_PREFIX
 set SPACEFISH_CHAR_SYMBOL ':<'
 bind \t forward-char
+
+set -x NVM_DIR "$HOME/.nvm"
+
+function nvm
+   bass source $NVM_DIR/nvm.sh --no-use ';' nvm $argv
+end
+
+nvm use default --silent
