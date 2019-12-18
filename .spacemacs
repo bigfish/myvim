@@ -39,14 +39,14 @@ This function should only modify configuration layer settings."
      (javascript :variables javascript-disable-tern-port-files t
                  node-add-modules-path t)
      react
+     org
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; auto-completion
-     (auto-completion :variables auto-completion-enable-snippets-in-popup t
-                      )
+     (auto-completion :variables auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
      git
@@ -67,6 +67,7 @@ This function should only modify configuration layer settings."
                treemacs-use-git-mode 'simple)
      (templates :variables templates-use-default-templates nil)
      ;; version-control
+     evil-commentary
      )
 
    ;; List of additional packages that will be installed without being
@@ -76,7 +77,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(srcery-theme npm-mode emmet-mode company-tern)
+   dotspacemacs-additional-packages '(srcery-theme npm-mode emmet-mode company-tern helm-company)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -480,7 +481,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq yas-snippet-dirs (append yas-snippet-dirs '("~/snippets")))
-  (evilnc-default-hotkeys)
   (setq dired-use-ls-dired nil)
   (setq vc-follow-symlinks t)
   (setq-default srcery-invert-region nil)
@@ -490,18 +490,20 @@ before packages are loaded."
   (set-face-attribute 'region nil :background  "#275396" :weight 'bold)
 
   (add-hook 'web-mode-hook (lambda ()
-                             (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet))
+                             (add-to-list (make-local-variable 'company-backends) '(company-web-html company-yasnippet))
                              (emmet-mode t)
                              (company-mode +1)))
   (add-hook 'js2-mode-hook (lambda ()
-                             (set (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-tern))
+                             (add-to-list (make-local-variable 'company-backends) '(company-web-html company-yasnippet company-tern))
                              (emmet-mode t)
                              (tern-mode)
                              (company-mode +1)))
   (add-hook 'tide-mode-hook (lambda ()
-                             (set (make-local-variable 'company-backends) '(company-yasnippet))
+                             (add-to-list (make-local-variable 'company-backends) '(company-yasnippet company-files))
                              (company-mode +1)))
-  ;;(global-company-mode)
+  (global-company-mode)
+  (add-to-list 'load-path "~/ebuku")
+  (load "ebuku")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -516,6 +518,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ebuku-buku-path "/usr/local/bin/buku")
  '(package-selected-packages
    (quote
     (tide typescript-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data web-beautify tern prettier-js nodejs-repl livid-mode skewer-mode js2-refactor yasnippet multiple-cursors js2-mode js-doc import-js grizzl impatient-mode htmlize simple-httpd helm-gtags ggtags dap-mode bui tree-mode lsp-mode markdown-mode dash-functional counsel-gtags counsel swiper ivy company add-node-modules-path ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-evil treemacs ht pfuture toc-org symon symbol-overlay string-inflection spaceline-all-the-icons spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl let-alist flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump doom-modeline shrink-path all-the-icons memoize f dash s devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))))
@@ -524,5 +527,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(region ((t (:background "purple3" :inverse-video nil :weight bold)))))
 )

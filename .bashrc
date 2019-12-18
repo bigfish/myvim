@@ -164,4 +164,4 @@ export GTAGSLABEL=new-ctags
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
