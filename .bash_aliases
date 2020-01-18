@@ -10,7 +10,7 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit -a'
 alias gcam='git commit -am'
-alias gb='git branch'
+#alias gb='git branch'
 alias gco='git checkout'
 alias gpl='git pull'
 alias gpr='git pull --rebase'
@@ -18,9 +18,11 @@ alias gcl='git clone'
 alias grs='git reset --hard HEAD'
 alias ks='ls -lhFGv'
 alias cls=clear
-alias ff="firefox &>/dev/null &"
+#alias ff="firefox &>/dev/null &"
 alias ll='ls -alF'
 alias la='ls -laGH'
 alias l='ls -CF'
 alias ls='gls --group-directories-first --color=auto'
 alias ll='ls -al'
+alias bs='browser-sync . -w --directory --server --file index.html'
+

@@ -79,9 +79,8 @@ fi
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-#moved to .bash_profile:
-#export EDITOR=vim
-#export PAGER=less
+export EDITOR=vim
+export PAGER=less
 
 #enable 256 colors in vim
 #moved to .bash_profile
@@ -155,13 +154,10 @@ PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
-export FZF_TMUX=1
 export GTAGSLABEL=ctags
 export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=new-ctags
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/fzf.sh ] && source ~/fzf.sh
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
