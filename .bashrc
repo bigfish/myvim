@@ -114,8 +114,9 @@ set t_Co=256
 #if [ -f $(brew --prefix)/etc/bash_completion ]; then
     #. $(brew --prefix)/etc/bash_completion
 #fi
-
+if [ "$(uname)" == "Darwin" ]; then
 eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 set -o emacs
 
