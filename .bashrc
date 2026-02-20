@@ -77,14 +77,12 @@ fi
     #. /etc/bash_completion
 #fi
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+#[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
 
 export EDITOR=vim
 export PAGER=less
-
-#enable 256 colors in vim
-#moved to .bash_profile
-#[ -z "$TMUX" ] && export TERM=xterm-256color
 
 #prevent flow control
 stty -ixon
@@ -102,8 +100,8 @@ export LESS=" -R "
 #export PATH=$NODE_PATH/bin:$HOME/bin:$PATH
 #export LESS=' -R '
 
-export CPPFLAGS=-I/usr/local/opt/openssl/include
-export LDFLAGS=-L/usr/local/opt/openssl/lib
+#export CPPFLAGS=-I/usr/local/opt/openssl/include
+#export LDFLAGS=-L/usr/local/opt/openssl/lib
 
 . ~/bin/git-completion.bash
 
@@ -117,6 +115,8 @@ set t_Co=256
     #. $(brew --prefix)/etc/bash_completion
 #fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 set -o emacs
 
 go()
@@ -129,13 +129,14 @@ else
 fi
 }
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(fzf --bash)"
 
-eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
+#eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 #export GIT_PS1_SHOWDIRTYSTATE=1
@@ -147,7 +148,12 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # changing PROMPT_COMMAND breaks autojump :/
 #export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 #PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
-PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+MY_PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[\e[m\]\[\e[0;32m\]" "\[\e[0;32m\]\[\e[m\]\[\e[1;32m\] >: \[\e[1;32m\]\\[$(tput sgr0)\\]"'
+
+# workaround gotcha with autojump
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} $MY_PROMPT_COMMAND"
+
+
 #moved to .bash_profile...
 #export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 
@@ -160,4 +166,19 @@ export GTAGSLABEL=new-ctags
 
 [ -f ~/fzf.sh ] && source ~/fzf.sh
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+. ~/.bash_env
+
+alias pnx="pnpm nx"
+
+# pnpm
+export PNPM_HOME="/Users/DavidWilhelm/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+#alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)"
+#alias docker_clean_ps="docker rm $(docker ps --filter=status=exited --filter=status=created -q)"

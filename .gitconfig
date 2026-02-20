@@ -6,3 +6,7 @@
 [user]
 	name = David Wilhelm
 	email = david.wilhelm@perkinelmer.com
+[push]
+	followTags = true
+[core]
+	autocrlf = false
