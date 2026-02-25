@@ -108,6 +108,7 @@ This function should only modify configuration layer settings."
      evil-commentary
      (plantuml :variables plantuml-jar-path "~/plantuml.jar" org-plantuml-jar-path "~/plantUml.jar" plantuml-default-exec-mode 'library)
      eww
+     tree-sitter
      )
 
 
@@ -118,7 +119,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(srcery-theme treemacs-nerd-icons nerd-icons npm-mode emmet-mode groovy-mode jenkinsfile-mode helm-company yasnippet-snippets graphql-mode vmd-mode)
+   dotspacemacs-additional-packages '(srcery-theme treemacs-nerd-icons nerd-icons npm-mode emmet-mode groovy-mode jenkinsfile-mode helm-company yasnippet-snippets graphql-mode vmd-mode treesit-auto)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -302,8 +303,8 @@ It should only modify the values of Spacemacs settings."
    ;;                             :size 14.0
    ;;                             :weight normal
    ;;                             :width normal)
-   dotspacemacs-default-font '("Meslo LG M DZ for Powerline"
-                               :size 13
+   dotspacemacs-default-font '("MesloLGMDZ Nerd Font"
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -635,6 +636,50 @@ before packages are loaded."
   (use-package treemacs-nerd-icons
     :config
     (treemacs-nerd-icons-config))
+  (setq treesit-language-source-alist
+        '(
+          (bash       . ("https://github.com/tree-sitter/tree-sitter-bash"))
+          (c          . ("https://github.com/tree-sitter/tree-sitter-c"))
+          (cmake      . ("https://github.com/uyha/tree-sitter-cmake"))
+          (cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+          (css        . ("https://github.com/tree-sitter/tree-sitter-css"))
+          (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
+          (dot        . ("https://github.com/rydesun/tree-sitter-dot"))
+          (doxygen    . ("https://github.com/tree-sitter-grammars/tree-sitter-doxygen"))
+          (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
+          (gitcommit  . ("https://github.com/gbprod/tree-sitter-gitcommit"))
+          (go         . ("https://github.com/tree-sitter/tree-sitter-go"))
+          (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod"))
+          (gosum      . ("https://github.com/amaanq/tree-sitter-go-sum"))
+          (gowork     . ("https://github.com/omertuc/tree-sitter-go-work"))
+          (html       . ("https://github.com/tree-sitter/tree-sitter-html"))
+          (http       . ("https://github.com/rest-nvim/tree-sitter-http"))
+          (java       . ("https://github.com/tree-sitter/tree-sitter-java"))
+          (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1" "src"))
+          (json       . ("https://github.com/tree-sitter/tree-sitter-json"))
+          (lua        . ("https://github.com/tree-sitter-grammars/tree-sitter-lua"))
+          (make       . ("https://github.com/tree-sitter-grammars/tree-sitter-make"))
+          (markdown   . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown"))
+          (proto      . ("https://github.com/treywood/tree-sitter-proto"))
+          (python     . ("https://github.com/tree-sitter/tree-sitter-python"))
+          (rust       . ("https://github.com/tree-sitter/tree-sitter-rust"))
+          (sql        . ("https://github.com/derekstride/tree-sitter-sql"))
+          (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
+          (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+          (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+          (vue        . ("https://github.com/tree-sitter-grammars/tree-sitter-vue"))
+          (yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
+          )
+        )
+  (use-package treesit-auto
+    :custom
+    (treesit-auto-install 'prompt)
+    :config
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode))
+  ;; (dolist (lang treesit-language-source-alist)
+  ;;   (unless (treesit-language-available-p (car lang))
+  ;;     (treesit-install-language-grammar (car lang))))
   ;; (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
   ;; (define-key evil-visual-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
   ;; (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
@@ -717,6 +762,7 @@ before packages are loaded."
   (set-face-attribute 'highlight nil :foreground 'unspecified)
   (setq confirm-kill-processes nil)
   (setq helm-buffer-max-length nil)
+  (setq treesit-font-lock-level 4)
 
   ;;https://emacs.stackexchange.com/questions/9583/how-to-treat-underscore-as-part-of-the-word
   (defadvice evil-inner-word (around underscore-as-word activate)
@@ -788,13 +834,14 @@ This function is called at the very end of Spacemacs initialization."
                  scss-mode shell-pop simple-httpd skewer-mode slim-mode smeargle
                  spaceline-all-the-icons sphinx-doc srcery-theme
                  stickyfunc-enhance string-inflection swiper symbol-overlay symon
-                 tagedit terminal-here tern tide toc-org toml-mode treemacs-evil
-                 treemacs-icons-dired treemacs-magit treemacs-persp
-                 treemacs-projectile typescript-mode use-package uuidgen
-                 vi-tilde-fringe vim-powerline volatile-highlights vterm
-                 web-beautify web-completion-data web-mode which-key winum
-                 writeroom-mode ws-butler xcscope xterm-color yaml-mode yapfify
-                 yasnippet yasnippet-snippets yatemplate))
+                 tagedit terminal-here tern tide toc-org toml-mode tree-sitter
+                 tree-sitter-langs treemacs-evil treemacs-icons-dired
+                 treemacs-magit treemacs-persp treemacs-projectile tsc
+                 typescript-mode use-package uuidgen vi-tilde-fringe vim-powerline
+                 volatile-highlights vterm web-beautify web-completion-data
+                 web-mode which-key winum writeroom-mode ws-butler xcscope
+                 xterm-color yaml-mode yapfify yasnippet yasnippet-snippets
+                 yatemplate))
    '(safe-local-variable-values
      '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
        (web-mode-script-padding . 2) (web-mode-style-padding . 2)
