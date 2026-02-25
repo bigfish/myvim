@@ -1,7 +1,3 @@
-theme = "Srcery"
-font-family = "MesloLGMDZ Nerd Font"
-font-size = 14
-
 keybind = ctrl+alt+t=new_tab
 
 keybind = ctrl+alt+g>1=goto_tab:1

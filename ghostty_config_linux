@@ -1,0 +1,5 @@
+theme = "Srcery"
+#font-family = "MesloLGMDZ Nerd Font"
+#font-size = 14
+
+config-file=./ghostty_config

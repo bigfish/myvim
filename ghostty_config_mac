@@ -1,0 +1,10 @@
+theme = "Srcery"
+# Mac
+font-family = "MesloLGMDZ Nerd Font"
+font-size = 14
+
+#Linux
+#font-family = "MesloLGM Nerd Font"
+#font-size = 11
+
+config-file=./ghostty_config
