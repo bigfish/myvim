@@ -41,6 +41,7 @@ This function should only modify configuration layer settings."
      windows-scripts
      python
      html
+     tree-sitter
                                         ;import-js
      (javascript :variables javascript-disable-tern-port-files t
                  node-add-modules-path t
@@ -624,6 +625,7 @@ before packages are loaded."
   (setq evil-undo-system 'undo-redo)
   (evil-set-undo-system 'undo-redo)
                                         ;(npm-global-mode)
+  (setq font-lock-maximum-decoration t)
   (require 'company-yasnippet)
   (add-to-list 'company-backends '(company-yasnippet  company-capf company-anaconda))
 
@@ -655,6 +657,7 @@ before packages are loaded."
     (setq-local evil-shift-width 2)
     (setq js2-basic-offset 2)
     (emmet-mode t)
+
     (company-mode +1))
 
   (add-hook 'web-mode-hook 'web-setup-hook)
