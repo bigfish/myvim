@@ -46,13 +46,13 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 # enable color support of ls and also add handy aliases
-# if [ -x /usr/bin/dircolors ]; then
-#     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-#     alias ls='ls --color=auto'
-#     alias grep='grep --color=auto'
-#     alias fgrep='fgrep --color=auto'
-#     alias egrep='egrep --color=auto'
-# fi
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -77,8 +77,9 @@ fi
     #. /etc/bash_completion
 #fi
 
-#[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 
 export EDITOR=vim
@@ -135,9 +136,9 @@ eval "$(fzf --bash)"
 
 #eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 #export GIT_PS1_SHOWDIRTYSTATE=1
@@ -169,17 +170,18 @@ export GTAGSLABEL=new-ctags
 
 #export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
+export PATH=$HOME/.local/share/pnpm:$PATH
+
 . ~/.bash_env
 
-alias pnx="pnpm nx"
+#alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)"
+#alias docker_clean_ps="docker rm $(docker ps --filter=status=exited --filter=status=created -q)"
 
 # pnpm
-export PNPM_HOME="/Users/DavidWilhelm/Library/pnpm"
+export PNPM_HOME="/home/dwilhelm-claude/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-#alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)"
-#alias docker_clean_ps="docker rm $(docker ps --filter=status=exited --filter=status=created -q)"
+. "$HOME/.cargo/env"

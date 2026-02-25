@@ -5,3 +5,4 @@ source ~/.profile
 if [ "$(uname)" == "Darwin" ]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+. "$HOME/.cargo/env"

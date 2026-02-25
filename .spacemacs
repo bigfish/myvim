@@ -5,7 +5,7 @@
 (setq custom--inhibit-theme-enable nil)
 
 ;; disable titlebar
-(add-to-list 'default-frame-alist '(undecorated . t))
+;;(add-to-list 'default-frame-alist '(undecorated . t))
 
 (defun dotspacemacs/layers ()
   "Layer configuration:
