@@ -1,5 +1,7 @@
 theme = "Srcery"
 
+font-size = 15
+
 keybind = ctrl+alt+t=new_tab
 
 keybind = ctrl+alt+g>1=goto_tab:1
