@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-cat package.json | jq -r '.scripts | keys | join("\n")' | fzf | xargs npm run
-
