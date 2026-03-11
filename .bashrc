@@ -182,5 +182,6 @@ alias em="emacs -nw"
 alias ec="emacsclient -nw"
 export PATH="$GIT_FUZZY_HOME:$PATH"
 export PATH=$HOME/.local/share/pnpm:$PATH
+alias gfz="git-fuzzy"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -63,9 +63,20 @@ gr() {
     --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1} | head -200' |
   cut -d$'\t' -f1
 }
+
+gdiff() {
+  git-fuzzy diff
+}
+
+glog() {
+  git-fuzzy log
+}
+
 bind '"\er": redraw-current-line'
 bind '"\C-g\C-f": "$(gf)\e\C-e\er"'
 bind '"\C-g\C-b": "$(gb)\e\C-e\er"'
 bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
 bind '"\C-g\C-h": "$(gh)\e\C-e\er"'
 bind '"\C-g\C-r": "$(gr)\e\C-e\er"'
+bind '"\C-g\C-d": "$(gdiff)\e\C-e\er"'
+bind '"\C-g\C-l": "$(glog)\e\C-e\er"'
