@@ -89,6 +89,8 @@ export PAGER=less
 stty -ixon
 stty stop ''
 stty start ''
+# disable Ctrl-D closing tab/pane
+set -o ignoreeof
 
 #export LC_CTYPE=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
@@ -131,9 +133,6 @@ else
 fi
 }
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(fzf --bash)"
-
 #eval $(gdircolors ~/.dircolors/dircolors.ansi-dark)
 
 export NVM_DIR="$HOME/.nvm"
@@ -155,7 +154,6 @@ MY_PROMPT_COMMAND='__git_ps1 "\\[$(tput setaf 7)\\]\[\e[0;33m\]\\w\[\e[0;33m\]\[
 # workaround gotcha with autojump
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} $MY_PROMPT_COMMAND"
 
-
 #moved to .bash_profile...
 #export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 
@@ -168,20 +166,21 @@ export GTAGSLABEL=new-ctags
 
 [ -f ~/fzf.sh ] && source ~/fzf.sh
 
-#export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+eval "$(fzf --bash)"
 
-export PATH=$HOME/.local/share/pnpm:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 . ~/.bash_env
 
 #alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)"
 #alias docker_clean_ps="docker rm $(docker ps --filter=status=exited --filter=status=created -q)"
 
-# pnpm
-export PNPM_HOME="/home/dwilhelm-claude/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
 # pnpm end
 . "$HOME/.cargo/env"
+alias nv="nvim"
+alias em="emacs -nw"
+alias ec="emacsclient -nw"
+export PATH="$GIT_FUZZY_HOME:$PATH"
+export PATH=$HOME/.local/share/pnpm:$PATH
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

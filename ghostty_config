@@ -42,4 +42,7 @@ keybind = alt+arrow_down=goto_split:down
 keybind = alt+arrow_up=goto_split:up
 keybind = alt+arrow_right=goto_split:right
 
+keybind = ctrl+alt+u=scroll_page_up
+keybind = ctrl+alt+d=scroll_page_down
+
 keybind = ctrl+alt+.=reload_config

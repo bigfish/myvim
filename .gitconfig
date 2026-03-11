@@ -5,8 +5,21 @@
   br = branch
 [user]
 	name = David Wilhelm
-	email = david.wilhelm@perkinelmer.com
+	email = dewilhelm@gmail.com
 [push]
 	followTags = true
 [core]
 	autocrlf = false
+	pager = delta
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+[merge]
+	conflictStyle = zdiff3

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export FZF_DEFAULT_OPTS="--layout=reverse --height=50% --bind 'f1:execute(bat {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'"
-export FZF_TMUX=1
+#export FZF_TMUX=1
 
 vf() {
   IFS=$'\n' files=($(fzf-tmux --ansi --preview 'bat --color=always --style=grid --style=header,grid --line-range :300 {}' --query="$1" --multi --select-1 --exit-0 ))
@@ -24,10 +24,11 @@ fzf-down() {
 
 gf() {
   is_in_git_repo || return
-  git -c color.status=always status --short |
-  fzf-down -m --ansi --nth 2..,.. \
-    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
-  cut -c4- | sed 's/.* -> //'
+  #git -c color.status=always status --short |
+  #fzf-down -m --ansi --nth 2..,.. \
+   # --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
+  fzf --preview="bat --color=always {}"
+  #cut -c4- | sed 's/.* -> //'
 }
 
 gb() {

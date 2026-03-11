@@ -119,7 +119,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(srcery-theme treemacs-nerd-icons nerd-icons npm-mode emmet-mode groovy-mode jenkinsfile-mode helm-company yasnippet-snippets graphql-mode vmd-mode treesit-auto)
+   dotspacemacs-additional-packages '(srcery-theme treemacs-nerd-icons nerd-icons npm-mode emmet-mode groovy-mode jenkinsfile-mode helm-company yasnippet-snippets graphql-mode vmd-mode treesit-auto magit-delta)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -704,6 +704,8 @@ before packages are loaded."
   (add-to-list 'exec-path "/usr/local/lib/node_modules" t)
 
   (add-hook 'org-mode-hook 'my-org-settings)
+
+  (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
 
   (add-hook 'markdown-mode-hook 'auto-fill-mode)
   (global-company-mode)
