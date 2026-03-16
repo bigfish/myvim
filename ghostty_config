@@ -1,5 +1,5 @@
 theme = "Srcery"
-
+background-opacity = 0.8
 keybind = ctrl+alt+t=new_tab
 
 keybind = ctrl+alt+g>1=goto_tab:1
