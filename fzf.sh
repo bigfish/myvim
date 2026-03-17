@@ -19,7 +19,7 @@ is_in_git_repo() {
 }
 
 fzf-down() {
-  fzf-tmux --height 50% "$@" --border
+  fzf-tmux --height 80% "$@" --border
 }
 
 gf() {
