@@ -67,7 +67,7 @@ This function should only modify configuration layer settings."
      ;;github -- deprecated
      ;; lsp
      ;; markdown
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     (markdown :variables markdown-live-preview-engine 'glow)
      prettier
      ranger
      ;; multiple-cursors
