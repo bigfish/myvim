@@ -163,11 +163,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export GTAGSLABEL=ctags
 export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=new-ctags
-
-[ -f ~/fzf.sh ] && source ~/fzf.sh
-
-eval "$(fzf --bash)"
-
 #export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 . ~/.bash_env
@@ -182,6 +177,11 @@ alias em="emacs -nw"
 alias ec="emacsclient -nw"
 export PATH="$GIT_FUZZY_HOME:$PATH"
 export PATH=$HOME/.local/share/pnpm:$PATH
+
+[ -f ~/fzf.sh ] && source ~/fzf.sh
+
+eval "$(fzf --bash)"
+
 alias gfz="git-fuzzy"
 alias python="python3"
 
