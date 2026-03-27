@@ -68,10 +68,9 @@ gfz() {
   git-fuzzy
 }
 
-#needs branch as arg to work - use develop as this is usually the default
-gfd() {
-  git-fuzzy diff develop
-}
+#gfd() {
+#  git-fuzzy diff "$1"
+#}
 
 glog() {
   git-fuzzy log
@@ -83,6 +82,6 @@ bind '"\C-g\C-b": "$(gb)\e\C-e\er"'
 bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
 #bind '"\C-g\C-h": "$(gh)\e\C-e\er"'
 bind '"\C-g\C-r": "$(gr)\e\C-e\er"'
-bind '"\C-g\C-d": "$(gfd)\e\C-e\er"'
+#bind '"\C-g\C-d": "$(gfd)\e\C-e\er"'
 bind '"\C-g\C-l": "$(glog)\e\C-e\er"'
 bind '"\C-g\C-z": "$(gfzf)\e\C-e\er"'

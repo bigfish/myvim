@@ -183,6 +183,7 @@ export PATH=$HOME/.local/share/pnpm:$PATH
 eval "$(fzf --bash)"
 
 alias gfz="git-fuzzy"
+alias gfd="git-fuzzy diff"
 alias python="python3"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
