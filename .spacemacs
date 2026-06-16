@@ -37,7 +37,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(php
+   '(lua
+     php
      windows-scripts
      python
      html
@@ -756,7 +757,7 @@ This function is called at the very end of Spacemacs initialization."
                  aggressive-indent anaconda-mode auto-compile
                  auto-highlight-symbol auto-yasnippet blacken bui cargo
                  centered-cursor-mode cfrs clean-aindent-mode column-enforce-mode
-                 company company-anaconda company-php company-phpactor
+                 company company-anaconda company-lua company-php company-phpactor
                  company-statistics company-web composer concurrent counsel
                  counsel-css counsel-gtags csv-mode ctable cython-mode dap-mode
                  dash-functional deferred define-word devdocs diminish dotenv-mode
@@ -782,13 +783,13 @@ This function is called at the very end of Spacemacs initialization."
                  import-js importmagic indent-guide ivy jenkinsfile-mode js-doc
                  js2-mode js2-refactor json-mode json-navigator launchctl
                  link-hint live-py-mode livid-mode lorem-ipsum lsp-mode
-                 lsp-pyright lsp-python-ms lsp-treemacs macrostep magit-gitflow
-                 magit-section magit-svn markdown-mode markdown-toc mmm-mode
-                 move-text multi-term multiple-cursors nameless nginx-mode
-                 nodejs-repl npm-mode omnisharp open-junk-file org-brain
-                 org-cliplink org-download org-mime org-pomodoro org-present
-                 org-projectile org-rich-yank org-superstar orgit osx-clipboard
-                 osx-dictionary osx-trash overseer ox-jira paradox
+                 lsp-pyright lsp-python-ms lsp-treemacs lua-mode macrostep
+                 magit-gitflow magit-section magit-svn markdown-mode markdown-toc
+                 mmm-mode move-text multi-term multiple-cursors nameless
+                 nginx-mode nodejs-repl npm-mode omnisharp open-junk-file
+                 org-brain org-cliplink org-download org-mime org-pomodoro
+                 org-present org-projectile org-rich-yank org-superstar orgit
+                 osx-clipboard osx-dictionary osx-trash overseer ox-jira paradox
                  password-generator pcre2el php-extras php-mode php-runtime
                  phpactor phpunit pip-requirements pipenv pippel poetry popwin
                  posframe powerline powershell prettier-js pug-mode py-isort

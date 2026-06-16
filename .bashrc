@@ -175,6 +175,7 @@ export GTAGSLABEL=new-ctags
 alias nv="nvim"
 alias em="emacs -nw"
 alias ec="emacsclient -nw"
+alias vim="nvim"
 export PATH="$GIT_FUZZY_HOME:$PATH"
 export PATH=$HOME/.local/share/pnpm:$PATH
 
@@ -187,3 +188,14 @@ alias gfd="git-fuzzy diff"
 alias python="python3"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+# pnpm
+export PNPM_HOME="/home/dwilhelm-claude/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

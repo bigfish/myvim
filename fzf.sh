@@ -68,6 +68,10 @@ gfz() {
   git-fuzzy
 }
 
+gdiff() {
+  git-fuzzy diff
+}
+
 #gfd() {
 #  git-fuzzy diff "$1"
 #}
