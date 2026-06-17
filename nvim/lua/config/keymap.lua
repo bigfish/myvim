@@ -19,6 +19,12 @@ vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Copy to system clipbo
 vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p', { desc = 'Paste from system clipboard after the cursor position' })
 vim.keymap.set({ 'n', 'x' }, '<leader>P', '"+P', { desc = 'Paste from system clipboard before the cursor position' })
 
+-- window navigation
+vim.keymap.set('n', 'H', '<c-w>h')
+vim.keymap.set('n', 'J', '<c-w>j')
+vim.keymap.set('n', 'K', '<c-w>k')
+vim.keymap.set('n', 'L', '<c-w>l')
+
 -- Navigating buffers
 vim.keymap.set('n', '<leader>bb', '<C-^>', { desc = 'Switch to alternate buffer' })
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = 'Next buffer' })
@@ -69,3 +75,5 @@ vim.keymap.set("n", "<leader>u", function()
     vim.cmd.packadd("nvim.undotree")
     require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
+
+vim.keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<cr>")
