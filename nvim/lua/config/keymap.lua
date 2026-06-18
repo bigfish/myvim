@@ -7,7 +7,6 @@ vim.keymap.set({ 'n', 'x' }, '<Down>', 'gj', { desc = 'Navigate down (visual lin
 vim.keymap.set({ 'n', 'x' }, '<Up>', 'gk', { desc = 'Navigate up (visual line)' })
 vim.keymap.set('i', '<Down>', '<C-\\><C-o>gj', { desc = 'Navigate down (visual line)' })
 vim.keymap.set('i', '<Up>', '<C-\\><C-o>gk', { desc = 'Navigate up (visual line)' })
-
 -- Move Lines
 -- vim.keymap.set({ 'n', 'x' }, '<M-S-Up>', ':move -2<cr>', { desc = 'Move Line Up' })
 -- vim.keymap.set({ 'n', 'x' }, '<M-S-Down>', ':move +1<cr>', { desc = 'Move Line Down' })
@@ -20,6 +19,7 @@ vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p', { desc = 'Paste from system cli
 vim.keymap.set({ 'n', 'x' }, '<leader>P', '"+P', { desc = 'Paste from system clipboard before the cursor position' })
 
 -- window navigation
+--
 vim.keymap.set('n', 'H', '<c-w>h')
 vim.keymap.set('n', 'J', '<c-w>j')
 vim.keymap.set('n', 'K', '<c-w>k')
@@ -27,6 +27,8 @@ vim.keymap.set('n', 'L', '<c-w>l')
 
 -- Navigating buffers
 vim.keymap.set('n', '<leader>bb', '<C-^>', { desc = 'Switch to alternate buffer' })
+vim.keymap.set('n', '<leader><Tab>', '<C-^>', { desc = 'Switch to alternate buffer' })
+
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprevious<cr>', { desc = 'Previous buffer' })
 
@@ -76,4 +78,13 @@ vim.keymap.set("n", "<leader>u", function()
     require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
 
-vim.keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>ft", "<cmd>NvimTreeToggle<cr>")
+
+vim.keymap.set("n", "<C-s>", ":w<cr>")
+
+vim.keymap.set("n", "gs","<C-w>]")
+vim.keymap.set("n", "gv","<C-w>v<C-]>")
+
+vim.keymap.set("n", "<leader>q", ":q<cr>")
+vim.keymap.set("n", "<leader>qa", ":qa<cr>")
+vim.keymap.set("n", "<C-s>", ":w<cr>")

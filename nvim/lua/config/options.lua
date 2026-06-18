@@ -56,7 +56,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.guicursor = ""
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 vim.opt.termguicolors = true
 
 

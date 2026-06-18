@@ -169,33 +169,23 @@ export GTAGSLABEL=new-ctags
 
 #alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)"
 #alias docker_clean_ps="docker rm $(docker ps --filter=status=exited --filter=status=created -q)"
-
-# pnpm end
-. "$HOME/.cargo/env"
-alias nv="nvim"
-alias em="emacs -nw"
-alias ec="emacsclient -nw"
-alias vim="nvim"
 export PATH="$GIT_FUZZY_HOME:$PATH"
-export PATH=$HOME/.local/share/pnpm:$PATH
+# export PATH=$HOME/.local/share/pnpm:$PATH
 
 [ -f ~/fzf.sh ] && source ~/fzf.sh
 
 eval "$(fzf --bash)"
 
+alias vim="nvim"
 alias gfz="git-fuzzy"
 alias gfd="git-fuzzy diff"
 alias python="python3"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-
 # pnpm
-export PNPM_HOME="/home/dwilhelm-claude/.local/share/pnpm"
+export PNPM_HOME="/Users/DavidWilhelm/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end

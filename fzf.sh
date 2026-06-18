@@ -56,6 +56,16 @@ gt() {
 #  grep -o "[a-f0-9]\{7,\}"
 #}
 
+# using ripgrep combined with preview
+# find-in-file - usage: fif <searchTerm>
+# doesn't seem to return file name
+fif() {
+  fzf --disabled --ansi \
+    --bind "start:reload:rg --column --line-number --no-heading --color=always --smart-case {q}" \
+    --bind "change:reload:rg --column --line-number --no-heading --color=always --smart-case {q} || true" \
+    --preview 'file=$(echo {} | cut -d: -f1); line=$(echo {} | cut -d: -f2); bat --style=numbers --color=always --highlight-line "$line" "$file" 2>/dev/null || head -n 100 "$file"'
+}
+
 gr() {
   is_in_git_repo || return
   git remote -v | awk '{print $1 "\t" $2}' | uniq |
@@ -86,6 +96,7 @@ bind '"\C-g\C-b": "$(gb)\e\C-e\er"'
 bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
 #bind '"\C-g\C-h": "$(gh)\e\C-e\er"'
 bind '"\C-g\C-r": "$(gr)\e\C-e\er"'
+bind '"\C-g\C-s": "$(fif)\e\C-e\er"'
 #bind '"\C-g\C-d": "$(gfd)\e\C-e\er"'
 bind '"\C-g\C-l": "$(glog)\e\C-e\er"'
 bind '"\C-g\C-z": "$(gfzf)\e\C-e\er"'

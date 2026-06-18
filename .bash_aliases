@@ -26,4 +26,5 @@ alias l='ls -CF'
 #alias ls='gls --group-directories-first --color=auto'
 alias ll='ls -al'
 #alias bs='browser-sync . -w --directory --server --file index.html'
+alias vim="nvim"
 
