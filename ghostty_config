@@ -2,6 +2,7 @@ theme = "Srcery"
 background-opacity = 0.8
 keybind = ctrl+alt+t=new_tab
 confirm-close-surface = false
+macos-option-as-alt = left
 
 keybind = ctrl+alt+g>1=goto_tab:1
 keybind = ctrl+alt+g>2=goto_tab:2

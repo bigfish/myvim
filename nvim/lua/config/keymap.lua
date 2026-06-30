@@ -26,7 +26,6 @@ vim.keymap.set('n', 'K', '<c-w>k')
 vim.keymap.set('n', 'L', '<c-w>l')
 
 -- Navigating buffers
-vim.keymap.set('n', '<leader>bb', '<C-^>', { desc = 'Switch to alternate buffer' })
 vim.keymap.set('n', '<leader><Tab>', '<C-^>', { desc = 'Switch to alternate buffer' })
 
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = 'Next buffer' })
@@ -78,7 +77,9 @@ vim.keymap.set("n", "<leader>u", function()
     require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
 
+-- NvimTree
 vim.keymap.set("n", "<leader>ft", "<cmd>NvimTreeToggle<cr>")
+vim.keymap.set("n", "gt", "<C-w>t")
 
 vim.keymap.set("n", "<C-s>", ":w<cr>")
 
@@ -88,3 +89,17 @@ vim.keymap.set("n", "gv","<C-w>v<C-]>")
 vim.keymap.set("n", "<leader>q", ":q<cr>")
 vim.keymap.set("n", "<leader>qa", ":qa<cr>")
 vim.keymap.set("n", "<C-s>", ":w<cr>")
+
+--toggles 
+vim.keymap.set("n", "<leader>tl", ":set wrap!<cr>")
+vim.keymap.set("n", "<leader>tr", ":set relativenumber!<cr>")
+
+-- Git
+vim.keymap.set("n", "<leader>gs",":Git<cr>")
+
+vim.keymap.set("n", "<leader>q",":q<cr>")
+vim.keymap.set("n", "<leader>qq",":q!<cr>")
+
+vim.keymap.set("n", "<leader>h", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)

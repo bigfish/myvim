@@ -6,6 +6,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main" },
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/tpope/vim-fugitive",
   {
     src = "https://github.com/kylechui/nvim-surround",
@@ -15,6 +16,8 @@ vim.pack.add({
   'https://github.com/nvim-lualine/lualine.nvim',
   "https://github.com/nvim-tree/nvim-tree.lua",
   "https://github.com/nvim-tree/nvim-web-devicons",
+  { src = 'https://github.com/MysticalDevil/inlay-hints.nvim' },
+  -- "https://github.com/stevearc/conform.nvim"
 })
 
 -- mini files ----
@@ -33,7 +36,14 @@ vim.pack.add({
 --   MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 --   MiniFiles.reveal_cwd()
 -- end, { desc = "Toggle into currently opened file" })
-
+--
+require("mason").setup()
+require("mason-lspconfig").setup()
+-- require("inlay-hints").setup()
+require("inlay-hints").setup({
+  commands = { enable = true }, -- Enable commands: InlayHintsToggle, InlayHintsEnable, InlayHintsDisable
+  autocmd = { enable = true },  -- Auto-enable inlay hints on LspAttach
+})
 ---- mini notify ----
 require("mini.notify").setup({
   -- only show messages
@@ -115,3 +125,5 @@ local config = {
   },
 }
 require("nvim-tree").setup(config)
+
+-- require("conform").setup()

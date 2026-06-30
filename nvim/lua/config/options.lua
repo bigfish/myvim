@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 -- Relative and absolute line numbers combined
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
@@ -22,7 +22,7 @@ vim.opt.smartcase = true
 vim.opt.inccommand = 'split'
 
 -- Text wrapping
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.breakindent = true
 
 -- Tabstops
